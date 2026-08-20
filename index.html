@@ -217,6 +217,59 @@
             </div>
         </div>
 
+        <!-- VISÃO EMPILHADA DG EXADATA / DG EXACC -->
+        <div class="info-section">
+            <h3>📊 Visão Empilhada — DataGuard Exadata vs DataGuard ExaCC</h3>
+            <p style="font-size:0.78rem; color:#4a5568; margin-bottom:1rem;">
+                Cada linha mostra o estado do DataGuard em cada base ao longo do tempo. Consumidores são apontados para o mais atualizado.
+            </p>
+
+            <div style="margin-bottom:0.3rem; font-size:0.72rem; font-weight:700; color:#c53030;">🔴 DataGuard EXADATA</div>
+            <div class="swimlane" style="margin-bottom:0.8rem;">
+                <div class="swimlane-label">DG Exadata<small>base leitura</small></div>
+                <div class="swimlane-track">
+                    <div class="ev c-dg-exa" style="left:0%;width:19%;" title="até 19/08: Atualizado em tempo real — consumidores lendo">✅ Atualizado (consumidores aqui)</div>
+                    <div class="ev c-frozen" style="left:19%;width:62%;" title="19/08→~05/09: Congelado em 19/08 — acessível, sem eventos novos">🧊 Congelado (acessível, dados até 19/08)</div>
+                    <div class="ev c-dg" style="left:81%;width:19%;" title="~05/09+: Volta a atualizar via DG Online do Primário ExaCC">✅ Atualizado (DG Online)</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom:0.3rem; font-size:0.72rem; font-weight:700; color:#276749;">🟢 DataGuard EXACC</div>
+            <div class="swimlane" style="margin-bottom:0.8rem;">
+                <div class="swimlane-label">DG ExaCC<small>base leitura</small></div>
+                <div class="swimlane-track">
+                    <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;" title="até ~24/08: Não existe">— não existe</div>
+                    <div class="ev c-dg-exacc" style="left:43%;width:28%;" title="~24→~30: Fase 1 — Intermediário Primary, atualizando">✅ Fase 1 (atualizando)</div>
+                    <div class="ev c-dg-exacc" style="left:71%;width:10%;" title="~30→~02/09: Fase 2 — Primário Primary, atualizando">✅ Fase 2</div>
+                    <div class="ev c-dg-exacc" style="left:81%;width:19%;" title="~05/09+: Fase 3 — DG Online definitivo, atualizado">✅ DG Online (definitivo)</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom:0.3rem; font-size:0.72rem; font-weight:700; color:#667eea;">👥 Consumidores apontados para:</div>
+            <div class="swimlane">
+                <div class="swimlane-label">Consumidores<small>leem de qual DG</small></div>
+                <div class="swimlane-track">
+                    <div class="ev c-dg-exa" style="left:0%;width:19%;" title="até 19/08: DG Exadata (atualizado)">DG Exadata ✅</div>
+                    <div class="ev c-frozen" style="left:19%;width:24%;" title="19→24: DG Exadata (congelado) — defasagem, não indisponibilidade">DG Exadata 🧊 (defasado)</div>
+                    <div class="ev c-dg-exacc" style="left:43%;width:38%;" title="~24→~02/09: DG ExaCC (mais atualizado)">DG ExaCC ✅ (mais atual)</div>
+                    <div class="ev c-consumers" style="left:81%;width:19%;" title="~05/09+: Escolhem — ambos atualizados">Escolhem (ambos ✅)</div>
+                </div>
+            </div>
+
+            <div class="date-axis">
+                <div></div>
+                <div class="date-axis-track">
+                    <span>15/08</span><span>17</span><span>19</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span>
+                </div>
+            </div>
+
+            <div class="note">
+                Entre 19→24/08: consumidores leem DG Exadata (congelado) — <strong>defasagem, não indisponibilidade</strong>.<br>
+                A partir de ~24/08: DG ExaCC é mais atualizado → consumidores migram.<br>
+                A partir de ~05/09: ambos DGs atualizados → cada consumidor escolhe.
+            </div>
+        </div>
+
         <div class="info-section risk-box">
             <h3>⚠️ Por que essa estratégia</h3>
             <ul>
