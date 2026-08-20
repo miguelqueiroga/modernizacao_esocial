@@ -108,9 +108,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Negócio</strong></td>
+                        <td><strong>Negócio</strong><br><small style="color:#718096;">Plano A (antes)</small></td>
                         <td>104 TB</td>
-                        <td>104 TB → <strong>208 TB</strong> (CTAS) → 104 TB<br><small style="color:#ed8936;">Plano B: CTAS no intermediário</small></td>
+                        <td>104 TB<br><small style="color:#718096;">Clone direto</small></td>
+                        <td>104 TB → <strong>208 TB</strong> (CTAS) → 104 TB<br><small style="color:#ed8936;">CTAS na definitiva</small></td>
+                        <td>104 TB</td>
+                    </tr>
+                    <tr style="background:#fffff0;">
+                        <td><strong>Negócio</strong><br><small style="color:#d69e2e;">Plano B (atual)</small></td>
+                        <td>104 TB</td>
+                        <td>104 TB → <strong>208 TB</strong> (CTAS) → 104 TB<br><small style="color:#ed8936;">CTAS no intermediário</small></td>
                         <td>104 TB<br><small style="color:#718096;">Recebe via DG do intermediário</small></td>
                         <td>104 TB</td>
                     </tr>
