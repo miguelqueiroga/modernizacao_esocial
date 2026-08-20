@@ -3,222 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Migração eSocial Alfanumérico — Timeline v2</title>
+    <title>Migração eSocial Alfanumérico — Timeline v3</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #f5f7fa;
-            color: #2d3748;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-        h1 { text-align: center; font-size: 1.7rem; margin-bottom: 0.3rem; color: #1a365d; }
-        .subtitle { text-align: center; color: #718096; margin-bottom: 1.5rem; font-size: 0.9rem; }
-
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f5f7fa; color: #2d3748; padding: 1.5rem; line-height: 1.6; }
+        h1 { text-align: center; font-size: 1.6rem; margin-bottom: 0.2rem; color: #1a365d; }
+        .subtitle { text-align: center; color: #718096; margin-bottom: 1.2rem; font-size: 0.88rem; }
         .today-banner {
-            text-align: center; padding: 0.6rem 1rem; background: #fff5f5;
-            border: 1px solid #feb2b2; border-radius: 6px; font-size: 0.82rem;
-            color: #c53030; font-weight: 600; margin-bottom: 1.5rem; max-width: 800px; margin-inline: auto;
+            text-align: center; padding: 0.5rem 1rem; background: #fff5f5;
+            border: 1px solid #feb2b2; border-radius: 6px; font-size: 0.8rem;
+            color: #c53030; font-weight: 600; margin-bottom: 1.5rem; max-width: 900px; margin-inline: auto;
         }
-
         /* Tabs */
-        .tabs { display: flex; justify-content: center; gap: 0.4rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tabs { display: flex; justify-content: center; gap: 0.4rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
         .tab {
-            padding: 0.55rem 1.2rem; border: 2px solid #cbd5e0; border-radius: 8px;
-            cursor: pointer; font-weight: 600; font-size: 0.82rem; transition: all 0.2s; background: white;
+            padding: 0.5rem 1.1rem; border: 2px solid #cbd5e0; border-radius: 8px;
+            cursor: pointer; font-weight: 600; font-size: 0.78rem; transition: all 0.2s; background: white;
         }
         .tab:hover { border-color: #4299e1; color: #4299e1; }
         .tab.active { background: #ebf8ff; border-color: #3182ce; color: #2b6cb0; }
-
         .panel { display: none; max-width: 1200px; margin: 0 auto; }
         .panel.active { display: block; }
-
         /* Badges */
-        .badge {
-            display: inline-block; padding: 0.2rem 0.6rem; border-radius: 10px;
-            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-left: 0.5rem;
-        }
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 10px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; margin-left: 0.4rem; }
         .badge-blue { background: #bee3f8; color: #2a4365; }
         .badge-yellow { background: #fefcbf; color: #744210; }
         .badge-red { background: #fed7d7; color: #9b2c2c; }
         .badge-green { background: #c6f6d5; color: #22543d; }
-
-        /* Section headers */
+        /* Section */
         .section-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
-        .section-header h2 { font-size: 1.2rem; color: #2d3748; }
-
+        .section-header h2 { font-size: 1.15rem; color: #2d3748; }
         /* Swimlanes */
-        .swimlane { display: grid; grid-template-columns: 150px 1fr; margin-bottom: 0.6rem; min-height: 52px; align-items: center; }
-        .swimlane-label { font-weight: 700; font-size: 0.73rem; color: #4a5568; text-align: right; padding-right: 1rem; line-height: 1.3; }
-        .swimlane-label small { font-weight: 400; color: #a0aec0; }
-        .swimlane-track { position: relative; height: 42px; background: #edf2f7; border-radius: 5px; }
-
+        .swimlane { display: grid; grid-template-columns: 150px 1fr; margin-bottom: 0.55rem; min-height: 50px; align-items: center; }
+        .swimlane-label { font-weight: 700; font-size: 0.7rem; color: #4a5568; text-align: right; padding-right: 0.8rem; line-height: 1.3; }
+        .swimlane-label small { font-weight: 400; color: #a0aec0; display: block; }
+        .swimlane-track { position: relative; height: 40px; background: #edf2f7; border-radius: 5px; }
         .ev {
-            position: absolute; top: 50%; transform: translateY(-50%); height: 32px; border-radius: 4px;
-            display: flex; align-items: center; padding: 0 0.4rem; font-size: 0.65rem; font-weight: 600;
-            white-space: nowrap; color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            position: absolute; top: 50%; transform: translateY(-50%); height: 30px; border-radius: 4px;
+            display: flex; align-items: center; padding: 0 0.4rem; font-size: 0.63rem; font-weight: 600;
+            white-space: nowrap; color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.12);
             cursor: default; transition: transform 0.15s; overflow: hidden; text-overflow: ellipsis;
         }
-        .ev:hover { transform: translateY(-50%) scale(1.05); z-index: 10; overflow: visible; }
-
-        .c-snap { background: #805ad5; }
-        .c-migr { background: #3182ce; }
-        .c-conv { background: #dd6b20; }
-        .c-base { background: #2f855a; }
-        .c-stop { background: #e53e3e; opacity: 0.75; }
-        .c-repr { background: #d69e2e; }
-        .c-proc { background: #38a169; }
-        .c-dg { background: #6b46c1; }
-        .c-norm { background: #319795; }
-        .c-fail { background: #e53e3e; }
-        .c-read { background: #a0aec0; }
-        .c-prim { background: #2b6cb0; }
-        .c-equal { background: #d53f8c; }
-        .c-serpro { background: #dd6b20; }
-        .c-consumers { background: #667eea; }
-
-        .date-axis { display: grid; grid-template-columns: 150px 1fr; margin-top: 0.4rem; margin-bottom: 2rem; }
-        .date-axis-track {
-            display: flex; justify-content: space-between; font-size: 0.7rem;
-            color: #718096; font-weight: 600; padding: 0.2rem 0; border-top: 2px solid #cbd5e0;
-        }
-
+        .ev:hover { transform: translateY(-50%) scale(1.06); z-index: 10; overflow: visible; }
+        .c-snap { background: #805ad5; } .c-migr { background: #3182ce; } .c-conv { background: #dd6b20; }
+        .c-base { background: #2f855a; } .c-stop { background: #e53e3e; opacity: 0.75; }
+        .c-repr { background: #d69e2e; } .c-proc { background: #38a169; } .c-dg { background: #6b46c1; }
+        .c-norm { background: #319795; } .c-fail { background: #e53e3e; } .c-read { background: #a0aec0; }
+        .c-prim { background: #2b6cb0; } .c-equal { background: #d53f8c; } .c-serpro { background: #dd6b20; }
+        .c-consumers { background: #667eea; } .c-invert { background: #b794f4; }
+        .date-axis { display: grid; grid-template-columns: 150px 1fr; margin-top: 0.3rem; margin-bottom: 1.8rem; }
+        .date-axis-track { display: flex; justify-content: space-between; font-size: 0.68rem; color: #718096; font-weight: 600; padding: 0.2rem 0; border-top: 2px solid #cbd5e0; }
         /* Legend */
-        .legend {
-            display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center;
-            margin: 1rem 0 1.5rem; padding: 0.6rem 1rem; background: white;
-            border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-        }
-        .legend-item { display: flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; }
-        .legend-color { width: 12px; height: 12px; border-radius: 3px; }
-
+        .legend { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin: 0.8rem 0 1.2rem; padding: 0.5rem 0.8rem; background: white; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .legend-item { display: flex; align-items: center; gap: 0.3rem; font-size: 0.67rem; }
+        .legend-color { width: 11px; height: 11px; border-radius: 3px; }
         /* Info sections */
-        .info-section {
-            max-width: 1050px; margin: 1.5rem auto; padding: 1.5rem;
-            background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        }
-        .info-section h3 { margin-bottom: 1rem; color: #2d3748; font-size: 1rem; }
-
+        .info-section { max-width: 1050px; margin: 1.5rem auto; padding: 1.3rem; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+        .info-section h3 { margin-bottom: 0.8rem; color: #2d3748; font-size: 0.95rem; }
         /* Strategy flow */
-        .strategy-flow {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;
-            margin: 1rem 0;
-        }
-        .strat-card {
-            border: 2px solid #e2e8f0; border-radius: 8px; padding: 0.8rem;
-            text-align: center; font-size: 0.75rem; position: relative;
-        }
-        .strat-card .step { font-size: 0.65rem; color: #718096; margin-bottom: 0.3rem; }
-        .strat-card .title { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.3rem; }
+        .strategy-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; margin: 1rem 0; }
+        .strat-card { border: 2px solid #e2e8f0; border-radius: 8px; padding: 0.7rem; text-align: center; font-size: 0.72rem; position: relative; }
+        .strat-card .step { font-size: 0.62rem; color: #718096; margin-bottom: 0.2rem; }
+        .strat-card .title { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.2rem; }
         .strat-card .detail { color: #4a5568; }
         .strat-card.origin { border-color: #fc8181; background: #fff5f5; }
         .strat-card.intermediate { border-color: #90cdf4; background: #ebf8ff; }
         .strat-card.equalize { border-color: #d53f8c; background: #fff5f7; }
         .strat-card.final { border-color: #68d391; background: #f0fff4; }
-        .strat-arrow {
-            position: absolute; right: -18px; top: 50%; transform: translateY(-50%);
-            font-size: 1.2rem; color: #a0aec0; z-index: 2;
-        }
-
-        /* DG Consumer view */
-        .dg-timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem; }
-        .dg-slot {
-            border: 2px solid #e2e8f0; border-radius: 8px; padding: 0.75rem;
-            text-align: center; font-size: 0.73rem;
-        }
-        .dg-slot .date { font-weight: 700; margin-bottom: 0.3rem; font-size: 0.78rem; }
-        .dg-slot .role { font-size: 0.68rem; color: #718096; margin-top: 0.3rem; }
-        .dg-slot.dg-exa { border-color: #fc8181; background: #fff5f5; }
-        .dg-slot.dg-none { border-color: #e53e3e; background: #fff5f5; border-style: dashed; }
-        .dg-slot.dg-exacc { border-color: #68d391; background: #f0fff4; }
-
-        /* Processing cards */
+        .strat-arrow { position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #a0aec0; z-index: 2; }
+        /* DG phase cards */
+        .dg-phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin: 1rem 0; }
+        .dg-phase { border: 2px solid #e2e8f0; border-radius: 8px; padding: 0.8rem; text-align: center; font-size: 0.73rem; }
+        .dg-phase .phase-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.4rem; }
+        .dg-phase .phase-date { font-size: 0.7rem; color: #718096; margin-bottom: 0.4rem; }
+        .dg-phase.phase1 { border-color: #90cdf4; background: #ebf8ff; }
+        .dg-phase.phase2 { border-color: #b794f4; background: #faf5ff; }
+        .dg-phase.phase3 { border-color: #68d391; background: #f0fff4; }
+        /* Processing flow */
+        .flow-box { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 0.8rem; margin: 0.8rem 0; font-size: 0.8rem; text-align: center; }
+        .flow-box .arrow { color: #4299e1; font-weight: 700; margin: 0 0.3rem; }
+        /* Proc grid */
         .proc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
         .proc-card { border: 2px solid #e2e8f0; border-radius: 8px; padding: 1rem; }
-        .proc-card h4 { font-size: 0.88rem; margin-bottom: 0.6rem; }
+        .proc-card h4 { font-size: 0.85rem; margin-bottom: 0.5rem; }
         .proc-card.exa-card { border-color: #fc8181; }
         .proc-card.exa-card h4 { color: #c53030; }
         .proc-card.exacc-card { border-color: #68d391; }
         .proc-card.exacc-card h4 { color: #276749; }
-
-        .status-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0.3rem 0; font-size: 0.76rem; border-bottom: 1px solid #f0f0f0;
-        }
+        .status-row { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0; font-size: 0.74rem; border-bottom: 1px solid #f0f0f0; }
         .status-row:last-child { border-bottom: none; }
-        .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.25rem; }
-        .dot-green { background: #38a169; }
-        .dot-red { background: #e53e3e; }
-        .dot-yellow { background: #d69e2e; }
-        .dot-blue { background: #3182ce; }
-        .dot-purple { background: #805ad5; }
-
+        .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 0.25rem; }
+        .dot-green { background: #38a169; } .dot-red { background: #e53e3e; }
+        .dot-yellow { background: #d69e2e; } .dot-blue { background: #3182ce; } .dot-purple { background: #805ad5; }
         /* Comp table */
-        .comp-table {
-            width: 100%; border-collapse: collapse; background: white;
-            border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        }
-        .comp-table th { background: #2d3748; color: white; padding: 0.65rem 0.8rem; text-align: left; font-size: 0.8rem; }
-        .comp-table td { padding: 0.55rem 0.8rem; border-bottom: 1px solid #e2e8f0; font-size: 0.8rem; }
+        .comp-table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        .comp-table th { background: #2d3748; color: white; padding: 0.6rem 0.7rem; text-align: left; font-size: 0.76rem; }
+        .comp-table td { padding: 0.5rem 0.7rem; border-bottom: 1px solid #e2e8f0; font-size: 0.78rem; }
         .comp-table tr:nth-child(even) { background: #f7fafc; }
-        .worse { color: #e53e3e; font-weight: 600; }
-        .better { color: #38a169; font-weight: 600; }
-
-        /* Risk box */
+        .worse { color: #e53e3e; font-weight: 600; } .better { color: #38a169; font-weight: 600; }
+        /* Risk */
         .risk-box { border-left: 4px solid #e53e3e; }
-        .risk-box ul { padding-left: 1.5rem; font-size: 0.82rem; line-height: 2; }
-
+        .risk-box ul { padding-left: 1.3rem; font-size: 0.8rem; line-height: 1.9; }
         @media (max-width: 768px) {
-            body { padding: 1rem; }
-            .swimlane { grid-template-columns: 95px 1fr; }
-            .swimlane-label { font-size: 0.63rem; }
-            .ev { font-size: 0.58rem; padding: 0 0.25rem; }
-            .proc-grid { grid-template-columns: 1fr; }
+            body { padding: 0.8rem; }
+            .swimlane { grid-template-columns: 90px 1fr; }
+            .swimlane-label { font-size: 0.6rem; }
+            .ev { font-size: 0.55rem; padding: 0 0.2rem; }
+            .proc-grid, .dg-phases { grid-template-columns: 1fr; }
             .strategy-flow { grid-template-columns: 1fr 1fr; }
-            .dg-timeline { grid-template-columns: 1fr; }
-            .tabs { gap: 0.3rem; }
-            .tab { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+            .tabs { gap: 0.25rem; }
+            .tab { padding: 0.35rem 0.6rem; font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
     <h1>Migração eSocial Alfanumérico</h1>
-    <p class="subtitle">Exadata → ExaCC | Conversão CNPJ Alfanumérico | Plano de Ação 2026 — v2</p>
+    <p class="subtitle">Exadata → ExaCC | Conversão CNPJ Alfanumérico | Plano de Ação 2026 — v3</p>
 
     <div class="today-banner">
-        📍 Hoje: 20/08/2026 — Dia 6 da migração | Recepção Serpro interrompida desde 19/08 9h | Proposta B em vigor
+        📍 Hoje: 20/08/2026 — Dia 6 | Recepção Serpro interrompida desde 19/08 9h | Intermediário sendo equalizado | Proposta B em vigor
     </div>
 
     <div class="tabs">
-        <div class="tab active" data-panel="strategy" onclick="showPanel('strategy')">Estratégia Alternativa</div>
-        <div class="tab" data-panel="a" onclick="showPanel('a')">Proposta A (Original)</div>
-        <div class="tab" data-panel="b" onclick="showPanel('b')">Proposta B (Vigente)</div>
+        <div class="tab active" data-panel="strategy" onclick="showPanel('strategy')">Estratégia & Fases DG</div>
+        <div class="tab" data-panel="b" onclick="showPanel('b')">Timeline Proposta B</div>
         <div class="tab" data-panel="dg" onclick="showPanel('dg')">DataGuard & Consumidores</div>
+        <div class="tab" data-panel="a" onclick="showPanel('a')">Proposta A (Original)</div>
         <div class="tab" data-panel="comp" onclick="showPanel('comp')">Comparativo</div>
     </div>
 
-    <!-- ============ ESTRATÉGIA ALTERNATIVA ============ -->
+    <!-- ============ ESTRATÉGIA & FASES DG ============ -->
     <div class="panel active" id="panel-strategy">
         <div class="section-header">
-            <h2>Estratégia Alternativa (Proposta B)</h2>
-            <span class="badge badge-red">Clone falhou 2x</span>
+            <h2>Estratégia Alternativa</h2>
+            <span class="badge badge-red">Clone falhou 17 e 19/08</span>
         </div>
 
+        <!-- Fluxo de processamento -->
         <div class="info-section">
-            <h3>Fluxo: Exadata → Intermediário → Equalização → Primary</h3>
-            <p style="font-size:0.83rem; color:#4a5568; margin-bottom:1rem;">
-                O clone direto das bases falhou nos dias 17 e 19/08. A estratégia alternativa usa o servidor intermediário
-                no ExaCC, equaliza seus recursos e o promove a primary temporário.
+            <h3>🔄 Fluxo de Processamento (idêntico Exadata e ExaCC)</h3>
+            <div class="flow-box">
+                <strong>Serpro</strong> <span class="arrow">→</span> eventos <span class="arrow">→</span>
+                <strong>Banco Recepção</strong> <span class="arrow">→</span> leitura + transformação <span class="arrow">→</span>
+                <strong>Banco Negócio</strong>
+            </div>
+            <p style="font-size:0.78rem; color:#4a5568; margin-top:0.5rem;">
+                ⚠️ Para processamento no <strong>Exadata</strong> (futuro), depende de <strong>dblink</strong> do Banco Recepção ExaCC → Banco Recepção Exadata.
+                Recepção Serpro sempre entra pelo ExaCC após a migração.
             </p>
+        </div>
+
+        <!-- Etapas -->
+        <div class="info-section">
+            <h3>📐 Etapas: Exadata → Intermediário → Equalização → Primary</h3>
             <div class="strategy-flow">
                 <div class="strat-card origin">
                     <div class="step">Etapa 01</div>
                     <div class="title">ORIGEM</div>
                     <div class="detail">
-                        Exadata (ambiente atual)<br><br>
-                        <strong>eSocial Negócio:</strong> 104 TB<br>
-                        <strong>eSocial Recepção:</strong> 32 TB
+                        Exadata<br>
+                        Negócio: 104 TB<br>
+                        Recepção: 32 TB
                     </div>
                     <div class="strat-arrow">→</div>
                 </div>
@@ -226,9 +171,9 @@
                     <div class="step">Etapa 02</div>
                     <div class="title">INTERMEDIÁRIO</div>
                     <div class="detail">
-                        ExaCC (e3cc2dtp-pclu01)<br><br>
-                        Recebe dados: 104+32 TB<br>
-                        <strong>26 vCPUs</strong> (limitado)
+                        ExaCC e3cc2dtp-pclu01<br>
+                        Recebe dados<br>
+                        <strong>26 vCPUs</strong>
                     </div>
                     <div class="strat-arrow">→</div>
                 </div>
@@ -236,145 +181,94 @@
                     <div class="step">Etapa 03</div>
                     <div class="title">EQUALIZAÇÃO</div>
                     <div class="detail">
-                        Mesmo servidor<br><br>
-                        <strong>+66 vCPUs</strong><br>
-                        +100 TB disco<br>
-                        +PGA / +SGA<br><br>
-                        → <strong>92 vCPUs</strong>
+                        Mesmo servidor<br>
+                        +66 vCPUs, +100 TB<br>
+                        +PGA, +SGA<br>
+                        <strong>→ 92 vCPUs</strong>
                     </div>
                     <div class="strat-arrow">→</div>
                 </div>
                 <div class="strat-card final">
                     <div class="step">Etapa 04</div>
-                    <div class="title">INTERMEDIÁRIO EQUALIZADO</div>
+                    <div class="title">PRIMARY TEMP.</div>
                     <div class="detail">
-                        ExaCC (mesmo box)<br><br>
-                        Assume como <strong>PRIMARY</strong><br>
-                        DataGuard montado<br>
-                        Consumidores apontam aqui<br>
-                        Recepção Serpro retoma
+                        Mesmo box equalizado<br>
+                        Assume processamento<br>
+                        Recepção Serpro retoma<br>
+                        Primário recebe via DG
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- 3 Fases do DG Temporário -->
         <div class="info-section">
-            <h3>Por que essa estratégia?</h3>
-            <ul style="padding-left:1.5rem; font-size:0.83rem; line-height:2;">
-                <li><strong>Clone falhou 2x</strong> (17/08 e 19/08) — operação direta Exadata→ExaCC não completou</li>
-                <li><strong>Decisão:</strong> usar servidor intermediário que já tem parte dos dados e promovê-lo</li>
-                <li><strong>Recepção Serpro interrompida 19/08 9h</strong> — necessário para o intermediário poder assumir como primary sem conflitos</li>
-                <li><strong>Equalização de recursos</strong> — intermediário tinha apenas 26 vCPUs, precisava dos mesmos 92 da primary para aguentar carga</li>
-                <li><strong>DataGuard será montado no ExaCC equalizado</strong> — consumidores só voltam a ler quando esse DG estiver pronto</li>
-            </ul>
+            <h3>🛡️ Fases do DataGuard Temporário (~24/08 → ~02/09)</h3>
+            <div class="dg-phases">
+                <div class="dg-phase phase1">
+                    <div class="phase-title">Fase 1</div>
+                    <div class="phase-date">~24/08 → ~30/08</div>
+                    <table style="width:100%; font-size:0.72rem; margin-top:0.4rem;">
+                        <tr><td style="text-align:right; padding-right:0.3rem;"><strong>Primary:</strong></td><td style="text-align:left;">Intermediário</td></tr>
+                        <tr><td style="text-align:right; padding-right:0.3rem;"><strong>Standby:</strong></td><td style="text-align:left;">Primário</td></tr>
+                    </table>
+                    <p style="margin-top:0.5rem; font-size:0.7rem; color:#4a5568;">
+                        Intermediário processa eventos.<br>
+                        Primário recebe dados via DG Oracle<br>
+                        (substitui o clone que falhou)
+                    </p>
+                </div>
+                <div class="dg-phase phase2">
+                    <div class="phase-title">Fase 2 — Inversão</div>
+                    <div class="phase-date">~30/08 → ~02/09</div>
+                    <table style="width:100%; font-size:0.72rem; margin-top:0.4rem;">
+                        <tr><td style="text-align:right; padding-right:0.3rem;"><strong>Primary:</strong></td><td style="text-align:left;">Primário ✅</td></tr>
+                        <tr><td style="text-align:right; padding-right:0.3rem;"><strong>Standby:</strong></td><td style="text-align:left;">Intermediário</td></tr>
+                    </table>
+                    <p style="margin-top:0.5rem; font-size:0.7rem; color:#4a5568;">
+                        Bancos iguais → inversão de papéis.<br>
+                        Primário assume processamento.<br>
+                        Transformação grava no Primário.
+                    </p>
+                    <p style="margin-top:0.3rem; font-size:0.65rem; color:#e53e3e;">
+                        ⚠️ Data não definida (~30/08)<br>Depende do tempo para bancos equalizarem
+                    </p>
+                </div>
+                <div class="dg-phase phase3">
+                    <div class="phase-title">Fase 3 — Final</div>
+                    <div class="phase-date">~02/09 em diante</div>
+                    <table style="width:100%; font-size:0.72rem; margin-top:0.4rem;">
+                        <tr><td style="text-align:right; padding-right:0.3rem;"><strong>Primary:</strong></td><td style="text-align:left;">Primário ✅</td></tr>
+                        <tr><td style="text-align:right; padding-right:0.3rem;"><strong>Standby:</strong></td><td style="text-align:left;">Exadata (DG Online)</td></tr>
+                    </table>
+                    <p style="margin-top:0.5rem; font-size:0.7rem; color:#4a5568;">
+                        Situação definitiva.<br>
+                        Intermediário desmobilizado.<br>
+                        Consumidores apontam p/ DG.
+                    </p>
+                </div>
+            </div>
         </div>
 
+        <!-- Motivo -->
         <div class="info-section risk-box">
-            <h3>⚠️ Consequências</h3>
+            <h3>⚠️ Por que essa estratégia</h3>
             <ul>
-                <li><strong>Sem recepção de eventos:</strong> desde 19/08 9h — eventos do Serpro estão represados</li>
-                <li><strong>Sem DataGuard (leitura consumidores):</strong> desde 19/08 — CTPS, Meu INSS, Portal CNIS, Extrato sem atualização</li>
-                <li><strong>Retomada só no ExaCC:</strong> quando banco equalizado + DG pronto + apontamento dos consumidores</li>
-                <li><strong>Janela estendida:</strong> +5 dias em relação ao cronograma original</li>
+                <li><strong>Clone falhou 2x</strong> (17 e 19/08) — operação direta Exadata→ExaCC não completou</li>
+                <li><strong>Alternativa:</strong> usar DG Oracle para popular o Primário a partir do Intermediário</li>
+                <li><strong>Recepção Serpro interrompida 19/08 9h</strong> — necessário para intermediário assumir sem conflitos</li>
+                <li><strong>Equalização:</strong> intermediário tinha 26 vCPUs, insuficiente para carga produção — upgrade para 92</li>
+                <li><strong>Inversão (~30/08):</strong> quando Primário fica igual ao Intermediário, trocam papéis — processamento passa para o Primário definitivo</li>
             </ul>
         </div>
     </div>
 
-    <!-- ============ PROPOSTA A ============ -->
-    <div class="panel" id="panel-a">
-        <div class="section-header">
-            <h2>Proposta A — Cronograma Original</h2>
-            <span class="badge badge-blue">16 dias | 15/08 → 31/08</span>
-        </div>
-
-        <div class="legend">
-            <div class="legend-item"><div class="legend-color" style="background:#805ad5"></div>Snapshot</div>
-            <div class="legend-item"><div class="legend-color" style="background:#3182ce"></div>Migração</div>
-            <div class="legend-item"><div class="legend-color" style="background:#dd6b20"></div>Conversão CNPJ</div>
-            <div class="legend-item"><div class="legend-color" style="background:#2f855a"></div>Baseline</div>
-            <div class="legend-item"><div class="legend-color" style="background:#e53e3e;opacity:0.75"></div>Parada</div>
-            <div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reprocessamento</div>
-            <div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Proc. ExaCC</div>
-            <div class="legend-item"><div class="legend-color" style="background:#6b46c1"></div>DataGuard</div>
-            <div class="legend-item"><div class="legend-color" style="background:#667eea"></div>Consumidores</div>
-        </div>
-
-        <!-- EXADATA -->
-        <div class="swimlane">
-            <div class="swimlane-label">EXADATA<br><small>origem / DG atual</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-snap" style="left:0%;width:10%;" title="15/08: Snapshot → ExaCC">📷 Snapshot</div>
-                <div class="ev c-read" style="left:25%;width:75%;" title="19/08→: Somente consulta eventos antigos">📖 Consulta (antigos)</div>
-            </div>
-        </div>
-
-        <!-- Processamento -->
-        <div class="swimlane">
-            <div class="swimlane-label">Processamento<br><small>eSocial</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-prim" style="left:0%;width:25%;" title="15→19/08: Processando Exadata">🔵 Exadata</div>
-                <div class="ev c-stop" style="left:25%;width:12%;" title="19→21/08: Sem processamento">⛔ Parada</div>
-                <div class="ev c-repr" style="left:37%;width:13%;" title="21→25/08: Reproc 15-19 no ExaCC">♻️ Reproc</div>
-                <div class="ev c-proc" style="left:50%;width:50%;" title="25→31/08: ExaCC processando">🟢 ExaCC</div>
-            </div>
-        </div>
-
-        <!-- EXACC -->
-        <div class="swimlane">
-            <div class="swimlane-label">EXACC<br><small>destino</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-migr" style="left:0%;width:13%;" title="15→17/08: Migração Negócio+CNIS">Migr Neg+CNIS</div>
-                <div class="ev c-conv" style="left:13%;width:8%;" title="~17/08: Conversão CNPJ">CNPJ Alfa</div>
-                <div class="ev c-base" style="left:13%;width:12%;" title="17→19: Baselines">Baselines</div>
-                <div class="ev c-migr" style="left:25%;width:12%;" title="19→21: Migr Recepção">Migr Recepção</div>
-                <div class="ev c-proc" style="left:37%;width:63%;" title="21→31: Processando">Processando</div>
-            </div>
-        </div>
-
-        <!-- Recepção Serpro -->
-        <div class="swimlane">
-            <div class="swimlane-label">Recepção<br><small>eventos Serpro</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-serpro" style="left:0%;width:25%;" title="15→19/08: Recebendo no Exadata">✅ Exadata</div>
-                <div class="ev c-stop" style="left:25%;width:12%;" title="19→21: Parada">⛔ Parada</div>
-                <div class="ev c-proc" style="left:37%;width:63%;" title="21→: Retoma no ExaCC">✅ ExaCC</div>
-            </div>
-        </div>
-
-        <!-- DataGuard / Consumidores -->
-        <div class="swimlane">
-            <div class="swimlane-label">DataGuard<br><small>base leitura consumidores</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-dg" style="left:0%;width:25%;" title="Até 19/08: DG Exadata (consumidores lendo)">DG Exadata</div>
-                <div class="ev c-stop" style="left:25%;width:68%;opacity:0.4;" title="19→30: Sem DG">⚠️ Sem DG</div>
-                <div class="ev c-dg" style="left:93%;width:7%;" title="31/08: DG Online ExaCC">DG ExaCC</div>
-            </div>
-        </div>
-
-        <!-- Consumidores -->
-        <div class="swimlane">
-            <div class="swimlane-label">Consumidores<br><small>CTPS, Meu INSS, Portal...</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-consumers" style="left:0%;width:25%;" title="Até 19/08: Lendo DG Exadata">✅ Lendo DG Exadata</div>
-                <div class="ev c-stop" style="left:25%;width:68%;" title="19→30: Sem base de leitura">⛔ Sem atualização</div>
-                <div class="ev c-consumers" style="left:93%;width:7%;" title="31/08: Lendo DG ExaCC">✅ ExaCC</div>
-            </div>
-        </div>
-
-        <div class="date-axis">
-            <div></div>
-            <div class="date-axis-track">
-                <span>15/08</span><span>17</span><span>19</span><span>21</span><span>25</span><span>30</span><span>31/08</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ PROPOSTA B ============ -->
+    <!-- ============ PROPOSTA B TIMELINE ============ -->
     <div class="panel" id="panel-b">
         <div class="section-header">
-            <h2>Proposta B — Cronograma Vigente</h2>
+            <h2>Proposta B — Timeline Vigente</h2>
             <span class="badge badge-yellow">21 dias | 15/08 → 05/09</span>
-            <span class="badge badge-red">Falhas clone 17 e 19/08</span>
+            <span class="badge badge-red">Falhas clone</span>
         </div>
 
         <div class="legend">
@@ -383,82 +277,85 @@
             <div class="legend-item"><div class="legend-color" style="background:#e53e3e"></div>Falha/Parada</div>
             <div class="legend-item"><div class="legend-color" style="background:#d53f8c"></div>Equalização</div>
             <div class="legend-item"><div class="legend-color" style="background:#2f855a"></div>Baseline</div>
-            <div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reprocessamento</div>
-            <div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Proc. ExaCC</div>
-            <div class="legend-item"><div class="legend-color" style="background:#6b46c1"></div>DataGuard</div>
+            <div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reproc.</div>
+            <div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Processando</div>
+            <div class="legend-item"><div class="legend-color" style="background:#6b46c1"></div>DG</div>
+            <div class="legend-item"><div class="legend-color" style="background:#b794f4"></div>Inversão</div>
             <div class="legend-item"><div class="legend-color" style="background:#667eea"></div>Consumidores</div>
         </div>
 
         <!-- EXADATA -->
         <div class="swimlane">
-            <div class="swimlane-label">EXADATA<br><small>origem / DG hoje</small></div>
+            <div class="swimlane-label">EXADATA<small>origem / DG hoje</small></div>
             <div class="swimlane-track">
-                <div class="ev c-snap" style="left:0%;width:7%;" title="15/08: Snapshot">📷</div>
-                <div class="ev c-read" style="left:19%;width:81%;" title="19/08→: Somente consulta">📖 Consulta (antigos)</div>
+                <div class="ev c-snap" style="left:0%;width:6%;" title="15/08: Snapshot → ExaCC">📷</div>
+                <div class="ev c-read" style="left:19%;width:81%;" title="19/08→: Somente consulta eventos antigos">📖 Consulta (antigos)</div>
             </div>
         </div>
-
         <!-- Processamento -->
         <div class="swimlane">
-            <div class="swimlane-label">Processamento<br><small>eSocial</small></div>
+            <div class="swimlane-label">Processamento<small>eSocial</small></div>
             <div class="swimlane-track">
-                <div class="ev c-prim" style="left:0%;width:19%;" title="15→19/08: Exadata">🔵 Exadata</div>
+                <div class="ev c-prim" style="left:0%;width:19%;" title="15→19/08: Exadata processando">🔵 Exadata</div>
                 <div class="ev c-stop" style="left:19%;width:24%;" title="19→24/08: Parada ~5 dias">⛔ Parada (~5d)</div>
-                <div class="ev c-repr" style="left:43%;width:14%;" title="24→28: Reproc 15-19">♻️ Reproc</div>
-                <div class="ev c-proc" style="left:57%;width:43%;" title="28→05/09: ExaCC">🟢 ExaCC</div>
+                <div class="ev c-proc" style="left:43%;width:28%;" title="~24→~30: Intermediário processando (Fase 1)">🟢 Intermediário</div>
+                <div class="ev c-invert" style="left:71%;width:5%;" title="~30: Inversão — Primário assume">🔄</div>
+                <div class="ev c-proc" style="left:76%;width:24%;" title="~30→05/09: Primário processando (Fase 2+3)">🟢 Primário</div>
             </div>
         </div>
-
-        <!-- EXACC -->
+        <!-- ExaCC Intermediário -->
         <div class="swimlane">
-            <div class="swimlane-label">EXACC<br><small>intermediário</small></div>
+            <div class="swimlane-label">ExaCC Intermediário<small>e3cc2dtp-pclu01</small></div>
             <div class="swimlane-track">
-                <div class="ev c-migr" style="left:0%;width:10%;" title="15→17: Migração CNIS">Migr CNIS</div>
-                <div class="ev c-fail" style="left:10%;width:3%;" title="17/08: Falha clone #1">❌</div>
-                <div class="ev c-base" style="left:0%;width:19%;" title="15→19: BL CNIS">BL CNIS</div>
-                <div class="ev c-fail" style="left:19%;width:3%;" title="19/08: Falha clone #2">❌</div>
-                <div class="ev c-equal" style="left:22%;width:12%;" title="19→24: Equalização (26→92 vCPUs)">⚡ Equalização</div>
-                <div class="ev c-migr" style="left:22%;width:16%;" title="19→24: Migr Recepção">Migr Recepção</div>
-                <div class="ev c-base" style="left:38%;width:9%;" title="~24: BL Negócio">BL Neg</div>
-                <div class="ev c-dg" style="left:43%;width:19%;" title="24→28: Migr Negócio via DG">DG→Neg</div>
-                <div class="ev c-proc" style="left:62%;width:38%;" title="28→: Processando">Processando</div>
+                <div class="ev c-migr" style="left:0%;width:10%;" title="15→17: Migr CNIS">Migr CNIS</div>
+                <div class="ev c-fail" style="left:10%;width:2%;" title="17/08: Falha #1">❌</div>
+                <div class="ev c-fail" style="left:19%;width:2%;" title="19/08: Falha #2">❌</div>
+                <div class="ev c-equal" style="left:19%;width:14%;" title="19→24: Equalização 26→92 vCPUs">⚡ Equal. (92 vCPUs)</div>
+                <div class="ev c-proc" style="left:43%;width:28%;" title="~24→~30: Primary temp — processa">Primary (Fase 1)</div>
+                <div class="ev c-dg" style="left:71%;width:10%;" title="~30→02/09: Vira standby">Standby</div>
+                <div class="ev c-read" style="left:81%;width:19%; opacity:0.4;" title="02/09+: Desmobilizado">Desmob.</div>
             </div>
         </div>
-
+        <!-- ExaCC Primário -->
+        <div class="swimlane">
+            <div class="swimlane-label">ExaCC Primário<small>destino definitivo</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-dg" style="left:43%;width:28%;" title="~24→~30: Standby — recebe dados via DG Oracle">Standby (recebe via DG)</div>
+                <div class="ev c-proc" style="left:71%;width:29%;" title="~30→05/09+: Primary definitivo">✅ Primary definitivo</div>
+            </div>
+        </div>
         <!-- Recepção Serpro -->
         <div class="swimlane">
-            <div class="swimlane-label">Recepção Serpro<br><small>eventos novos</small></div>
+            <div class="swimlane-label">Recepção Serpro<small>eventos novos</small></div>
             <div class="swimlane-track">
                 <div class="ev c-serpro" style="left:0%;width:19%;" title="15→19/08 9h: Recebendo no Exadata">✅ Exadata</div>
-                <div class="ev c-stop" style="left:19%;width:43%;" title="19/08 9h → ~28/08: Interrompida">⛔ Interrompida (19/08 9h)</div>
-                <div class="ev c-proc" style="left:62%;width:38%;" title="~28→: Retoma no ExaCC">✅ Retoma ExaCC</div>
+                <div class="ev c-stop" style="left:19%;width:24%;" title="19/08 9h → ~24: Interrompida">⛔ Interrompida</div>
+                <div class="ev c-proc" style="left:43%;width:57%;" title="~24→: Retoma no ExaCC (Intermediário/Primário)">✅ ExaCC</div>
             </div>
         </div>
-
-        <!-- DataGuard -->
+        <!-- DataGuard base leitura -->
         <div class="swimlane">
-            <div class="swimlane-label">DataGuard<br><small>base leitura</small></div>
+            <div class="swimlane-label">DG (leitura)<small>consumidores</small></div>
             <div class="swimlane-track">
-                <div class="ev c-dg" style="left:0%;width:19%;" title="Até 19/08: DG Exadata">DG Exadata</div>
-                <div class="ev c-stop" style="left:19%;width:62%;opacity:0.4;" title="19/08→02/09: Sem DG">⚠️ Sem DG (consumidores sem base)</div>
-                <div class="ev c-dg" style="left:81%;width:19%;" title="~02/09→: DG ExaCC Online">DG ExaCC ✅</div>
+                <div class="ev c-dg" style="left:0%;width:19%;" title="Até 19/08: DG Exadata ativo">DG Exadata</div>
+                <div class="ev c-stop" style="left:19%;width:62%;opacity:0.4;" title="19/08→~02/09: Sem DG — consumidores sem base">⚠️ Sem DG (~14 dias)</div>
+                <div class="ev c-dg" style="left:81%;width:19%;" title="~02/09: DG ExaCC Online (Primário)">DG ExaCC ✅</div>
             </div>
         </div>
-
         <!-- Consumidores -->
         <div class="swimlane">
-            <div class="swimlane-label">Consumidores<br><small>CTPS, Meu INSS, Portal...</small></div>
+            <div class="swimlane-label">Consumidores<small>CTPS, Meu INSS, Portal</small></div>
             <div class="swimlane-track">
-                <div class="ev c-consumers" style="left:0%;width:19%;" title="Até 19/08: Lendo DG Exadata">✅ DG Exadata</div>
-                <div class="ev c-stop" style="left:19%;width:62%;" title="19/08→02/09: Sem atualização (~14 dias)">⛔ Sem atualização (~14 dias)</div>
-                <div class="ev c-consumers" style="left:81%;width:19%;" title="~02/09: Apontam DG ExaCC">✅ DG ExaCC</div>
+                <div class="ev c-consumers" style="left:0%;width:19%;" title="Lendo DG Exadata">✅ DG Exadata</div>
+                <div class="ev c-stop" style="left:19%;width:62%;" title="Sem atualização ~14 dias">⛔ Sem atualização</div>
+                <div class="ev c-consumers" style="left:81%;width:19%;" title="Lendo DG ExaCC">✅ DG ExaCC</div>
             </div>
         </div>
 
         <div class="date-axis">
             <div></div>
             <div class="date-axis-track">
-                <span>15/08</span><span>17</span><span>19</span><span>24</span><span>28</span><span>02/09</span><span>05/09</span>
+                <span>15/08</span><span>17</span><span>19</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span>
             </div>
         </div>
     </div>
@@ -471,121 +368,158 @@
 
         <div class="info-section">
             <h3>🔑 Conceito-chave</h3>
-            <p style="font-size:0.85rem; color:#4a5568; margin-bottom:0.5rem;">
-                O DataGuard <strong>não é apenas DR</strong>. É a <strong>base de leitura dos consumidores críticos</strong>.
-                Serviços como CTPS Digital, Meu INSS, Portal CNIS e Extrato leem do DataGuard (standby) — nunca da primary diretamente.
-            </p>
-            <p style="font-size:0.85rem; color:#4a5568;">
-                Os consumidores só leem de <strong>um DataGuard por vez</strong>. Hoje é o do Exadata. No futuro será o do ExaCC.
-                <strong>Enquanto não houver DG ativo, os consumidores ficam sem base de leitura.</strong>
+            <p style="font-size:0.83rem; color:#4a5568;">
+                O DataGuard é a <strong>base de leitura dos consumidores</strong>. Serviços como CTPS Digital, Meu INSS, Portal CNIS, Extrato leem
+                do DataGuard (standby) — nunca da primary. Consumidores leem de <strong>um DG por vez</strong>.
+                Hoje: DG Exadata. Futuro: DG ExaCC. Após migração, cada consumidor escolherá entre DG Exadata ou ExaCC.
             </p>
         </div>
 
-        <!-- Visão separada Exadata vs ExaCC -->
+        <!-- Visão separada -->
         <div class="info-section">
             <h3>📊 Visão por Base — Proposta B</h3>
             <div class="proc-grid">
                 <div class="proc-card exa-card">
                     <h4>🔴 EXADATA (base de DG hoje)</h4>
-                    <div class="status-row">
-                        <span><span class="dot dot-green"></span>15/08 → 19/08</span>
-                        <span>Primary + DG ativo (consumidores lendo)</span>
-                    </div>
-                    <div class="status-row">
-                        <span><span class="dot dot-red"></span>19/08 9h</span>
-                        <span>Recepção Serpro interrompida</span>
-                    </div>
-                    <div class="status-row">
-                        <span><span class="dot dot-red"></span>19/08 em diante</span>
-                        <span>DG desconectado — consumidores perdem base</span>
-                    </div>
-                    <div class="status-row">
-                        <span><span class="dot dot-yellow"></span>Futuro</span>
-                        <span>Vira standby do ExaCC (após DG Online)</span>
-                    </div>
+                    <div class="status-row"><span><span class="dot dot-green"></span>15/08 → 19/08</span><span>Primary + DG ativo (consumidores lendo)</span></div>
+                    <div class="status-row"><span><span class="dot dot-red"></span>19/08 9h</span><span>Recepção Serpro interrompida</span></div>
+                    <div class="status-row"><span><span class="dot dot-red"></span>19/08 em diante</span><span>DG desconectado — consumidores perdem base</span></div>
+                    <div class="status-row"><span><span class="dot dot-yellow"></span>~02/09+</span><span>Vira standby do Primário ExaCC (DG Online)</span></div>
+                    <div class="status-row"><span><span class="dot dot-blue"></span>Futuro</span><span>Consumidores podem escolher DG Exadata ou DG ExaCC</span></div>
                 </div>
                 <div class="proc-card exacc-card">
-                    <h4>🟢 EXACC (intermediário → primary futura)</h4>
-                    <div class="status-row">
-                        <span><span class="dot dot-blue"></span>15/08 → 24/08</span>
-                        <span>Recebendo migrações + equalização</span>
-                    </div>
-                    <div class="status-row">
-                        <span><span class="dot dot-purple"></span>~24/08</span>
-                        <span>Equalizado (92 vCPUs) — assume como primary</span>
-                    </div>
-                    <div class="status-row">
-                        <span><span class="dot dot-yellow"></span>~24→28/08</span>
-                        <span>Reprocessa eventos 15-19 + monta DG</span>
-                    </div>
-                    <div class="status-row">
-                        <span><span class="dot dot-green"></span>~02/09</span>
-                        <span>DG Online — consumidores apontam aqui</span>
-                    </div>
-                    <div class="status-row">
-                        <span><span class="dot dot-green"></span>~02/09</span>
-                        <span>Recepção Serpro retoma</span>
-                    </div>
+                    <h4>🟢 EXACC (intermediário → primário)</h4>
+                    <div class="status-row"><span><span class="dot dot-blue"></span>15/08 → 24/08</span><span>Intermediário: recebendo migrações + equalização</span></div>
+                    <div class="status-row"><span><span class="dot dot-purple"></span>~24/08 (Fase 1)</span><span>Intermediário = Primary temp. Primário = Standby (recebe via DG)</span></div>
+                    <div class="status-row"><span><span class="dot dot-yellow"></span>~30/08 (Fase 2)</span><span>Inversão: Primário = Primary. Intermediário = Standby</span></div>
+                    <div class="status-row"><span><span class="dot dot-green"></span>~02/09 (Fase 3)</span><span>DG Online: Primário=Primary, Exadata=Standby. Consumidores voltam</span></div>
+                    <div class="status-row"><span><span class="dot dot-green"></span>~02/09+</span><span>Intermediário desmobilizado. Situação final</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- Timeline de DG por fase -->
+        <!-- Dependência processamento Exadata -->
         <div class="info-section">
-            <h3>🛡️ DataGuard — Fase a Fase</h3>
-            <div class="dg-timeline">
-                <div class="dg-slot dg-exa">
-                    <div class="date">15/08 → 19/08</div>
-                    <strong>DG: EXADATA</strong><br>
-                    Consumidores: ✅ lendo<br>
-                    <span class="role">Exadata = Primary + DG<br>Último momento com leitura normal</span>
-                </div>
-                <div class="dg-slot dg-none">
-                    <div class="date">19/08 → ~02/09</div>
-                    <strong>⚠️ SEM DataGuard</strong><br>
-                    Consumidores: ❌ sem base<br>
-                    <span class="role">DG Exadata desconectado<br>DG ExaCC ainda não existe<br><em>~14 dias sem leitura</em></span>
-                </div>
-                <div class="dg-slot dg-exacc">
-                    <div class="date">~02/09 em diante</div>
-                    <strong>DG: EXACC ✅</strong><br>
-                    Consumidores: ✅ lendo<br>
-                    <span class="role">ExaCC = Primary<br>Exadata = Standby<br>Consumidores apontados para DG ExaCC</span>
-                </div>
+            <h3>🔗 Dependência: Processamento Exadata pós-migração</h3>
+            <div class="flow-box">
+                <strong>Serpro</strong> <span class="arrow">→</span>
+                <strong>Recepção ExaCC</strong> <span class="arrow">→ dblink →</span>
+                <strong>Recepção Exadata</strong> <span class="arrow">→</span>
+                transformação <span class="arrow">→</span>
+                <strong>Negócio Exadata</strong>
             </div>
+            <p style="font-size:0.78rem; color:#4a5568; margin-top:0.5rem;">
+                Após a migração, a recepção Serpro sempre entra pelo ExaCC. O Exadata só processa se tiver dblink ativo com o Banco Recepção do ExaCC.
+                Consumidores que escolherem DG Exadata dependem desse dblink estar operacional.
+            </p>
         </div>
 
         <!-- Consumidores afetados -->
         <div class="info-section">
-            <h3>📋 Consumidores Afetados (sem DG de 19/08 a ~02/09)</h3>
+            <h3>📋 Consumidores sem base de leitura (19/08 → ~02/09)</h3>
             <table class="comp-table">
-                <thead>
-                    <tr><th>Consumidor</th><th>Frequência</th><th>Impacto</th></tr>
-                </thead>
+                <thead><tr><th>Consumidor</th><th>Tipo</th><th>Impacto</th></tr></thead>
                 <tbody>
                     <tr><td><strong>CTPS Digital</strong></td><td>Online</td><td class="worse">Sem dados atualizados de vínculos</td></tr>
                     <tr><td><strong>Meu INSS</strong></td><td>Online</td><td class="worse">Extrato desatualizado</td></tr>
                     <tr><td><strong>Portal CNIS</strong></td><td>Online</td><td class="worse">Consultas sem eventos recentes</td></tr>
                     <tr><td><strong>Sistemas Benefício</strong></td><td>Online</td><td class="worse">Dados previdenciários congelados</td></tr>
                     <tr><td><strong>Portal eSocial</strong></td><td>Online</td><td class="worse">Sem retorno de processamento</td></tr>
-                    <tr><td><strong>Extrato V6</strong></td><td>Online/API</td><td class="worse">Congelado na posição de 19/08</td></tr>
+                    <tr><td><strong>Extrato V6</strong></td><td>Online/API</td><td class="worse">Congelado posição 19/08</td></tr>
                     <tr><td><strong>Crédito do Trabalhador</strong></td><td>Diária</td><td class="worse">Extração diária interrompida</td></tr>
-                    <tr><td><strong>Painel Monitor CNIS</strong></td><td>Diária</td><td class="worse">Sem métricas atualizadas</td></tr>
-                    <tr><td><strong>Datalake</strong></td><td>Semanal</td><td>Atraso aceitável se normalizar até 02/09</td></tr>
+                    <tr><td><strong>Painel Monitor CNIS</strong></td><td>Diária</td><td class="worse">Sem métricas</td></tr>
                     <tr><td><strong>Segurado Especial / Defeso</strong></td><td>Online</td><td class="worse">Sem consulta atualizada</td></tr>
+                    <tr><td><strong>Datalake</strong></td><td>Semanal</td><td>Atraso aceitável se normalizar até 02/09</td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="info-section risk-box">
-            <h3>⚠️ Pontos de Atenção</h3>
+            <h3>⚠️ Riscos DataGuard / Consumidores</h3>
             <ul>
-                <li><strong>~14 dias sem DG</strong> = ~14 dias sem atualização para todos os consumidores online</li>
-                <li><strong>Recepção Serpro represada:</strong> eventos desde 19/08 9h estão em fila — ao retomar, haverá pico de reprocessamento</li>
-                <li><strong>Chaveamento é atômico:</strong> quando DG ExaCC subir, todos os consumidores migram de uma vez — risco de pico de carga</li>
-                <li><strong>FPSE/CAF:</strong> retestes que dependam de extrato CNIS ficam bloqueados até ~02/09</li>
-                <li><strong>Crédito do Trabalhador:</strong> impacto direto ao cidadão (possível escalonamento)</li>
+                <li><strong>~14 dias sem DG</strong> = todos os serviços online congelados na posição de 19/08</li>
+                <li><strong>Eventos represados:</strong> ao retomar recepção Serpro (~24/08), haverá pico de processamento</li>
+                <li><strong>Chaveamento consumidores:</strong> quando DG ExaCC subir (~02/09), apontamento é atômico — risco de pico de carga</li>
+                <li><strong>Dependência dblink:</strong> Exadata só volta a processar se dblink com Recepção ExaCC estiver OK</li>
+                <li><strong>Escolha de DG:</strong> consumidores precisarão decidir se leem DG Exadata ou ExaCC — decisão pós-migração</li>
             </ul>
+        </div>
+    </div>
+
+    <!-- ============ PROPOSTA A ============ -->
+    <div class="panel" id="panel-a">
+        <div class="section-header">
+            <h2>Proposta A — Original (não vigente)</h2>
+            <span class="badge badge-blue">16 dias | 15/08 → 31/08</span>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color" style="background:#805ad5"></div>Snapshot</div>
+            <div class="legend-item"><div class="legend-color" style="background:#3182ce"></div>Migração</div>
+            <div class="legend-item"><div class="legend-color" style="background:#dd6b20"></div>Conv. CNPJ</div>
+            <div class="legend-item"><div class="legend-color" style="background:#2f855a"></div>Baseline</div>
+            <div class="legend-item"><div class="legend-color" style="background:#e53e3e;opacity:0.75"></div>Parada</div>
+            <div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reproc.</div>
+            <div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Proc. ExaCC</div>
+            <div class="legend-item"><div class="legend-color" style="background:#6b46c1"></div>DG</div>
+            <div class="legend-item"><div class="legend-color" style="background:#667eea"></div>Consumidores</div>
+        </div>
+
+        <div class="swimlane">
+            <div class="swimlane-label">EXADATA<small>origem / DG</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-snap" style="left:0%;width:10%;">📷 Snapshot</div>
+                <div class="ev c-read" style="left:25%;width:75%;">📖 Consulta (antigos)</div>
+            </div>
+        </div>
+        <div class="swimlane">
+            <div class="swimlane-label">Processamento<small>eSocial</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-prim" style="left:0%;width:25%;">🔵 Exadata</div>
+                <div class="ev c-stop" style="left:25%;width:12%;">⛔ Parada</div>
+                <div class="ev c-repr" style="left:37%;width:13%;">♻️ Reproc</div>
+                <div class="ev c-proc" style="left:50%;width:50%;">🟢 ExaCC</div>
+            </div>
+        </div>
+        <div class="swimlane">
+            <div class="swimlane-label">EXACC<small>destino</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-migr" style="left:0%;width:13%;">Migr Neg+CNIS</div>
+                <div class="ev c-conv" style="left:13%;width:8%;">CNPJ Alfa</div>
+                <div class="ev c-base" style="left:13%;width:12%;">Baselines</div>
+                <div class="ev c-migr" style="left:25%;width:12%;">Migr Recepção</div>
+                <div class="ev c-proc" style="left:37%;width:63%;">Processando</div>
+            </div>
+        </div>
+        <div class="swimlane">
+            <div class="swimlane-label">Recepção Serpro<small>eventos</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-serpro" style="left:0%;width:25%;">✅ Exadata</div>
+                <div class="ev c-stop" style="left:25%;width:12%;">⛔ Parada</div>
+                <div class="ev c-proc" style="left:37%;width:63%;">✅ ExaCC</div>
+            </div>
+        </div>
+        <div class="swimlane">
+            <div class="swimlane-label">DG (leitura)<small>consumidores</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-dg" style="left:0%;width:25%;">DG Exadata</div>
+                <div class="ev c-stop" style="left:25%;width:68%;opacity:0.4;">⚠️ Sem DG</div>
+                <div class="ev c-dg" style="left:93%;width:7%;">DG ExaCC</div>
+            </div>
+        </div>
+        <div class="swimlane">
+            <div class="swimlane-label">Consumidores<small>CTPS, Meu INSS...</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-consumers" style="left:0%;width:25%;">✅ DG Exadata</div>
+                <div class="ev c-stop" style="left:25%;width:68%;">⛔ Sem atualização</div>
+                <div class="ev c-consumers" style="left:93%;width:7%;">✅</div>
+            </div>
+        </div>
+        <div class="date-axis">
+            <div></div>
+            <div class="date-axis-track">
+                <span>15/08</span><span>17</span><span>19</span><span>21</span><span>25</span><span>30</span><span>31/08</span>
+            </div>
         </div>
     </div>
 
@@ -597,83 +531,40 @@
 
         <div class="info-section">
             <table class="comp-table">
-                <thead>
-                    <tr><th>Aspecto</th><th>Proposta A (Original)</th><th>Proposta B (Vigente)</th><th>Delta</th></tr>
-                </thead>
+                <thead><tr><th>Aspecto</th><th>Proposta A</th><th>Proposta B (Vigente)</th><th>Delta</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td><strong>Janela total</strong></td>
-                        <td>16 dias (15/08→31/08)</td>
-                        <td class="worse">21 dias (15/08→05/09)</td>
-                        <td class="worse">+5 dias</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Parada processamento</strong></td>
-                        <td>~2 dias (19→21/08)</td>
-                        <td class="worse">~5 dias (19→24/08)</td>
-                        <td class="worse">+3 dias</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Consumidores sem DG</strong></td>
-                        <td>~11 dias (19→30/08)</td>
-                        <td class="worse">~14 dias (19/08→02/09)</td>
-                        <td class="worse">+3 dias</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Recepção Serpro parada</strong></td>
-                        <td>~2 dias</td>
-                        <td class="worse">~9 dias (19/08→~28/08)</td>
-                        <td class="worse">+7 dias</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Migração Negócio</strong></td>
-                        <td>Clone direto (15/08)</td>
-                        <td>Via DG + Equalização (~24/08)</td>
-                        <td>Alternativa</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Normalização</strong></td>
-                        <td>30/08</td>
-                        <td class="worse">05/09</td>
-                        <td class="worse">+6 dias</td>
-                    </tr>
-                    <tr>
-                        <td><strong>DG Online (definitivo)</strong></td>
-                        <td>31/08</td>
-                        <td class="worse">~02-05/09</td>
-                        <td class="worse">+5 dias</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Estratégia infra</strong></td>
-                        <td>Clone direto</td>
-                        <td>Intermediário + Equalização (26→92 vCPUs)</td>
-                        <td>Mais complexa</td>
-                    </tr>
-                    <tr style="background:#fefcbf;">
-                        <td><strong>Causa</strong></td>
-                        <td>—</td>
-                        <td colspan="2">Falhas clone 17/08 e 19/08</td>
-                    </tr>
+                    <tr><td><strong>Janela total</strong></td><td>16 dias (15/08→31/08)</td><td class="worse">21 dias (15/08→05/09)</td><td class="worse">+5 dias</td></tr>
+                    <tr><td><strong>Parada processamento</strong></td><td>~2 dias</td><td class="worse">~5 dias</td><td class="worse">+3 dias</td></tr>
+                    <tr><td><strong>Consumidores sem DG</strong></td><td>~11 dias</td><td class="worse">~14 dias</td><td class="worse">+3 dias</td></tr>
+                    <tr><td><strong>Recepção Serpro parada</strong></td><td>~2 dias</td><td class="worse">~5 dias (19→~24)</td><td class="worse">+3 dias</td></tr>
+                    <tr><td><strong>Migração Negócio</strong></td><td>Clone direto</td><td>DG Oracle + Equalização</td><td>Alternativa</td></tr>
+                    <tr><td><strong>Fases internas</strong></td><td>1 fase</td><td>3 fases (Inter→Invers→Final)</td><td>Mais complexa</td></tr>
+                    <tr><td><strong>Normalização</strong></td><td>30/08</td><td class="worse">05/09</td><td class="worse">+6 dias</td></tr>
+                    <tr><td><strong>DG Online</strong></td><td>31/08</td><td class="worse">~02/09</td><td class="worse">+2 dias</td></tr>
+                    <tr><td><strong>Intermediário</strong></td><td>Não necessário</td><td>e3cc2dtp-pclu01 (desmob. após)</td><td>Recurso extra temporário</td></tr>
+                    <tr style="background:#fefcbf;"><td><strong>Causa</strong></td><td>—</td><td colspan="2">Falhas clone 17/08 e 19/08</td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="info-section">
             <h3>📋 Resumo Executivo</h3>
-            <ul style="padding-left:1.5rem; font-size:0.85rem; line-height:2.2;">
-                <li>Migração iniciou 15/08 às 11h conforme planejado</li>
-                <li>Clone falhou 2x (17 e 19/08) → forçou estratégia alternativa com servidor intermediário</li>
-                <li>Recepção Serpro interrompida 19/08 9h para permitir intermediário assumir como primary</li>
-                <li>Intermediário sendo equalizado (26→92 vCPUs, +100 TB) para aguentar carga de produção</li>
-                <li>Consumidores (CTPS, Meu INSS, Portal) sem base de leitura desde 19/08 (~14 dias previstos)</li>
-                <li>DataGuard do ExaCC será a nova base de leitura — estimativa: ~02/09</li>
-                <li>Normalização completa: ~05/09</li>
+            <ul style="padding-left:1.3rem; font-size:0.83rem; line-height:2.1;">
+                <li>Migração iniciou 15/08 11h conforme planejado</li>
+                <li>Clone falhou 2x (17, 19/08) → estratégia alternativa com intermediário + DG Oracle</li>
+                <li>Recepção Serpro interrompida 19/08 9h — eventos represados</li>
+                <li>Intermediário sendo equalizado (26→92 vCPUs) para assumir como primary temporário</li>
+                <li>3 fases: Intermediário processa (~24) → Inversão (~30) → Primário definitivo (~02/09)</li>
+                <li>Consumidores sem base de leitura desde 19/08 (~14 dias previstos)</li>
+                <li>DG ExaCC Online estimado ~02/09 — situação final com Exadata como standby</li>
+                <li>Intermediário será desmobilizado após Fase 3</li>
+                <li>Processamento Exadata futuro depende de dblink Recepção ExaCC → Recepção Exadata</li>
             </ul>
         </div>
     </div>
 
-    <footer style="text-align:center; margin-top:2rem; font-size:0.7rem; color:#a0aec0;">
-        ALFA-ESOCIAL — Migração CNPJ Alfanumérico | Atualizado: 20/08/2026 | v2
+    <footer style="text-align:center; margin-top:2rem; padding:0.5rem; font-size:0.68rem; color:#a0aec0;">
+        ALFA-ESOCIAL | Migração CNPJ Alfanumérico | Atualizado: 20/08/2026 | v3
     </footer>
 
     <script>
