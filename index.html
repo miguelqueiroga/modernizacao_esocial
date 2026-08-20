@@ -78,10 +78,236 @@
     </div>
 
     <div class="tabs">
-        <div class="tab active" data-panel="b" onclick="showPanel('b')">Proposta B (Vigente)</div>
+        <div class="tab active" data-panel="timeline" onclick="showPanel('timeline')">Timeline Oficial</div>
+        <div class="tab" data-panel="b" onclick="showPanel('b')">Proposta B (Detalhada)</div>
         <div class="tab" data-panel="infra" onclick="showPanel('infra')">Infraestrutura</div>
         <div class="tab" data-panel="a" onclick="showPanel('a')">Proposta A (Original)</div>
         <div class="tab" data-panel="comp" onclick="showPanel('comp')">Comparativo</div>
+    </div>
+
+    <!-- ============ TIMELINE OFICIAL ============ -->
+    <div class="panel active" id="panel-timeline">
+        <div class="section-header">
+            <h2>Timeline Oficial — Proposta B</h2>
+            <span class="badge badge-yellow">15/08 → 05/09</span>
+        </div>
+
+        <div class="info-section">
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th style="width:12%;">Data</th>
+                        <th style="width:10%;">Dia</th>
+                        <th style="width:18%;">Domínio</th>
+                        <th>Atividade</th>
+                        <th style="width:12%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background:#f0fff4;">
+                        <td><strong>15/08 (sex)</strong></td>
+                        <td>Dia 1</td>
+                        <td>Geral</td>
+                        <td>Início migração. Snapshot Exadata → ExaCC</td>
+                        <td class="better">✅ Concluído</td>
+                    </tr>
+                    <tr>
+                        <td>15/08</td>
+                        <td>Dia 1</td>
+                        <td>CNIS</td>
+                        <td>Migração CNIS + Baselines CNIS no ExaCC</td>
+                        <td class="better">✅ Concluído</td>
+                    </tr>
+                    <tr>
+                        <td>15/08</td>
+                        <td>Dia 1</td>
+                        <td>Negócio / Recepção</td>
+                        <td>DG eSocial Negócio e Recepção</td>
+                        <td class="better">✅ Concluído</td>
+                    </tr>
+                    <tr style="background:#fff5f5;">
+                        <td><strong>15→17/08</strong></td>
+                        <td>Dia 1-3</td>
+                        <td>Negócio</td>
+                        <td>1ª tentativa clone Exadata → ExaCC (~2 dias)</td>
+                        <td class="worse">❌ Falhou</td>
+                    </tr>
+                    <tr style="background:#fff5f5;">
+                        <td><strong>17→19/08</strong></td>
+                        <td>Dia 3-5</td>
+                        <td>Negócio</td>
+                        <td>2ª tentativa clone Exadata → ExaCC (~2 dias)</td>
+                        <td class="worse">❌ Falhou</td>
+                    </tr>
+                    <tr style="background:#fefcbf;">
+                        <td><strong>19/08 (qua)</strong></td>
+                        <td>Dia 5</td>
+                        <td>Geral</td>
+                        <td>Decisão: estratégia alternativa (Plano B)</td>
+                        <td class="better">✅</td>
+                    </tr>
+                    <tr>
+                        <td>19/08 9h</td>
+                        <td>Dia 5</td>
+                        <td>Recepção</td>
+                        <td>Recepção Serpro interrompida</td>
+                        <td class="better">✅</td>
+                    </tr>
+                    <tr>
+                        <td>19/08</td>
+                        <td>Dia 5</td>
+                        <td>Negócio</td>
+                        <td>Fim processamento novos eventos no Exadata</td>
+                        <td class="better">✅</td>
+                    </tr>
+                    <tr>
+                        <td>19/08</td>
+                        <td>Dia 5</td>
+                        <td>Negócio (Intermediário)</td>
+                        <td>Equalização concluída</td>
+                        <td class="better">✅ Concluído</td>
+                    </tr>
+                    <tr style="background:#ebf8ff;">
+                        <td><strong>20/08 (qui)</strong></td>
+                        <td>Dia 6</td>
+                        <td>Negócio (Intermediário)</td>
+                        <td>Baseline alfanumérico iniciada (Primary desde hoje)</td>
+                        <td style="color:#0694a2; font-weight:600;">🔄 Em andamento</td>
+                    </tr>
+                    <tr>
+                        <td>20/08</td>
+                        <td>Dia 6</td>
+                        <td>Recepção</td>
+                        <td>dblink Recepção ExaCC → Recepção Exadata configurado</td>
+                        <td class="better">✅ Concluído</td>
+                    </tr>
+                    <tr>
+                        <td>20/08</td>
+                        <td>Dia 6</td>
+                        <td>Negócio (Primário)</td>
+                        <td>Primário começa a receber via DG Oracle (standby)</td>
+                        <td class="better">✅ Ativo</td>
+                    </tr>
+                    <tr>
+                        <td>20/08</td>
+                        <td>Dia 6</td>
+                        <td>Negócio (Exadata)</td>
+                        <td>Backup Exadata Negócio iniciado</td>
+                        <td style="color:#0694a2; font-weight:600;">🔄 Em andamento</td>
+                    </tr>
+                    <tr>
+                        <td>20/08</td>
+                        <td>Dia 6</td>
+                        <td>Negócio (Exadata)</td>
+                        <td>Baseline Exadata Negócio (índices) — mín. 22h</td>
+                        <td style="color:#0694a2; font-weight:600;">🔄 Em andamento</td>
+                    </tr>
+                    <tr style="background:#f0fff4;">
+                        <td><strong>20/08 17h</strong></td>
+                        <td>Dia 6</td>
+                        <td>Recepção</td>
+                        <td>Recepção Serpro retomou no ExaCC (fora ~32h)</td>
+                        <td class="better">✅ Concluído</td>
+                    </tr>
+                    <tr style="background:#f7fafc;">
+                        <td><strong>~24/08 (dom)</strong></td>
+                        <td>Dia 10</td>
+                        <td>Negócio (Intermediário)</td>
+                        <td>Baseline alfanumérico concluída</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td>~24/08</td>
+                        <td>Dia 10</td>
+                        <td>Negócio (Intermediário)</td>
+                        <td>Geração de estatísticas</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td>~24/08</td>
+                        <td>Dia 10</td>
+                        <td>Negócio (Intermediário)</td>
+                        <td>Drop tablespaces</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td>~24/08</td>
+                        <td>Dia 10</td>
+                        <td>Negócio (Intermediário)</td>
+                        <td>Remanejamento espaço em disco</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td>~24/08</td>
+                        <td>Dia 10</td>
+                        <td>Negócio (Intermediário→Primário)</td>
+                        <td>Ativar DG Oracle (Intermediário → Primário)</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr style="background:#f0fff4;">
+                        <td>~24/08</td>
+                        <td>Dia 10</td>
+                        <td>Negócio (Intermediário)</td>
+                        <td>Retomada Proc. Negócio ExaCC (Recepção → Negócio)</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td>~24/08</td>
+                        <td>Dia 10</td>
+                        <td>Negócio (ExaCC)</td>
+                        <td>Reprocessamento dias 15→19 no ExaCC</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td>~24→28/08</td>
+                        <td>Dia 10-14</td>
+                        <td>Negócio</td>
+                        <td>Migração eSocial Negócio (via DataGuard)</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>~28/08 (qui)</strong></td>
+                        <td>Dia 14</td>
+                        <td>CNIS</td>
+                        <td>Extrato CNIS muda apontamento: Exadata → ExaCC</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td>~28→30/08</td>
+                        <td>Dia 14-16</td>
+                        <td>Negócio (ExaCC)</td>
+                        <td>Dias 20→30 processados no ExaCC</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr style="background:#faf5ff;">
+                        <td><strong>~30/08 (sáb)</strong></td>
+                        <td>Dia 16</td>
+                        <td>Negócio</td>
+                        <td>Inversão: Primário assume (Fase 2). Data depende sincronização</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>~02/09 (ter)</strong></td>
+                        <td>Dia 19</td>
+                        <td>Geral</td>
+                        <td>Apontamento eSocial API e Extrato. DataGuard Online</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                    <tr style="background:#f0fff4;">
+                        <td><strong>05/09 (sex)</strong></td>
+                        <td>Dia 21</td>
+                        <td>Geral</td>
+                        <td>Processamento normalizado. DG Exadata descontinuado</td>
+                        <td>⏳ Previsto</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="note" style="max-width:1050px; margin:0.5rem auto;">
+            <strong>Pendências:</strong> Avaliar impacto da baseline Exadata Negócio na retomada do processamento Exadata.
+            Pré-req Recepção Exadata: baseline rápida + espaço disco (sem previsão definida).
+        </div>
     </div>
 
     <!-- ============ INFRAESTRUTURA ============ -->
@@ -206,7 +432,7 @@
     </div>
 
     <!-- ============ PROPOSTA B ============ -->
-    <div class="panel active" id="panel-b">
+    <div class="panel" id="panel-b">
         <div class="section-header">
             <h2>Proposta B — Vigente</h2>
             <span class="badge badge-yellow">21 dias | 15/08 → 05/09</span>
