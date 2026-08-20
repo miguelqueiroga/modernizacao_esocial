@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Migração eSocial Alfanumérico — v9</title>
+    <title>MigraÃ§Ã£o eSocial AlfanumÃ©rico â€” v9</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f5f7fa; color: #2d3748; padding: 1.5rem; line-height: 1.6; }
@@ -70,11 +70,11 @@
     </style>
 </head>
 <body>
-    <h1>Migração eSocial Alfanumérico</h1>
-    <p class="subtitle">Exadata → ExaCC | CNPJ Alfanumérico | Plano de Ação 2026 — v9</p>
+    <h1>MigraÃ§Ã£o eSocial AlfanumÃ©rico</h1>
+    <p class="subtitle">Exadata â†’ ExaCC | CNPJ AlfanumÃ©rico | Plano de AÃ§Ã£o 2026 â€” v9</p>
 
     <div class="today-banner">
-        📍 20/08 (qui) — Dia 6 | <strong>Baseline alfanumérico no Intermediário (20→24)</strong> | Recepção Serpro parada desde 19/08 9h | dblink configurado hoje
+        ðŸ“ 20/08 (qui) â€” Dia 6 | <strong>Baseline alfanumÃ©rico no IntermediÃ¡rio (20â†’24)</strong> | RecepÃ§Ã£o Serpro parada desde 19/08 9h | dblink configurado hoje
     </div>
 
     <div class="tabs">
@@ -88,15 +88,15 @@
     <!-- ============ TIMELINE OFICIAL ============ -->
     <div class="panel active" id="panel-timeline">
         <div class="section-header">
-            <h2>Timeline Oficial — Proposta B</h2>
-            <span class="badge badge-yellow">15/08 → 05/09</span>
+            <h2>Timeline Oficial â€” Proposta B</h2>
+            <span class="badge badge-yellow">15/08 â†’ 05/09</span>
         </div>
 
-        <div class="info-section" style="padding:1.5rem 1rem; overflow-x:auto;">
+        <div class="info-section" style="padding:1.5rem 0.5rem;">
             <style>
-                .htl { position:relative; display:flex; align-items:flex-start; min-width:1400px; padding:3rem 0 1rem; }
+                .htl { position:relative; display:flex; align-items:flex-start; padding:2.5rem 0 1rem; }
                 .htl-line { position:absolute; top:50%; left:0; right:0; height:4px; background:#cbd5e0; border-radius:2px; transform:translateY(-50%); }
-                .htl-node { position:relative; flex:1; display:flex; flex-direction:column; align-items:center; min-width:0; z-index:2; }
+                .htl-node { position:relative; flex:1; display:flex; flex-direction:column; align-items:center; min-width:0; z-index:2; padding:0 0.15rem; }
                 .htl-dot { width:16px; height:16px; border-radius:50%; border:3px solid #cbd5e0; background:white; margin-bottom:0.4rem; position:relative; z-index:3; }
                 .htl-dot.done { background:#38a169; border-color:#38a169; }
                 .htl-dot.failed { background:#e53e3e; border-color:#e53e3e; }
@@ -114,7 +114,7 @@
                 .htl-group { display:flex; flex-direction:column; gap:0.3rem; align-items:center; }
             </style>
 
-            <div style="font-size:0.7rem; color:#718096; margin-bottom:0.5rem;">← Scroll horizontal para ver toda a timeline →</div>
+            <div style="font-size:0.7rem; color:#718096; margin-bottom:0.5rem;">â† Scroll horizontal para ver toda a timeline â†’</div>
 
             <div class="htl">
                 <div class="htl-line"></div>
@@ -124,9 +124,9 @@
                     <div class="htl-date">15/08<br><small>sex</small></div>
                     <div class="htl-dot done"></div>
                     <div class="htl-group">
-                        <div class="htl-card done"><div class="htl-domain">Geral</div><div class="htl-desc">Início migração<br>Snapshot</div></div>
-                        <div class="htl-card done"><div class="htl-domain">CNIS</div><div class="htl-desc">Migração + BL CNIS</div></div>
-                        <div class="htl-card done"><div class="htl-domain">Neg/Rec</div><div class="htl-desc">DG Negócio e Recepção</div></div>
+                        <div class="htl-card done"><div class="htl-domain">Geral</div><div class="htl-desc">InÃ­cio migraÃ§Ã£o<br>Snapshot</div></div>
+                        <div class="htl-card done"><div class="htl-domain">CNIS</div><div class="htl-desc">MigraÃ§Ã£o + BL CNIS</div></div>
+                        <div class="htl-card done"><div class="htl-domain">Neg/Rec</div><div class="htl-desc">DG NegÃ³cio e RecepÃ§Ã£o</div></div>
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@
                     <div class="htl-date">17/08<br><small>seg</small></div>
                     <div class="htl-dot failed"></div>
                     <div class="htl-group">
-                        <div class="htl-card failed"><div class="htl-domain">Negócio</div><div class="htl-desc">❌ Clone 1 falhou<br>(~2 dias)</div></div>
+                        <div class="htl-card failed"><div class="htl-domain">NegÃ³cio</div><div class="htl-desc">âŒ Clone 1 falhou<br>(~2 dias)</div></div>
                     </div>
                 </div>
 
@@ -144,24 +144,24 @@
                     <div class="htl-date">19/08<br><small>qua</small></div>
                     <div class="htl-dot failed"></div>
                     <div class="htl-group">
-                        <div class="htl-card failed"><div class="htl-domain">Negócio</div><div class="htl-desc">❌ Clone 2 falhou<br>(~2 dias)</div></div>
-                        <div class="htl-card done"><div class="htl-domain">Geral</div><div class="htl-desc">Decisão Plano B</div></div>
-                        <div class="htl-card done"><div class="htl-domain">Recepção</div><div class="htl-desc">Serpro parado 9h</div></div>
-                        <div class="htl-card done"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">Equalização OK</div></div>
+                        <div class="htl-card failed"><div class="htl-domain">NegÃ³cio</div><div class="htl-desc">âŒ Clone 2 falhou<br>(~2 dias)</div></div>
+                        <div class="htl-card done"><div class="htl-domain">Geral</div><div class="htl-desc">DecisÃ£o Plano B</div></div>
+                        <div class="htl-card done"><div class="htl-domain">RecepÃ§Ã£o</div><div class="htl-desc">Serpro parado 9h</div></div>
+                        <div class="htl-card done"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">EqualizaÃ§Ã£o OK</div></div>
                     </div>
                 </div>
 
                 <!-- 20/08 - HOJE -->
                 <div class="htl-node">
-                    <div class="htl-today">📍 HOJE</div>
+                    <div class="htl-today">ðŸ“ HOJE</div>
                     <div class="htl-date">20/08<br><small>qui</small></div>
                     <div class="htl-dot active"></div>
                     <div class="htl-group">
-                        <div class="htl-card active"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">🔄 Baseline Alfa<br>(Primary)</div></div>
-                        <div class="htl-card done"><div class="htl-domain">Recepção</div><div class="htl-desc">dblink configurado</div></div>
+                        <div class="htl-card active"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">ðŸ”„ Baseline Alfa<br>(Primary)</div></div>
+                        <div class="htl-card done"><div class="htl-domain">RecepÃ§Ã£o</div><div class="htl-desc">dblink configurado</div></div>
                         <div class="htl-card done"><div class="htl-domain">Neg (Prim)</div><div class="htl-desc">Standby DG Oracle</div></div>
-                        <div class="htl-card active"><div class="htl-domain">Neg (Exa)</div><div class="htl-desc">🔄 Backup + BL índices</div></div>
-                        <div class="htl-card done"><div class="htl-domain">Recepção</div><div class="htl-desc">✅ Serpro retomou 17h</div></div>
+                        <div class="htl-card active"><div class="htl-domain">Neg (Exa)</div><div class="htl-desc">ðŸ”„ Backup + BL Ã­ndices</div></div>
+                        <div class="htl-card done"><div class="htl-domain">RecepÃ§Ã£o</div><div class="htl-desc">âœ… Serpro retomou 17h</div></div>
                     </div>
                 </div>
 
@@ -170,11 +170,11 @@
                     <div class="htl-date">~24/08<br><small>dom</small></div>
                     <div class="htl-dot pending"></div>
                     <div class="htl-group">
-                        <div class="htl-card pending"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">Baseline concluída</div></div>
-                        <div class="htl-card pending"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">Estatísticas</div></div>
+                        <div class="htl-card pending"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">Baseline concluÃ­da</div></div>
+                        <div class="htl-card pending"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">EstatÃ­sticas</div></div>
                         <div class="htl-card pending"><div class="htl-domain">Neg (Int)</div><div class="htl-desc">Drop TBS + disco</div></div>
-                        <div class="htl-card pending"><div class="htl-domain">Neg (Int→Prim)</div><div class="htl-desc">Ativar DG Oracle</div></div>
-                        <div class="htl-card pending"><div class="htl-domain">Neg (ExaCC)</div><div class="htl-desc">Proc. Negócio retoma<br>Reproc 15→19</div></div>
+                        <div class="htl-card pending"><div class="htl-domain">Neg (Intâ†’Prim)</div><div class="htl-desc">Ativar DG Oracle</div></div>
+                        <div class="htl-card pending"><div class="htl-domain">Neg (ExaCC)</div><div class="htl-desc">Proc. NegÃ³cio retoma<br>Reproc 15â†’19</div></div>
                     </div>
                 </div>
 
@@ -183,18 +183,18 @@
                     <div class="htl-date">~28/08<br><small>qui</small></div>
                     <div class="htl-dot pending"></div>
                     <div class="htl-group">
-                        <div class="htl-card pending"><div class="htl-domain">Negócio</div><div class="htl-desc">Migração Neg via DG</div></div>
-                        <div class="htl-card pending"><div class="htl-domain">CNIS</div><div class="htl-desc">Extrato CNIS → ExaCC</div></div>
+                        <div class="htl-card pending"><div class="htl-domain">NegÃ³cio</div><div class="htl-desc">MigraÃ§Ã£o Neg via DG</div></div>
+                        <div class="htl-card pending"><div class="htl-domain">CNIS</div><div class="htl-desc">Extrato CNIS â†’ ExaCC</div></div>
                     </div>
                 </div>
 
                 <!-- ~30/08 -->
                 <div class="htl-node">
-                    <div class="htl-date">~30/08<br><small>sáb</small></div>
+                    <div class="htl-date">~30/08<br><small>sÃ¡b</small></div>
                     <div class="htl-dot pending"></div>
                     <div class="htl-group">
-                        <div class="htl-card pending"><div class="htl-domain">Negócio</div><div class="htl-desc">Inversão<br>Primário assume</div></div>
-                        <div class="htl-card pending"><div class="htl-domain">Neg (ExaCC)</div><div class="htl-desc">Dias 20→30 proc.</div></div>
+                        <div class="htl-card pending"><div class="htl-domain">NegÃ³cio</div><div class="htl-desc">InversÃ£o<br>PrimÃ¡rio assume</div></div>
+                        <div class="htl-card pending"><div class="htl-domain">Neg (ExaCC)</div><div class="htl-desc">Dias 20â†’30 proc.</div></div>
                     </div>
                 </div>
 
@@ -219,16 +219,16 @@
         </div>
 
         <div class="note" style="max-width:1050px; margin:0.5rem auto;">
-            <strong>Pendências:</strong> Avaliar impacto da baseline Exadata Negócio na retomada do processamento.
-            Pré-req Recepção Exadata: baseline rápida + espaço disco (sem previsão).
+            <strong>PendÃªncias:</strong> Avaliar impacto da baseline Exadata NegÃ³cio na retomada do processamento.
+            PrÃ©-req RecepÃ§Ã£o Exadata: baseline rÃ¡pida + espaÃ§o disco (sem previsÃ£o).
         </div>
     </div>
 
     <!-- ============ INFRAESTRUTURA ============ -->
     <div class="panel" id="panel-infra">
-        <div class="section-header"><h2>Infraestrutura — Bancos e Disco</h2></div>
+        <div class="section-header"><h2>Infraestrutura â€” Bancos e Disco</h2></div>
         <div class="info-section">
-            <h3>🗺️ Visão Geral dos Bancos</h3>
+            <h3>ðŸ—ºï¸ VisÃ£o Geral dos Bancos</h3>
             <table class="comp-table" style="table-layout:fixed; width:100%;">
                 <colgroup>
                     <col style="width:14%;">
@@ -241,37 +241,37 @@
                     <tr>
                         <th>Banco</th>
                         <th>Exadata<br><small style="font-weight:400;opacity:0.8;">Oracle 12 | SP</small></th>
-                        <th>ExaCC Intermediário<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
-                        <th>ExaCC Primário (Definitivo)<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
+                        <th>ExaCC IntermediÃ¡rio<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
+                        <th>ExaCC PrimÃ¡rio (Definitivo)<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
                         <th>ExaCC DataGuard<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Negócio</strong><br><small style="color:#718096;">Plano A (antes)</small></td>
+                        <td><strong>NegÃ³cio</strong><br><small style="color:#718096;">Plano A (antes)</small></td>
                         <td>104 TB</td>
                         <td>104 TB<br><small style="color:#718096;">Clone direto</small></td>
-                        <td>104 TB → <strong>208 TB</strong> (CTAS) → 104 TB<br><small style="color:#ed8936;">CTAS na definitiva</small></td>
+                        <td>104 TB â†’ <strong>208 TB</strong> (CTAS) â†’ 104 TB<br><small style="color:#ed8936;">CTAS na definitiva</small></td>
                         <td>104 TB</td>
                     </tr>
                     <tr style="background:#fffff0;">
-                        <td><strong>Negócio</strong><br><small style="color:#d69e2e;">Plano B (atual)</small></td>
+                        <td><strong>NegÃ³cio</strong><br><small style="color:#d69e2e;">Plano B (atual)</small></td>
                         <td>104 TB</td>
-                        <td>104 TB → <strong>208 TB</strong> (CTAS) → 104 TB<br><small style="color:#ed8936;">CTAS no intermediário</small></td>
-                        <td>104 TB<br><small style="color:#718096;">Recebe via DG do intermediário</small></td>
+                        <td>104 TB â†’ <strong>208 TB</strong> (CTAS) â†’ 104 TB<br><small style="color:#ed8936;">CTAS no intermediÃ¡rio</small></td>
+                        <td>104 TB<br><small style="color:#718096;">Recebe via DG do intermediÃ¡rio</small></td>
                         <td>104 TB</td>
                     </tr>
                     <tr>
-                        <td><strong>Recepção</strong></td>
+                        <td><strong>RecepÃ§Ã£o</strong></td>
                         <td>32 TB</td>
                         <td>32 TB</td>
-                        <td>32 TB<br><small style="color:#38a169;">Já está na definitiva</small></td>
-                        <td>—</td>
+                        <td>32 TB<br><small style="color:#38a169;">JÃ¡ estÃ¡ na definitiva</small></td>
+                        <td>â€”</td>
                     </tr>
                     <tr style="background:#f0fff4;">
                         <td><strong>CNIS</strong><br><small style="color:#718096;">RJ (exceto DG)</small></td>
                         <td>20 TB<br><small>Oracle 18 | RJ</small></td>
-                        <td style="color:#a0aec0;">—<br><small>Não necessário (já era Oracle 18)</small></td>
+                        <td style="color:#a0aec0;">â€”<br><small>NÃ£o necessÃ¡rio (jÃ¡ era Oracle 18)</small></td>
                         <td>20 TB<br><small>Oracle 19 | RJ</small></td>
                         <td>20 TB<br><small>SP | vai para definitiva</small></td>
                     </tr>
@@ -281,65 +281,65 @@
                         <td>TOTAL</td>
                         <td>156 TB</td>
                         <td style="color:#fbbf24;">392 TB (pico c/ CTAS)</td>
-                        <td>208 TB (mín. previsto)</td>
+                        <td>208 TB (mÃ­n. previsto)</td>
                         <td>124 TB</td>
                     </tr>
                 </tfoot>
             </table>
 
             <div class="info-section" style="margin-top:1rem; padding:1rem;">
-                <h3>💾 Espaço em Disco — Base Definitiva (Primário ExaCC)</h3>
+                <h3>ðŸ’¾ EspaÃ§o em Disco â€” Base Definitiva (PrimÃ¡rio ExaCC)</h3>
                 <table class="comp-table">
-                    <thead><tr><th>Item</th><th>TB</th><th>Observação</th></tr></thead>
+                    <thead><tr><th>Item</th><th>TB</th><th>ObservaÃ§Ã£o</th></tr></thead>
                     <tbody>
-                        <tr><td>Recepção (já instalado)</td><td>32 TB</td><td>Já está na definitiva</td></tr>
-                        <tr><td>Negócio (a receber)</td><td>104 TB</td><td>Via DG do intermediário</td></tr>
+                        <tr><td>RecepÃ§Ã£o (jÃ¡ instalado)</td><td>32 TB</td><td>JÃ¡ estÃ¡ na definitiva</td></tr>
+                        <tr><td>NegÃ³cio (a receber)</td><td>104 TB</td><td>Via DG do intermediÃ¡rio</td></tr>
                         <tr><td>DG CNIS (a receber)</td><td>20 TB</td><td>DataGuard do CNIS (SP)</td></tr>
-                        <tr style="background:#f0fff4;"><td><strong>Espaço disponível atual</strong></td><td><strong>153 TB</strong></td><td>Livre para receber</td></tr>
-                        <tr><td>Devolução do intermediário</td><td>+120 TB</td><td>Após desmobilização do intermediário</td></tr>
+                        <tr style="background:#f0fff4;"><td><strong>EspaÃ§o disponÃ­vel atual</strong></td><td><strong>153 TB</strong></td><td>Livre para receber</td></tr>
+                        <tr><td>DevoluÃ§Ã£o do intermediÃ¡rio</td><td>+120 TB</td><td>ApÃ³s desmobilizaÃ§Ã£o do intermediÃ¡rio</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="info-section" style="margin-top:1rem; padding:1rem;">
-                <h3>🔄 CTAS — Diferença entre Planos</h3>
+                <h3>ðŸ”„ CTAS â€” DiferenÃ§a entre Planos</h3>
                 <table class="comp-table">
                     <thead><tr><th>Aspecto</th><th>Plano A (Original)</th><th>Plano B (Vigente)</th></tr></thead>
                     <tbody>
-                        <tr><td>Onde roda o CTAS</td><td>Base Definitiva (Primário)</td><td class="better">Base Intermediária</td></tr>
-                        <tr><td>Pico de espaço</td><td>Definitiva: 208 TB temp</td><td>Intermediária: 208 TB temp</td></tr>
-                        <tr><td>Risco de disco</td><td class="worse">Definitiva precisa aguentar 208 TB</td><td class="better">Intermediária aguenta (392 TB disponível)</td></tr>
+                        <tr><td>Onde roda o CTAS</td><td>Base Definitiva (PrimÃ¡rio)</td><td class="better">Base IntermediÃ¡ria</td></tr>
+                        <tr><td>Pico de espaÃ§o</td><td>Definitiva: 208 TB temp</td><td>IntermediÃ¡ria: 208 TB temp</td></tr>
+                        <tr><td>Risco de disco</td><td class="worse">Definitiva precisa aguentar 208 TB</td><td class="better">IntermediÃ¡ria aguenta (392 TB disponÃ­vel)</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="note" style="margin-top:1rem;">
-                <strong>CTAS (Create Table As Select):</strong> operação de conversão Oracle 12→19 que duplica temporariamente o espaço do Negócio no Intermediário (104→208 TB).<br>
-                <strong>Intermediário 392 TB:</strong> pico de uso durante conversão (208 Neg + 32 Rec + 20 CNIS + overhead).<br>
-                <strong>CNIS em RJ:</strong> banco e intermediário ficam no RJ. Apenas o DataGuard do CNIS fica em SP.<br>
-                <strong>Primário 208 TB:</strong> espaço mínimo previsto inicialmente (Negócio 104 + Recepção 32 + CNIS 20 + margem).
+                <strong>CTAS (Create Table As Select):</strong> operaÃ§Ã£o de conversÃ£o Oracle 12â†’19 que duplica temporariamente o espaÃ§o do NegÃ³cio no IntermediÃ¡rio (104â†’208 TB).<br>
+                <strong>IntermediÃ¡rio 392 TB:</strong> pico de uso durante conversÃ£o (208 Neg + 32 Rec + 20 CNIS + overhead).<br>
+                <strong>CNIS em RJ:</strong> banco e intermediÃ¡rio ficam no RJ. Apenas o DataGuard do CNIS fica em SP.<br>
+                <strong>PrimÃ¡rio 208 TB:</strong> espaÃ§o mÃ­nimo previsto inicialmente (NegÃ³cio 104 + RecepÃ§Ã£o 32 + CNIS 20 + margem).
             </div>
         </div>
 
         <div class="info-section">
-            <h3>📍 Localização</h3>
+            <h3>ðŸ“ LocalizaÃ§Ã£o</h3>
             <table class="comp-table">
-                <thead><tr><th>Localidade</th><th>O que está lá</th></tr></thead>
+                <thead><tr><th>Localidade</th><th>O que estÃ¡ lÃ¡</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>SP</strong></td><td>Exadata (Negócio, Recepção), ExaCC Intermediário, ExaCC Primário (Negócio, Recepção), ExaCC DG (Negócio, CNIS)</td></tr>
-                    <tr><td><strong>RJ</strong></td><td>CNIS Exadata, CNIS ExaCC Primário</td></tr>
+                    <tr><td><strong>SP</strong></td><td>Exadata (NegÃ³cio, RecepÃ§Ã£o), ExaCC IntermediÃ¡rio, ExaCC PrimÃ¡rio (NegÃ³cio, RecepÃ§Ã£o), ExaCC DG (NegÃ³cio, CNIS)</td></tr>
+                    <tr><td><strong>RJ</strong></td><td>CNIS Exadata, CNIS ExaCC PrimÃ¡rio</td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="info-section">
-            <h3>📊 Versões Oracle</h3>
+            <h3>ðŸ“Š VersÃµes Oracle</h3>
             <table class="comp-table">
-                <thead><tr><th>Ambiente</th><th>Versão</th><th>Observação</th></tr></thead>
+                <thead><tr><th>Ambiente</th><th>VersÃ£o</th><th>ObservaÃ§Ã£o</th></tr></thead>
                 <tbody>
-                    <tr><td>Exadata (Negócio, Recepção)</td><td>Oracle 12</td><td>Versão legada — motivo da migração</td></tr>
-                    <tr><td>Exadata (CNIS)</td><td>Oracle 18</td><td>—</td></tr>
-                    <tr><td>ExaCC (todos)</td><td>Oracle 19</td><td>Versão destino</td></tr>
+                    <tr><td>Exadata (NegÃ³cio, RecepÃ§Ã£o)</td><td>Oracle 12</td><td>VersÃ£o legada â€” motivo da migraÃ§Ã£o</td></tr>
+                    <tr><td>Exadata (CNIS)</td><td>Oracle 18</td><td>â€”</td></tr>
+                    <tr><td>ExaCC (todos)</td><td>Oracle 19</td><td>VersÃ£o destino</td></tr>
                 </tbody>
             </table>
         </div>
@@ -348,15 +348,15 @@
     <!-- ============ PROPOSTA B ============ -->
     <div class="panel" id="panel-b">
         <div class="section-header">
-            <h2>Proposta B — Vigente</h2>
-            <span class="badge badge-yellow">21 dias | 15/08 → 05/09</span>
+            <h2>Proposta B â€” Vigente</h2>
+            <span class="badge badge-yellow">21 dias | 15/08 â†’ 05/09</span>
             <span class="badge badge-red">Clone falhou 17 e 19/08</span>
         </div>
 
         <div class="legend">
-            <div class="legend-item"><div class="legend-color" style="background:#3182ce"></div>Migração</div>
+            <div class="legend-item"><div class="legend-color" style="background:#3182ce"></div>MigraÃ§Ã£o</div>
             <div class="legend-item"><div class="legend-color" style="background:#e53e3e"></div>Falha/Parada</div>
-            <div class="legend-item"><div class="legend-color" style="background:#d53f8c"></div>Equalização</div>
+            <div class="legend-item"><div class="legend-color" style="background:#d53f8c"></div>EqualizaÃ§Ã£o</div>
             <div class="legend-item"><div class="legend-color" style="background:#0694a2"></div>Baseline</div>
             <div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Ativo</div>
             <div class="legend-item"><div class="legend-color" style="background:#ed8936"></div>Passivo</div>
@@ -366,226 +366,226 @@
             <div class="legend-item"><div class="legend-color" style="background:#10b981"></div>Pronto</div>
         </div>
 
-        <!-- ===== BANCOS: RECEPÇÃO ===== -->
-        <span class="group-header group-rec">📥 BANCOS — RECEPÇÃO</span>
+        <!-- ===== BANCOS: RECEPÃ‡ÃƒO ===== -->
+        <span class="group-header group-rec">ðŸ“¥ BANCOS â€” RECEPÃ‡ÃƒO</span>
         <div class="swimlane">
-            <div class="swimlane-label">Recepção Exadata<small>origem</small></div>
+            <div class="swimlane-label">RecepÃ§Ã£o Exadata<small>origem</small></div>
             <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;" title="15→19: Ativo">✅ Ativo</div>
-                <div class="ev c-frozen" style="left:19%;width:24%;" title="19→24: Sem recepção">❄️</div>
-                <div class="ev c-passive" style="left:43%;width:57%;" title="~24+: Recebe via dblink do ExaCC (fallback)">🔗 Via dblink (fallback)</div>
+                <div class="ev c-proc" style="left:0%;width:19%;" title="15â†’19: Ativo">âœ… Ativo</div>
+                <div class="ev c-frozen" style="left:19%;width:24%;" title="19â†’24: Sem recepÃ§Ã£o">â„ï¸</div>
+                <div class="ev c-passive" style="left:43%;width:57%;" title="~24+: Recebe via dblink do ExaCC (fallback)">ðŸ”— Via dblink (fallback)</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Recepção ExaCC<small>banco separado</small></div>
+            <div class="swimlane-label">RecepÃ§Ã£o ExaCC<small>banco separado</small></div>
             <div class="swimlane-track">
-                <div class="ev c-read" style="left:0%;width:19%;opacity:0.3;">—</div>
-                <div class="ev c-migr" style="left:19%;width:24%;" title="19→24: Migração dados + dblink config 20/08">Migração + dblink</div>
-                <div class="ev c-proc" style="left:43%;width:57%;" title="~24+: Recebendo Serpro + dblink→Exadata">✅ Serpro + dblink→Exa</div>
+                <div class="ev c-read" style="left:0%;width:19%;opacity:0.3;">â€”</div>
+                <div class="ev c-migr" style="left:19%;width:24%;" title="19â†’24: MigraÃ§Ã£o dados + dblink config 20/08">MigraÃ§Ã£o + dblink</div>
+                <div class="ev c-proc" style="left:43%;width:57%;" title="~24+: Recebendo Serpro + dblinkâ†’Exadata">âœ… Serpro + dblinkâ†’Exa</div>
             </div>
         </div>
 
-        <!-- ===== BANCOS: NEGÓCIO ===== -->
-        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">📍20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
-        <span class="group-header group-neg">⚙️ BANCOS — NEGÓCIO</span>
+        <!-- ===== BANCOS: NEGÃ“CIO ===== -->
+        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">ðŸ“20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
+        <span class="group-header group-neg">âš™ï¸ BANCOS â€” NEGÃ“CIO</span>
         <div class="swimlane">
-            <div class="swimlane-label">Negócio Exadata<small>origem</small></div>
+            <div class="swimlane-label">NegÃ³cio Exadata<small>origem</small></div>
             <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;" title="15→19: Ativo">✅ Ativo</div>
-                <div class="ev c-frozen" style="left:19%;width:24%;" title="19→24: Congelado">❄️ Congelado</div>
-                <div class="ev c-passive" style="left:43%;width:38%;" title="~24→05/09: Proc passivo">🔄 Passivo</div>
-                <div class="ev c-discontinued" style="left:81%;width:19%;" title="05/09+">⊘</div>
+                <div class="ev c-proc" style="left:0%;width:19%;" title="15â†’19: Ativo">âœ… Ativo</div>
+                <div class="ev c-frozen" style="left:19%;width:24%;" title="19â†’24: Congelado">â„ï¸ Congelado</div>
+                <div class="ev c-passive" style="left:43%;width:38%;" title="~24â†’05/09: Proc passivo">ðŸ”„ Passivo</div>
+                <div class="ev c-discontinued" style="left:81%;width:19%;" title="05/09+">âŠ˜</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Negócio ExaCC<br>Intermediário<small>primary temp</small></div>
+            <div class="swimlane-label">NegÃ³cio ExaCC<br>IntermediÃ¡rio<small>primary temp</small></div>
             <div class="swimlane-track">
-                <div class="ev c-migr" style="left:0%;width:9%;" title="15→17: CNIS+BL">CNIS</div>
-                <div class="ev c-fail" style="left:9%;width:5%;" title="Clone 1 falhou">❌C1</div>
-                <div class="ev c-fail" style="left:14%;width:5%;" title="Clone 2 falhou">❌C2</div>
-                <div class="ev c-equal" style="left:19%;width:3%;" title="19: Equalização">⚡</div>
-                <div class="ev c-baseline" style="left:22%;width:21%;" title="20→24: Baseline Alfa (já é Primary) ← AQUI">📋 BL Alfa ← AQUI</div>
-                <div class="ev c-proc" style="left:43%;width:28%;" title="~24→~30: Negócio ativo (Fase 1)">🟢 Primary F1</div>
-                <div class="ev c-dg" style="left:71%;width:10%;" title="~30→02/09: Standby">Standby</div>
+                <div class="ev c-migr" style="left:0%;width:9%;" title="15â†’17: CNIS+BL">CNIS</div>
+                <div class="ev c-fail" style="left:9%;width:5%;" title="Clone 1 falhou">âŒC1</div>
+                <div class="ev c-fail" style="left:14%;width:5%;" title="Clone 2 falhou">âŒC2</div>
+                <div class="ev c-equal" style="left:19%;width:3%;" title="19: EqualizaÃ§Ã£o">âš¡</div>
+                <div class="ev c-baseline" style="left:22%;width:21%;" title="20â†’24: Baseline Alfa (jÃ¡ Ã© Primary) â† AQUI">ðŸ“‹ BL Alfa â† AQUI</div>
+                <div class="ev c-proc" style="left:43%;width:28%;" title="~24â†’~30: NegÃ³cio ativo (Fase 1)">ðŸŸ¢ Primary F1</div>
+                <div class="ev c-dg" style="left:71%;width:10%;" title="~30â†’02/09: Standby">Standby</div>
                 <div class="ev c-read" style="left:81%;width:19%;opacity:0.4;">Desmob.</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Negócio ExaCC<br>Primário<small>definitivo</small></div>
+            <div class="swimlane-label">NegÃ³cio ExaCC<br>PrimÃ¡rio<small>definitivo</small></div>
             <div class="swimlane-track">
-                <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">—</div>
-                <div class="ev c-dg" style="left:43%;width:28%;" title="~24→~30: Standby — recebe via DG Oracle (após baseline)">Standby (DG Oracle)</div>
-                <div class="ev c-proc" style="left:71%;width:29%;" title="~30+: Primary definitivo">✅ Primary</div>
+                <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">â€”</div>
+                <div class="ev c-dg" style="left:43%;width:28%;" title="~24â†’~30: Standby â€” recebe via DG Oracle (apÃ³s baseline)">Standby (DG Oracle)</div>
+                <div class="ev c-proc" style="left:71%;width:29%;" title="~30+: Primary definitivo">âœ… Primary</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Negócio ExaCC<br>DataGuard<small>leitura</small></div>
+            <div class="swimlane-label">NegÃ³cio ExaCC<br>DataGuard<small>leitura</small></div>
             <div class="swimlane-track">
-                <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">—</div>
-                <div class="ev c-dg-exacc" style="left:43%;width:38%;">✅ DG Ativo</div>
-                <div class="ev c-dg-exacc" style="left:81%;width:19%;">✅ DG Online</div>
+                <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">â€”</div>
+                <div class="ev c-dg-exacc" style="left:43%;width:38%;">âœ… DG Ativo</div>
+                <div class="ev c-dg-exacc" style="left:81%;width:19%;">âœ… DG Online</div>
             </div>
         </div>
 
         <!-- ===== BANCOS: CNIS ===== -->
-        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">📍20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
-        <span class="group-header group-cnis">🗄️ BANCOS — CNIS</span>
+        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">ðŸ“20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
+        <span class="group-header group-cnis">ðŸ—„ï¸ BANCOS â€” CNIS</span>
         <div class="swimlane">
             <div class="swimlane-label">CNIS Exadata<small>origem</small></div>
             <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;">✅ Ativo</div>
-                <div class="ev c-frozen" style="left:19%;width:81%;">❄️ Congelado (dados até 19/08)</div>
+                <div class="ev c-proc" style="left:0%;width:19%;">âœ… Ativo</div>
+                <div class="ev c-frozen" style="left:19%;width:81%;">â„ï¸ Congelado (dados atÃ© 19/08)</div>
             </div>
         </div>
         <div class="swimlane">
             <div class="swimlane-label">CNIS ExaCC<small>pronto</small></div>
             <div class="swimlane-track">
-                <div class="ev c-ready" style="left:0%;width:43%;" title="Baseline aplicada há dias — pronto">✅ Pronto (BL aplicada)</div>
-                <div class="ev c-waiting" style="left:43%;width:57%;" title="Aguardando Proc. Negócio">⏳ Aguardando Negócio processar</div>
+                <div class="ev c-ready" style="left:0%;width:43%;" title="Baseline aplicada hÃ¡ dias â€” pronto">âœ… Pronto (BL aplicada)</div>
+                <div class="ev c-waiting" style="left:43%;width:57%;" title="Aguardando Proc. NegÃ³cio">â³ Aguardando NegÃ³cio processar</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Extrato CNIS<small>consumidor crítico</small></div>
+            <div class="swimlane-label">Extrato CNIS<small>consumidor crÃ­tico</small></div>
             <div class="swimlane-track">
-                <div class="ev c-dg-exa" style="left:0%;width:62%;" title="até 28/08: Lendo CNIS Exadata (pode voltar a atualizar antes de 28 se processamento retomar)">📖 Lendo CNIS Exadata</div>
-                <div class="ev c-dg-exacc" style="left:62%;width:38%;" title="28/08: Apontamento migra para CNIS ExaCC">📖 Lendo CNIS ExaCC (28/08)</div>
+                <div class="ev c-dg-exa" style="left:0%;width:62%;" title="atÃ© 28/08: Lendo CNIS Exadata (pode voltar a atualizar antes de 28 se processamento retomar)">ðŸ“– Lendo CNIS Exadata</div>
+                <div class="ev c-dg-exacc" style="left:62%;width:38%;" title="28/08: Apontamento migra para CNIS ExaCC">ðŸ“– Lendo CNIS ExaCC (28/08)</div>
             </div>
         </div>
 
         <!-- ===== PROCESSAMENTOS ===== -->
-        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">📍20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
-        <span class="group-header group-proc">🔄 PROCESSAMENTOS (processos independentes)</span>
+        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">ðŸ“20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
+        <span class="group-header group-proc">ðŸ”„ PROCESSAMENTOS (processos independentes)</span>
 
         <div class="swimlane">
-            <div class="swimlane-label">Proc. Recepção<small>Serpro → Banco Rec.</small></div>
+            <div class="swimlane-label">Proc. RecepÃ§Ã£o<small>Serpro â†’ Banco Rec.</small></div>
             <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;" title="15→19: Serpro → Recepção Exadata">✅ → Exa</div>
-                <div class="ev c-stop" style="left:19%;width:24%;" title="19→~24: Parado">⛔ Parado</div>
-                <div class="ev c-proc" style="left:43%;width:57%;" title="~24+: Serpro → Recepção ExaCC">✅ → ExaCC</div>
+                <div class="ev c-proc" style="left:0%;width:19%;" title="15â†’19: Serpro â†’ RecepÃ§Ã£o Exadata">âœ… â†’ Exa</div>
+                <div class="ev c-stop" style="left:19%;width:24%;" title="19â†’~24: Parado">â›” Parado</div>
+                <div class="ev c-proc" style="left:43%;width:57%;" title="~24+: Serpro â†’ RecepÃ§Ã£o ExaCC">âœ… â†’ ExaCC</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Proc. Recepção<small>pré-req ExaCC</small></div>
+            <div class="swimlane-label">Proc. RecepÃ§Ã£o<small>prÃ©-req ExaCC</small></div>
             <div class="swimlane-track">
-                <div class="ev c-blocked" style="left:19%;width:24%;" title="Pré-req: baseline concluída">⏳ Aguarda baseline</div>
-                <div class="ev c-proc" style="left:43%;width:57%;" title="Retoma após baseline (~24)">✅ Baseline OK</div>
+                <div class="ev c-blocked" style="left:19%;width:24%;" title="PrÃ©-req: baseline concluÃ­da">â³ Aguarda baseline</div>
+                <div class="ev c-proc" style="left:43%;width:57%;" title="Retoma apÃ³s baseline (~24)">âœ… Baseline OK</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Proc. Recepção<small>pré-req Exadata</small></div>
+            <div class="swimlane-label">Proc. RecepÃ§Ã£o<small>prÃ©-req Exadata</small></div>
             <div class="swimlane-track">
-                <div class="ev c-blocked" style="left:19%;width:24%;" title="Pré-req: baseline rápida + espaço disco (sem previsão)">⏳ BL rápida + disco</div>
-                <div class="ev c-passive" style="left:43%;width:57%;" title="Quando tiver espaço — sem previsão">🔄 Quando espaço OK</div>
+                <div class="ev c-blocked" style="left:19%;width:24%;" title="PrÃ©-req: baseline rÃ¡pida + espaÃ§o disco (sem previsÃ£o)">â³ BL rÃ¡pida + disco</div>
+                <div class="ev c-passive" style="left:43%;width:57%;" title="Quando tiver espaÃ§o â€” sem previsÃ£o">ðŸ”„ Quando espaÃ§o OK</div>
             </div>
         </div>
 
         <div class="swimlane">
-            <div class="swimlane-label">Proc. Negócio<small>Rec. → Negócio</small></div>
+            <div class="swimlane-label">Proc. NegÃ³cio<small>Rec. â†’ NegÃ³cio</small></div>
             <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;" title="15→19: Rec Exa → Neg Exa">✅ Exa→Exa</div>
-                <div class="ev c-stop" style="left:19%;width:24%;" title="Parado">⛔ Parado</div>
-                <div class="ev c-proc" style="left:43%;width:28%;" title="ExaCC: após baseline + estatísticas">🟢 ExaCC</div>
+                <div class="ev c-proc" style="left:0%;width:19%;" title="15â†’19: Rec Exa â†’ Neg Exa">âœ… Exaâ†’Exa</div>
+                <div class="ev c-stop" style="left:19%;width:24%;" title="Parado">â›” Parado</div>
+                <div class="ev c-proc" style="left:43%;width:28%;" title="ExaCC: apÃ³s baseline + estatÃ­sticas">ðŸŸ¢ ExaCC</div>
                 <div class="ev c-passive" style="left:43%;width:57%;" title="Exa: retoma quando Rec Exa retomar" style="top:80%;height:14px;font-size:0.5rem;opacity:0.6;">Exa: qdo Rec retomar</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Proc. Negócio<small>pré-req ExaCC</small></div>
+            <div class="swimlane-label">Proc. NegÃ³cio<small>prÃ©-req ExaCC</small></div>
             <div class="swimlane-track">
-                <div class="ev c-blocked" style="left:19%;width:24%;" title="Pré-req: baseline + estatísticas rodadas">⏳ Baseline + estatísticas</div>
-                <div class="ev c-proc" style="left:43%;width:57%;" title="Retoma após baseline+stats">✅ BL + stats OK</div>
+                <div class="ev c-blocked" style="left:19%;width:24%;" title="PrÃ©-req: baseline + estatÃ­sticas rodadas">â³ Baseline + estatÃ­sticas</div>
+                <div class="ev c-proc" style="left:43%;width:57%;" title="Retoma apÃ³s baseline+stats">âœ… BL + stats OK</div>
             </div>
         </div>
 
         <div class="swimlane">
-            <div class="swimlane-label">Proc. CNIS<small>Negócio → CNIS</small></div>
+            <div class="swimlane-label">Proc. CNIS<small>NegÃ³cio â†’ CNIS</small></div>
             <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;" title="15→19: Neg Exa → CNIS Exa">✅ Exa</div>
-                <div class="ev c-stop" style="left:19%;width:24%;" title="Parado — depende Proc Negócio">⛔</div>
-                <div class="ev c-proc" style="left:43%;width:57%;" title="ExaCC: após Neg ExaCC rodar. Exa: após Neg Exa rodar">✅ Depende de cada Negócio</div>
+                <div class="ev c-proc" style="left:0%;width:19%;" title="15â†’19: Neg Exa â†’ CNIS Exa">âœ… Exa</div>
+                <div class="ev c-stop" style="left:19%;width:24%;" title="Parado â€” depende Proc NegÃ³cio">â›”</div>
+                <div class="ev c-proc" style="left:43%;width:57%;" title="ExaCC: apÃ³s Neg ExaCC rodar. Exa: apÃ³s Neg Exa rodar">âœ… Depende de cada NegÃ³cio</div>
             </div>
         </div>
 
         <!-- Faixas processadas -->
-        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">📍20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
-        <span class="group-header group-proc" style="background:#fdf2f8;">📊 FAIXAS PROCESSADAS</span>
+        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">ðŸ“20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
+        <span class="group-header group-proc" style="background:#fdf2f8;">ðŸ“Š FAIXAS PROCESSADAS</span>
         <div class="swimlane">
-            <div class="swimlane-label">Faixas Exadata<small>quais períodos</small></div>
+            <div class="swimlane-label">Faixas Exadata<small>quais perÃ­odos</small></div>
             <div class="swimlane-track">
                 <div class="ev c-prim" style="left:0%;width:19%;" title="Dias 15,18,19 processados no Exadata">15, 18, 19</div>
-                <div class="ev c-stop" style="left:19%;width:24%;">⏸ Nenhum</div>
-                <div class="ev c-passive" style="left:43%;width:57%;" title="~24+: Reprocessa passivamente (depende Rec Exa retomar)">🔄 Reproc. passivo (qdo Rec OK)</div>
+                <div class="ev c-stop" style="left:19%;width:24%;">â¸ Nenhum</div>
+                <div class="ev c-passive" style="left:43%;width:57%;" title="~24+: Reprocessa passivamente (depende Rec Exa retomar)">ðŸ”„ Reproc. passivo (qdo Rec OK)</div>
             </div>
         </div>
         <div class="swimlane">
-            <div class="swimlane-label">Faixas ExaCC<small>quais períodos</small></div>
+            <div class="swimlane-label">Faixas ExaCC<small>quais perÃ­odos</small></div>
             <div class="swimlane-track">
-                <div class="ev c-stop" style="left:0%;width:43%;">⏸ Nenhum (baseline)</div>
-                <div class="ev c-repr" style="left:43%;width:9%;" title="~24: Reproc dias 15→19">♻️ 15→19</div>
-                <div class="ev c-proc" style="left:52%;width:19%;" title="~24→30: Dias 20→30">20→30</div>
-                <div class="ev c-invert" style="left:71%;width:4%;">🔄</div>
+                <div class="ev c-stop" style="left:0%;width:43%;">â¸ Nenhum (baseline)</div>
+                <div class="ev c-repr" style="left:43%;width:9%;" title="~24: Reproc dias 15â†’19">â™»ï¸ 15â†’19</div>
+                <div class="ev c-proc" style="left:52%;width:19%;" title="~24â†’30: Dias 20â†’30">20â†’30</div>
+                <div class="ev c-invert" style="left:71%;width:4%;">ðŸ”„</div>
                 <div class="ev c-proc" style="left:75%;width:25%;" title="30+: Corrente">Corrente</div>
             </div>
         </div>
 
         <!-- DG resumo -->
-        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">📍20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
-        <span class="group-header group-dg">🛡️ DATAGUARD & CONSUMIDORES</span>
+        <div class="date-axis" style="margin-bottom:0;"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span style="color:#e53e3e;">ðŸ“20</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
+        <span class="group-header group-dg">ðŸ›¡ï¸ DATAGUARD & CONSUMIDORES</span>
         <div class="swimlane"><div class="swimlane-label">DG Exadata</div><div class="swimlane-track">
-            <div class="ev c-dg-exa" style="left:0%;width:19%;">✅</div>
-            <div class="ev c-frozen" style="left:19%;width:24%;">❄️</div>
-            <div class="ev c-passive" style="left:43%;width:38%;">🔄</div>
-            <div class="ev c-discontinued" style="left:81%;width:19%;">⊘</div>
+            <div class="ev c-dg-exa" style="left:0%;width:19%;">âœ…</div>
+            <div class="ev c-frozen" style="left:19%;width:24%;">â„ï¸</div>
+            <div class="ev c-passive" style="left:43%;width:38%;">ðŸ”„</div>
+            <div class="ev c-discontinued" style="left:81%;width:19%;">âŠ˜</div>
         </div></div>
         <div class="swimlane"><div class="swimlane-label">DG ExaCC</div><div class="swimlane-track">
-            <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">—</div>
-            <div class="ev c-dg-exacc" style="left:43%;width:57%;">✅ Ativo</div>
+            <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">â€”</div>
+            <div class="ev c-dg-exacc" style="left:43%;width:57%;">âœ… Ativo</div>
         </div></div>
         <div class="swimlane"><div class="swimlane-label">Consumidores</div><div class="swimlane-track">
-            <div class="ev c-dg-exa" style="left:0%;width:19%;">Exa ✅</div>
-            <div class="ev c-frozen" style="left:19%;width:24%;">❄️</div>
-            <div class="ev c-choose" style="left:43%;width:38%;">🔀 Exa ou ExaCC</div>
+            <div class="ev c-dg-exa" style="left:0%;width:19%;">Exa âœ…</div>
+            <div class="ev c-frozen" style="left:19%;width:24%;">â„ï¸</div>
+            <div class="ev c-choose" style="left:43%;width:38%;">ðŸ”€ Exa ou ExaCC</div>
             <div class="ev c-dg-exacc" style="left:81%;width:19%;">ExaCC</div>
         </div></div>
 
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08 (sex)</span><span>17 (seg)</span><span>19 (qua)</span><span style="color:#e53e3e; font-weight:700;">📍20 HOJE</span><span>24 (dom)</span><span>~30 (sáb)</span><span>02/09 (ter)</span><span>05/09 (sex)</span></div></div>
+        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08 (sex)</span><span>17 (seg)</span><span>19 (qua)</span><span style="color:#e53e3e; font-weight:700;">ðŸ“20 HOJE</span><span>24 (dom)</span><span>~30 (sÃ¡b)</span><span>02/09 (ter)</span><span>05/09 (sex)</span></div></div>
 
         <div class="note">
-            <strong>Fluxo:</strong> Serpro → Recepção → Negócio → CNIS (subconjunto).<br>
-            <strong>Pré-req ExaCC:</strong> Recepção: baseline concluída. Negócio: baseline + estatísticas.<br>
-            <strong>Pré-req Exadata:</strong> Recepção: baseline rápida + espaço disco (sem previsão). Negócio: quando Recepção retomar.<br>
-            <strong>CNIS:</strong> depende do respectivo Proc. Negócio ter rodado (cada ambiente independente).<br>
-            <strong>Fallback:</strong> Recepção Exadata mantida — alternativa se baseline demorar.
+            <strong>Fluxo:</strong> Serpro â†’ RecepÃ§Ã£o â†’ NegÃ³cio â†’ CNIS (subconjunto).<br>
+            <strong>PrÃ©-req ExaCC:</strong> RecepÃ§Ã£o: baseline concluÃ­da. NegÃ³cio: baseline + estatÃ­sticas.<br>
+            <strong>PrÃ©-req Exadata:</strong> RecepÃ§Ã£o: baseline rÃ¡pida + espaÃ§o disco (sem previsÃ£o). NegÃ³cio: quando RecepÃ§Ã£o retomar.<br>
+            <strong>CNIS:</strong> depende do respectivo Proc. NegÃ³cio ter rodado (cada ambiente independente).<br>
+            <strong>Fallback:</strong> RecepÃ§Ã£o Exadata mantida â€” alternativa se baseline demorar.
         </div>
     </div>
 
     <!-- ============ PROPOSTA A ============ -->
     <div class="panel" id="panel-a">
         <div class="section-header">
-            <h2>Proposta A — Original (não vigente)</h2>
-            <span class="badge badge-blue">16 dias | 15/08 → 31/08</span>
+            <h2>Proposta A â€” Original (nÃ£o vigente)</h2>
+            <span class="badge badge-blue">16 dias | 15/08 â†’ 31/08</span>
         </div>
 
-        <span class="group-header group-rec">📥 RECEPÇÃO</span>
-        <div class="swimlane"><div class="swimlane-label">Recepção Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">✅ Ativo</div><div class="ev c-frozen" style="left:25%;width:12%;">❄️</div><div class="ev c-passive" style="left:37%;width:63%;">🔗 Fallback</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">Recepção ExaCC</div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:25%;opacity:0.3;">—</div><div class="ev c-migr" style="left:25%;width:12%;">Migração</div><div class="ev c-proc" style="left:37%;width:63%;">✅ Ativo</div></div></div>
+        <span class="group-header group-rec">ðŸ“¥ RECEPÃ‡ÃƒO</span>
+        <div class="swimlane"><div class="swimlane-label">RecepÃ§Ã£o Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">âœ… Ativo</div><div class="ev c-frozen" style="left:25%;width:12%;">â„ï¸</div><div class="ev c-passive" style="left:37%;width:63%;">ðŸ”— Fallback</div></div></div>
+        <div class="swimlane"><div class="swimlane-label">RecepÃ§Ã£o ExaCC</div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:25%;opacity:0.3;">â€”</div><div class="ev c-migr" style="left:25%;width:12%;">MigraÃ§Ã£o</div><div class="ev c-proc" style="left:37%;width:63%;">âœ… Ativo</div></div></div>
 
-        <span class="group-header group-neg">⚙️ NEGÓCIO</span>
-        <div class="swimlane"><div class="swimlane-label">Negócio Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">✅</div><div class="ev c-frozen" style="left:25%;width:12%;">❄️</div><div class="ev c-passive" style="left:37%;width:56%;">🔄 Passivo</div><div class="ev c-discontinued" style="left:93%;width:7%;">⊘</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">Negócio ExaCC</div><div class="swimlane-track"><div class="ev c-migr" style="left:0%;width:25%;">Migr+BL+CNPJ</div><div class="ev c-repr" style="left:25%;width:12%;">♻️</div><div class="ev c-proc" style="left:37%;width:63%;">🟢 Processando</div></div></div>
+        <span class="group-header group-neg">âš™ï¸ NEGÃ“CIO</span>
+        <div class="swimlane"><div class="swimlane-label">NegÃ³cio Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">âœ…</div><div class="ev c-frozen" style="left:25%;width:12%;">â„ï¸</div><div class="ev c-passive" style="left:37%;width:56%;">ðŸ”„ Passivo</div><div class="ev c-discontinued" style="left:93%;width:7%;">âŠ˜</div></div></div>
+        <div class="swimlane"><div class="swimlane-label">NegÃ³cio ExaCC</div><div class="swimlane-track"><div class="ev c-migr" style="left:0%;width:25%;">Migr+BL+CNPJ</div><div class="ev c-repr" style="left:25%;width:12%;">â™»ï¸</div><div class="ev c-proc" style="left:37%;width:63%;">ðŸŸ¢ Processando</div></div></div>
 
-        <span class="group-header group-cnis">🗄️ CNIS</span>
-        <div class="swimlane"><div class="swimlane-label">CNIS Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">✅</div><div class="ev c-frozen" style="left:25%;width:75%;">❄️</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">CNIS ExaCC</div><div class="swimlane-track"><div class="ev c-migr" style="left:0%;width:25%;">Migração+BL</div><div class="ev c-waiting" style="left:25%;width:12%;">⏳</div><div class="ev c-proc" style="left:37%;width:63%;">✅ Ativo</div></div></div>
+        <span class="group-header group-cnis">ðŸ—„ï¸ CNIS</span>
+        <div class="swimlane"><div class="swimlane-label">CNIS Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">âœ…</div><div class="ev c-frozen" style="left:25%;width:75%;">â„ï¸</div></div></div>
+        <div class="swimlane"><div class="swimlane-label">CNIS ExaCC</div><div class="swimlane-track"><div class="ev c-migr" style="left:0%;width:25%;">MigraÃ§Ã£o+BL</div><div class="ev c-waiting" style="left:25%;width:12%;">â³</div><div class="ev c-proc" style="left:37%;width:63%;">âœ… Ativo</div></div></div>
 
-        <span class="group-header group-proc">🔄 PROCESSAMENTOS</span>
-        <div class="swimlane"><div class="swimlane-label">Proc. Recepção</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">→ Exa</div><div class="ev c-stop" style="left:25%;width:12%;">⛔</div><div class="ev c-proc" style="left:37%;width:63%;">→ ExaCC</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">Proc. Negócio</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">Exa</div><div class="ev c-stop" style="left:25%;width:12%;">⛔</div><div class="ev c-proc" style="left:37%;width:63%;">ExaCC</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">Proc. CNIS</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">Exa</div><div class="ev c-stop" style="left:25%;width:12%;">⛔</div><div class="ev c-proc" style="left:37%;width:63%;">ExaCC</div></div></div>
+        <span class="group-header group-proc">ðŸ”„ PROCESSAMENTOS</span>
+        <div class="swimlane"><div class="swimlane-label">Proc. RecepÃ§Ã£o</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">â†’ Exa</div><div class="ev c-stop" style="left:25%;width:12%;">â›”</div><div class="ev c-proc" style="left:37%;width:63%;">â†’ ExaCC</div></div></div>
+        <div class="swimlane"><div class="swimlane-label">Proc. NegÃ³cio</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">Exa</div><div class="ev c-stop" style="left:25%;width:12%;">â›”</div><div class="ev c-proc" style="left:37%;width:63%;">ExaCC</div></div></div>
+        <div class="swimlane"><div class="swimlane-label">Proc. CNIS</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">Exa</div><div class="ev c-stop" style="left:25%;width:12%;">â›”</div><div class="ev c-proc" style="left:37%;width:63%;">ExaCC</div></div></div>
 
-        <span class="group-header group-dg">🛡️ DATAGUARD</span>
-        <div class="swimlane"><div class="swimlane-label">DG Exadata</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:25%;">✅</div><div class="ev c-frozen" style="left:25%;width:12%;">❄️</div><div class="ev c-passive" style="left:37%;width:56%;">🔄</div><div class="ev c-discontinued" style="left:93%;width:7%;">⊘</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">DG ExaCC</div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:37%;opacity:0.3;">—</div><div class="ev c-dg-exacc" style="left:37%;width:63%;">✅</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">Consumidores</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:25%;">Exa ✅</div><div class="ev c-frozen" style="left:25%;width:12%;">❄️</div><div class="ev c-choose" style="left:37%;width:56%;">🔀</div><div class="ev c-dg-exacc" style="left:93%;width:7%;">ExaCC</div></div></div>
+        <span class="group-header group-dg">ðŸ›¡ï¸ DATAGUARD</span>
+        <div class="swimlane"><div class="swimlane-label">DG Exadata</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:25%;">âœ…</div><div class="ev c-frozen" style="left:25%;width:12%;">â„ï¸</div><div class="ev c-passive" style="left:37%;width:56%;">ðŸ”„</div><div class="ev c-discontinued" style="left:93%;width:7%;">âŠ˜</div></div></div>
+        <div class="swimlane"><div class="swimlane-label">DG ExaCC</div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:37%;opacity:0.3;">â€”</div><div class="ev c-dg-exacc" style="left:37%;width:63%;">âœ…</div></div></div>
+        <div class="swimlane"><div class="swimlane-label">Consumidores</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:25%;">Exa âœ…</div><div class="ev c-frozen" style="left:25%;width:12%;">â„ï¸</div><div class="ev c-choose" style="left:37%;width:56%;">ðŸ”€</div><div class="ev c-dg-exacc" style="left:93%;width:7%;">ExaCC</div></div></div>
         <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span>21</span><span>25</span><span>30</span><span>31</span></div></div>
     </div>
 
@@ -598,30 +598,30 @@
                 <tbody>
                     <tr><td><strong>Janela total</strong></td><td>16 dias</td><td class="worse">21 dias</td><td class="worse">+5</td></tr>
                     <tr><td><strong>Sem processamento</strong></td><td>~2 dias</td><td class="worse">~5 dias</td><td class="worse">+3</td></tr>
-                    <tr><td><strong>Recepção Serpro parada</strong></td><td>~2 dias</td><td class="worse">~5 dias</td><td class="worse">+3</td></tr>
-                    <tr><td><strong>Migração Negócio</strong></td><td>Clone direto</td><td>DG Oracle + Equal. + BL</td><td>Alternativa</td></tr>
-                    <tr><td><strong>CNIS ExaCC</strong></td><td>Migração junto</td><td class="better">Já pronto</td><td class="better">Adiantado</td></tr>
-                    <tr><td><strong>Fallback Exadata</strong></td><td>—</td><td class="better">dblink mantido</td><td class="better">Segurança</td></tr>
-                    <tr><td><strong>Normalização</strong></td><td>30/08</td><td class="worse">05/09</td><td class="worse">+6</td></tr>
-                    <tr style="background:#fefcbf;"><td><strong>Causa</strong></td><td>—</td><td colspan="2">Clone falhou 17 e 19/08</td></tr>
+                    <tr><td><strong>RecepÃ§Ã£o Serpro parada</strong></td><td>~2 dias</td><td class="worse">~5 dias</td><td class="worse">+3</td></tr>
+                    <tr><td><strong>MigraÃ§Ã£o NegÃ³cio</strong></td><td>Clone direto</td><td>DG Oracle + Equal. + BL</td><td>Alternativa</td></tr>
+                    <tr><td><strong>CNIS ExaCC</strong></td><td>MigraÃ§Ã£o junto</td><td class="better">JÃ¡ pronto</td><td class="better">Adiantado</td></tr>
+                    <tr><td><strong>Fallback Exadata</strong></td><td>â€”</td><td class="better">dblink mantido</td><td class="better">SeguranÃ§a</td></tr>
+                    <tr><td><strong>NormalizaÃ§Ã£o</strong></td><td>30/08</td><td class="worse">05/09</td><td class="worse">+6</td></tr>
+                    <tr style="background:#fefcbf;"><td><strong>Causa</strong></td><td>â€”</td><td colspan="2">Clone falhou 17 e 19/08</td></tr>
                 </tbody>
             </table>
         </div>
         <div class="info-section">
-            <h3>📋 Resumo Executivo</h3>
+            <h3>ðŸ“‹ Resumo Executivo</h3>
             <ul style="padding-left:1.2rem; font-size:0.8rem; line-height:2;">
-                <li>15/08: início. Clone falhou 2x (15→17, 17→19). Estratégia alternativa em 19/08</li>
-                <li>19/08: equalização concluída, recepção Serpro parada 9h</li>
-                <li><strong>20/08 (hoje):</strong> baseline alfanumérico em andamento (20→24). dblink configurado</li>
-                <li>CNIS ExaCC já pronto — aguarda Negócio</li>
-                <li>~24: processamentos retomam (ExaCC: após BL+stats. Exadata: quando disco OK)</li>
-                <li>~30: inversão Primário assume. ~02/09: DG Online. 05/09: normalizado</li>
+                <li>15/08: inÃ­cio. Clone falhou 2x (15â†’17, 17â†’19). EstratÃ©gia alternativa em 19/08</li>
+                <li>19/08: equalizaÃ§Ã£o concluÃ­da, recepÃ§Ã£o Serpro parada 9h</li>
+                <li><strong>20/08 (hoje):</strong> baseline alfanumÃ©rico em andamento (20â†’24). dblink configurado</li>
+                <li>CNIS ExaCC jÃ¡ pronto â€” aguarda NegÃ³cio</li>
+                <li>~24: processamentos retomam (ExaCC: apÃ³s BL+stats. Exadata: quando disco OK)</li>
+                <li>~30: inversÃ£o PrimÃ¡rio assume. ~02/09: DG Online. 05/09: normalizado</li>
             </ul>
         </div>
     </div>
 
     <footer style="text-align:center; margin-top:1.5rem; padding:0.4rem; font-size:0.65rem; color:#a0aec0;">
-        ALFA-ESOCIAL | CNPJ Alfanumérico | 20/08/2026 | v9
+        ALFA-ESOCIAL | CNPJ AlfanumÃ©rico | 20/08/2026 | v9
     </footer>
     <script>
         function showPanel(id) {
@@ -633,3 +633,4 @@
     </script>
 </body>
 </html>
+
