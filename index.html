@@ -78,14 +78,14 @@
     </div>
 
     <div class="tabs">
-        <div class="tab active" data-panel="dg" onclick="showPanel('dg')">DataGuard & Consumidores</div>
-        <div class="tab" data-panel="b" onclick="showPanel('b')">Proposta B (Vigente)</div>
+        <div class="tab active" data-panel="b" onclick="showPanel('b')">Proposta B (Vigente)</div>
+        <div class="tab" data-panel="dg" onclick="showPanel('dg')">DataGuard & Consumidores</div>
         <div class="tab" data-panel="a" onclick="showPanel('a')">Proposta A (Original)</div>
         <div class="tab" data-panel="comp" onclick="showPanel('comp')">Comparativo</div>
     </div>
 
     <!-- ============ DATAGUARD ============ -->
-    <div class="panel active" id="panel-dg">
+    <div class="panel" id="panel-dg">
         <div class="section-header"><h2>DataGuard — Visão Exadata vs ExaCC</h2></div>
         <div class="info-section">
             <p style="font-size:0.78rem; color:#4a5568; margin-bottom:0.8rem;">
@@ -130,7 +130,7 @@
     </div>
 
     <!-- ============ PROPOSTA B ============ -->
-    <div class="panel" id="panel-b">
+    <div class="panel active" id="panel-b">
         <div class="section-header">
             <h2>Proposta B — Vigente</h2>
             <span class="badge badge-yellow">21 dias | 15/08 → 05/09</span>
