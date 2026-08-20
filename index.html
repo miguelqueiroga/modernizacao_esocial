@@ -39,6 +39,8 @@
         .c-discontinued { background: #a0aec0; opacity: 0.5; }
         .c-baseline { background: #0694a2; }
         .c-choose { background: #5a67d8; }
+        .today-marker { position: absolute; top: -4px; bottom: -4px; width: 3px; background: #e53e3e; z-index: 8; border-radius: 2px; }
+        .today-marker::after { content: '📍'; position: absolute; top: -16px; left: -6px; font-size: 0.7rem; }
         .date-axis { display: grid; grid-template-columns: 150px 1fr; margin-top: 0.3rem; margin-bottom: 1.8rem; }
         .date-axis-track { display: flex; justify-content: space-between; font-size: 0.68rem; color: #718096; font-weight: 600; padding: 0.2rem 0; border-top: 2px solid #cbd5e0; }
         .legend { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin: 0.8rem 0 1.2rem; padding: 0.5rem 0.8rem; background: white; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
@@ -80,7 +82,7 @@
     <p class="subtitle">Exadata → ExaCC | Conversão CNPJ Alfanumérico | Plano de Ação 2026 — v7</p>
 
     <div class="today-banner">
-        📍 Hoje: 20/08/2026 (qui) — Dia 6 | Baseline alfanumérico em andamento | Recepção Serpro interrompida desde 19/08 9h
+        📍 Hoje: 20/08/2026 (qui) — Dia 6 | <strong>Baseline alfanumérico em andamento</strong> (previsão: até 8 dias, considerando término ~24/08) | Recepção Serpro interrompida desde 19/08 9h
     </div>
 
     <div class="tabs">
@@ -208,7 +210,7 @@
                 <div class="ev c-fail" style="left:10%;width:4%;" title="15→17: 1ª tentativa clone (~2d) → FALHOU">❌ Clone 1</div>
                 <div class="ev c-fail" style="left:14%;width:5%;" title="17→19: 2ª tentativa clone (~2d) → FALHOU">❌ Clone 2</div>
                 <div class="ev c-equal" style="left:19%;width:5%;" title="19/08: Equalização concluída">⚡ Equal.</div>
-                <div class="ev c-baseline" style="left:24%;width:10%;" title="20→~24: Baseline alfanumérico (em andamento)">📋 Baseline Alfa</div>
+                    <div class="ev c-baseline" style="left:24%;width:10%;" title="20→~24/08: Baseline alfanumérico (previsão até 8 dias, considerando término dia 24)">📋 Baseline Alfa ← AQUI</div>
                 <div class="ev c-proc" style="left:43%;width:28%;" title="~24→~30: Primary temporário">Primary (Fase 1)</div>
                 <div class="ev c-dg" style="left:71%;width:10%;" title="~30→02/09: Standby">Standby</div>
                 <div class="ev c-read" style="left:81%;width:19%;opacity:0.4;" title="Desmobilizado">Desmob.</div>
@@ -219,6 +221,14 @@
             <div class="swimlane-track">
                 <div class="ev c-dg" style="left:43%;width:28%;" title="~24→~30: Standby — recebe dados via DG Oracle">Standby (recebendo via DG)</div>
                 <div class="ev c-proc" style="left:71%;width:29%;" title="~30→: Primary definitivo">✅ Primary</div>
+            </div>
+        </div>
+        <div class="swimlane">
+            <div class="swimlane-label">Recepção ExaCC<small>banco separado</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-read" style="left:0%;width:19%;opacity:0.3;" title="até 19/08: Não existe">—</div>
+                <div class="ev c-migr" style="left:19%;width:24%;" title="19→24: Migração dados de recepção para ExaCC">Migração Recepção</div>
+                <div class="ev c-proc" style="left:43%;width:57%;" title="~24→: Recebendo eventos Serpro + dblink→Exadata">✅ Recebendo Serpro + dblink</div>
             </div>
         </div>
         <div class="swimlane">
