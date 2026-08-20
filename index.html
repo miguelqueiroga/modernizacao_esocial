@@ -79,10 +79,91 @@
 
     <div class="tabs">
         <div class="tab active" data-panel="b" onclick="showPanel('b')">Proposta B (Vigente)</div>
+        <div class="tab" data-panel="infra" onclick="showPanel('infra')">Infraestrutura</div>
         <div class="tab" data-panel="a" onclick="showPanel('a')">Proposta A (Original)</div>
         <div class="tab" data-panel="comp" onclick="showPanel('comp')">Comparativo</div>
     </div>
 
+    <!-- ============ INFRAESTRUTURA ============ -->
+    <div class="panel" id="panel-infra">
+        <div class="section-header"><h2>Infraestrutura — Bancos e Disco</h2></div>
+        <div class="info-section">
+            <h3>🗺️ Visão Geral dos Bancos</h3>
+            <table class="comp-table" style="text-align:center;">
+                <thead>
+                    <tr>
+                        <th>Banco</th>
+                        <th>Exadata<br><small style="font-weight:400;opacity:0.8;">Oracle 12 | SP</small></th>
+                        <th>ExaCC Intermediário<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
+                        <th>ExaCC Primário<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
+                        <th>ExaCC DataGuard<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Negócio</strong></td>
+                        <td>104 TB</td>
+                        <td>104 + 104 CTAS = <strong>208 TB</strong><br><small style="color:#ed8936;">temporário (conversão)</small></td>
+                        <td>104 TB</td>
+                        <td>104 TB</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recepção</strong></td>
+                        <td>32 TB</td>
+                        <td>32 TB</td>
+                        <td>32 TB</td>
+                        <td>—</td>
+                    </tr>
+                    <tr style="background:#f0fff4;">
+                        <td><strong>CNIS</strong><br><small style="color:#718096;">RJ (exceto DG)</small></td>
+                        <td>20 TB<br><small>Oracle 18 | RJ</small></td>
+                        <td>20 TB<br><small>Oracle 19 | RJ | CTAS++</small></td>
+                        <td>20 TB<br><small>RJ</small></td>
+                        <td>20 TB<br><small>SP</small></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="background:#2d3748; color:white; font-weight:700;">
+                        <td>TOTAL</td>
+                        <td>156 TB</td>
+                        <td style="color:#fbbf24;">392 TB (c/ CTAS)</td>
+                        <td>208 TB (mín. previsto)</td>
+                        <td>124 TB</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="note" style="margin-top:1rem;">
+                <strong>CTAS (Create Table As Select):</strong> operação de conversão Oracle 12→19 que duplica temporariamente o espaço do Negócio no Intermediário (104→208 TB).<br>
+                <strong>Intermediário 392 TB:</strong> pico de uso durante conversão (208 Neg + 32 Rec + 20 CNIS + overhead).<br>
+                <strong>CNIS em RJ:</strong> banco e intermediário ficam no RJ. Apenas o DataGuard do CNIS fica em SP.<br>
+                <strong>Primário 208 TB:</strong> espaço mínimo previsto inicialmente (Negócio 104 + Recepção 32 + CNIS 20 + margem).
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>📍 Localização</h3>
+            <table class="comp-table">
+                <thead><tr><th>Localidade</th><th>O que está lá</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>SP</strong></td><td>Exadata (todos), ExaCC Negócio (INT/FIM/DG), ExaCC Recepção, DG CNIS</td></tr>
+                    <tr><td><strong>RJ</strong></td><td>CNIS Exadata, CNIS ExaCC Intermediário, CNIS ExaCC Primário</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-section">
+            <h3>📊 Versões Oracle</h3>
+            <table class="comp-table">
+                <thead><tr><th>Ambiente</th><th>Versão</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>Exadata (Negócio, Recepção)</td><td>Oracle 12</td><td>Versão legada — motivo da migração</td></tr>
+                    <tr><td>Exadata (CNIS)</td><td>Oracle 18</td><td>—</td></tr>
+                    <tr><td>ExaCC (todos)</td><td>Oracle 19</td><td>Versão destino</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <!-- ============ PROPOSTA B ============ -->
     <div class="panel active" id="panel-b">
