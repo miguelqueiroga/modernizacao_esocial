@@ -282,14 +282,21 @@
         <!-- Faixas processadas -->
         <span class="group-header group-proc" style="background:#fdf2f8;">📊 FAIXAS PROCESSADAS</span>
         <div class="swimlane">
-            <div class="swimlane-label">Eventos processados<small>quais períodos</small></div>
+            <div class="swimlane-label">Faixas Exadata<small>quais períodos</small></div>
             <div class="swimlane-track">
-                <div class="ev c-prim" style="left:0%;width:19%;" title="Dias 15,18,19 no Exadata">Exa: 15,18,19</div>
+                <div class="ev c-prim" style="left:0%;width:19%;" title="Dias 15,18,19 processados no Exadata">15, 18, 19</div>
                 <div class="ev c-stop" style="left:19%;width:24%;">⏸ Nenhum</div>
-                <div class="ev c-repr" style="left:43%;width:9%;" title="Reproc 15→19 no ExaCC">♻️ 15→19</div>
-                <div class="ev c-proc" style="left:52%;width:19%;" title="20→30 ExaCC">20→30</div>
+                <div class="ev c-passive" style="left:43%;width:57%;" title="~24+: Reprocessa passivamente (depende Rec Exa retomar)">🔄 Reproc. passivo (qdo Rec OK)</div>
+            </div>
+        </div>
+        <div class="swimlane">
+            <div class="swimlane-label">Faixas ExaCC<small>quais períodos</small></div>
+            <div class="swimlane-track">
+                <div class="ev c-stop" style="left:0%;width:43%;">⏸ Nenhum (baseline)</div>
+                <div class="ev c-repr" style="left:43%;width:9%;" title="~24: Reproc dias 15→19">♻️ 15→19</div>
+                <div class="ev c-proc" style="left:52%;width:19%;" title="~24→30: Dias 20→30">20→30</div>
                 <div class="ev c-invert" style="left:71%;width:4%;">🔄</div>
-                <div class="ev c-proc" style="left:75%;width:25%;">Corrente</div>
+                <div class="ev c-proc" style="left:75%;width:25%;" title="30+: Corrente">Corrente</div>
             </div>
         </div>
 
