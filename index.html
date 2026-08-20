@@ -1,275 +1,163 @@
-
-
-        <!-- ===== BANCOS: RECEPCAO ===== -->
-        <span class="group-header group-rec">BANCOS - RECEPCAO</span>
-        <div class="swimlane">
-            <div class="swimlane-label">Recepcao Exadata<small>origem</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;">Ativo</div>
-                <div class="ev c-frozen" style="left:19%;width:5%;">Parou</div>
-                <div class="ev c-passive" style="left:43%;width:57%;" title="~24+: Recebe via dblink do ExaCC (fallback)">Via dblink (fallback)</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">Recepcao ExaCC<small>banco separado</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-read" style="left:0%;width:19%;opacity:0.3;">-</div>
-                <div class="ev c-migr" style="left:19%;width:5%;" title="19-20: Migracao dados + dblink config 20/08">Migr+dblink</div>
-                <div class="ev c-proc" style="left:24%;width:76%;" title="20/08 17h+: Recebendo Serpro + dblink para Exadata">Serpro (retomou 20/08 17h) + dblink-Exa</div>
-            </div>
-        </div>
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
-
-        <!-- ===== BANCOS: NEGOCIO ===== -->
-        <span class="group-header group-neg">BANCOS - NEGOCIO</span>
-        <div class="swimlane">
-            <div class="swimlane-label">Negocio Exadata<small>origem</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;">Ativo</div>
-                <div class="ev c-frozen" style="left:19%;width:24%;">Congelado</div>
-                <div class="ev c-passive" style="left:43%;width:38%;">Passivo (dblink)</div>
-                <div class="ev c-discontinued" style="left:81%;width:19%;">Descont.</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">Negocio ExaCC<br>Intermediario<small>primary temp</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-migr" style="left:0%;width:9%;">CNIS</div>
-                <div class="ev c-fail" style="left:9%;width:5%;">xC1</div>
-                <div class="ev c-fail" style="left:14%;width:5%;">xC2</div>
-                <div class="ev c-equal" style="left:19%;width:3%;">Eq</div>
-                <div class="ev c-baseline" style="left:22%;width:21%;" title="20-24/08: Baseline alfanumerico (Primary desde 20/08) - ESTAMOS AQUI">BL Alfa [AQUI]</div>
-                <div class="ev c-proc" style="left:43%;width:28%;">Primary (Fase 1)</div>
-                <div class="ev c-dg" style="left:71%;width:10%;">Standby</div>
-                <div class="ev c-read" style="left:81%;width:19%;opacity:0.4;">Desmob.</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">Negocio ExaCC<br>Primario<small>definitivo</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">-</div>
-                <div class="ev c-dg" style="left:43%;width:28%;" title="~24-~30: Standby - recebe via DG Oracle (apos baseline)">Standby (DG Oracle)</div>
-                <div class="ev c-proc" style="left:71%;width:29%;">Primary definitivo</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">Negocio ExaCC<br>DataGuard<small>leitura</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">-</div>
-                <div class="ev c-dg-exacc" style="left:43%;width:38%;">DG Ativo</div>
-                <div class="ev c-dg-exacc" style="left:81%;width:19%;">DG Online</div>
-            </div>
-        </div>
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
-
-        <!-- ===== BANCOS: CNIS ===== -->
-        <span class="group-header group-cnis">BANCOS - CNIS</span>
-        <div class="swimlane">
-            <div class="swimlane-label">CNIS Exadata<small>origem</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;">Ativo</div>
-                <div class="ev c-frozen" style="left:19%;width:81%;">Congelado (dados ate 19/08)</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">CNIS ExaCC<small>pronto</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-ready" style="left:0%;width:43%;">Pronto (BL aplicada)</div>
-                <div class="ev c-waiting" style="left:43%;width:57%;">Aguardando Negocio processar</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">Extrato CNIS<small>consumidor critico</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-dg-exa" style="left:0%;width:62%;" title="Ate 28/08: Lendo CNIS Exadata">Lendo CNIS Exadata</div>
-                <div class="ev c-dg-exacc" style="left:62%;width:38%;" title="28/08: Muda para CNIS ExaCC">Lendo CNIS ExaCC (28/08)</div>
-            </div>
-        </div>
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>28</span><span>05/09</span></div></div>
-
-        <!-- ===== PROCESSAMENTOS ===== -->
-        <span class="group-header group-proc">PROCESSAMENTOS</span>
-        <div class="swimlane">
-            <div class="swimlane-label">Proc. Recepcao<small>Serpro - Banco Rec.</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;">Exa</div>
-                <div class="ev c-stop" style="left:19%;width:5%;">Parado</div>
-                <div class="ev c-proc" style="left:24%;width:76%;" title="Retomou 20/08 17h no ExaCC">ExaCC (retomou 20/08)</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">Proc. Negocio<small>Rec. - Negocio</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;">Exa</div>
-                <div class="ev c-stop" style="left:19%;width:24%;">Parado</div>
-                <div class="ev c-proc" style="left:43%;width:57%;" title="ExaCC: apos baseline+stats. Exa: qdo Rec retomar">ExaCC (apos BL+stats)</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">Proc. CNIS<small>Negocio - CNIS</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-proc" style="left:0%;width:19%;">Exa</div>
-                <div class="ev c-stop" style="left:19%;width:24%;">Parado</div>
-                <div class="ev c-proc" style="left:43%;width:57%;">Depende Proc. Negocio</div>
-            </div>
-        </div>
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
-
-        <!-- ===== FAIXAS PROCESSADAS ===== -->
-        <span class="group-header group-proc" style="background:#fdf2f8;">FAIXAS PROCESSADAS</span>
-        <div class="swimlane">
-            <div class="swimlane-label">Faixas Exadata<small>periodos</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-prim" style="left:0%;width:19%;">15, 18, 19</div>
-                <div class="ev c-stop" style="left:19%;width:24%;">Nenhum</div>
-                <div class="ev c-passive" style="left:43%;width:57%;">Reproc. passivo (qdo Rec OK)</div>
-            </div>
-        </div>
-        <div class="swimlane">
-            <div class="swimlane-label">Faixas ExaCC<small>periodos</small></div>
-            <div class="swimlane-track">
-                <div class="ev c-stop" style="left:0%;width:43%;">Nenhum (baseline)</div>
-                <div class="ev c-repr" style="left:43%;width:9%;">15-19</div>
-                <div class="ev c-proc" style="left:52%;width:19%;">20-30</div>
-                <div class="ev c-invert" style="left:71%;width:4%;">Inv</div>
-                <div class="ev c-proc" style="left:75%;width:25%;">Corrente</div>
-            </div>
-        </div>
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
-
-        <!-- ===== DATAGUARD ===== -->
-        <span class="group-header group-dg">DATAGUARD & CONSUMIDORES</span>
-        <div class="swimlane"><div class="swimlane-label">DG Exadata</div><div class="swimlane-track">
-            <div class="ev c-dg-exa" style="left:0%;width:19%;">Atualizado</div>
-            <div class="ev c-frozen" style="left:19%;width:24%;">Congelado</div>
-            <div class="ev c-passive" style="left:43%;width:38%;">Passivo</div>
-            <div class="ev c-discontinued" style="left:81%;width:19%;">Descont.</div>
-        </div></div>
-        <div class="swimlane"><div class="swimlane-label">DG ExaCC</div><div class="swimlane-track">
-            <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">-</div>
-            <div class="ev c-dg-exacc" style="left:43%;width:57%;">Ativo</div>
-        </div></div>
-        <div class="swimlane"><div class="swimlane-label">Consumidores</div><div class="swimlane-track">
-            <div class="ev c-dg-exa" style="left:0%;width:19%;">DG Exa</div>
-            <div class="ev c-frozen" style="left:19%;width:24%;">Defasado</div>
-            <div class="ev c-choose" style="left:43%;width:38%;">Exa ou ExaCC (+ atual)</div>
-            <div class="ev c-dg-exacc" style="left:81%;width:19%;">ExaCC (unico)</div>
-        </div></div>
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
-
-        <div class="note">
-            <strong>Fluxo:</strong> Serpro - Recepcao - Negocio - CNIS (subconjunto).<br>
-            <strong>Pre-req ExaCC Negocio:</strong> Baseline + estatisticas + drop TBS + remanejamento disco + DG Oracle.<br>
-            <strong>Pre-req Exadata:</strong> Baseline rapida + espaco disco (sem previsao). Negocio: quando Recepcao retomar.<br>
-            <strong>CNIS:</strong> depende Proc. Negocio (cada ambiente independente).<br>
-            <strong>Fallback:</strong> Recepcao Exadata mantida via dblink.
-        </div>
-    </div>
-
-    <!-- ============ INFRAESTRUTURA ============ -->
-    <div class="panel" id="panel-infra">
-        <div class="section-header"><h2>Infraestrutura - Bancos e Disco</h2></div>
-        <div class="info-section">
-            <h3>Visao Geral dos Bancos</h3>
-            <table class="comp-table" style="table-layout:fixed; width:100%;">
-                <colgroup><col style="width:14%;"><col style="width:16%;"><col style="width:28%;"><col style="width:21%;"><col style="width:21%;"></colgroup>
-                <thead><tr><th>Banco</th><th>Exadata<br><small style="font-weight:400;opacity:0.8;">Oracle 12 | SP</small></th><th>ExaCC Intermediario<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th><th>ExaCC Primario<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th><th>ExaCC DataGuard<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th></tr></thead>
-                <tbody>
-                    <tr><td><strong>Negocio</strong><br><small>Plano A (antes)</small></td><td>104 TB</td><td>104 TB<br><small>Clone direto</small></td><td>104 TB - <strong>208 TB</strong> (CTAS) - 104 TB<br><small style="color:#ed8936;">CTAS na definitiva</small></td><td>104 TB</td></tr>
-                    <tr style="background:#fffff0;"><td><strong>Negocio</strong><br><small style="color:#d69e2e;">Plano B (atual)</small></td><td>104 TB</td><td>104 TB - <strong>208 TB</strong> (CTAS) - 104 TB<br><small style="color:#ed8936;">CTAS no intermediario</small></td><td>104 TB<br><small>Recebe via DG</small></td><td>104 TB</td></tr>
-                    <tr><td><strong>Recepcao</strong></td><td>32 TB</td><td>32 TB</td><td>32 TB<br><small style="color:#38a169;">Ja na definitiva</small></td><td>-</td></tr>
-                    <tr style="background:#f0fff4;"><td><strong>CNIS</strong><br><small>RJ (exceto DG)</small></td><td>20 TB<br><small>Oracle 18 | RJ</small></td><td style="color:#a0aec0;">-<br><small>Nao necessario (ja era Oracle 18)</small></td><td>20 TB<br><small>Oracle 19 | RJ</small></td><td>20 TB<br><small>SP</small></td></tr>
-                </tbody>
-                <tfoot><tr style="background:#2d3748; color:white; font-weight:700;"><td>TOTAL</td><td>156 TB</td><td style="color:#fbbf24;">392 TB (pico CTAS)</td><td>208 TB (min. previsto)</td><td>124 TB</td></tr></tfoot>
-            </table>
-        </div>
-        <div class="info-section">
-            <h3>Espaco em Disco - Base Definitiva (Primario ExaCC)</h3>
-            <table class="comp-table">
-                <thead><tr><th>Item</th><th>TB</th><th>Observacao</th></tr></thead>
-                <tbody>
-                    <tr><td>Recepcao (ja instalado)</td><td>32 TB</td><td>Ja esta na definitiva</td></tr>
-                    <tr><td>Negocio (a receber)</td><td>104 TB</td><td>Via DG do intermediario</td></tr>
-                    <tr><td>DG CNIS (a receber)</td><td>20 TB</td><td>DataGuard do CNIS (SP)</td></tr>
-                    <tr style="background:#f0fff4;"><td><strong>Espaco disponivel atual</strong></td><td><strong>153 TB</strong></td><td>Livre para receber</td></tr>
-                    <tr><td>Devolucao do intermediario</td><td>+120 TB</td><td>Apos desmobilizacao</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="info-section">
-            <h3>Localizacao</h3>
-            <table class="comp-table">
-                <thead><tr><th>Local</th><th>O que esta la</th></tr></thead>
-                <tbody>
-                    <tr><td><strong>SP</strong></td><td>Exadata (Negocio, Recepcao), ExaCC Intermediario, ExaCC Primario (Negocio, Recepcao), ExaCC DG (Negocio, CNIS)</td></tr>
-                    <tr><td><strong>RJ</strong></td><td>CNIS Exadata, CNIS ExaCC Primario</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- ============ PROPOSTA A ============ -->
-    <div class="panel" id="panel-a">
-        <div class="section-header"><h2>Proposta A - Original (nao vigente)</h2><span class="badge badge-blue">16 dias | 15/08 - 31/08</span></div>
-        <span class="group-header group-rec">RECEPCAO</span>
-        <div class="swimlane"><div class="swimlane-label">Recepcao Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">Ativo</div><div class="ev c-frozen" style="left:25%;width:12%;">Parou</div><div class="ev c-passive" style="left:37%;width:63%;">Fallback</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">Recepcao ExaCC</div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:25%;opacity:0.3;">-</div><div class="ev c-migr" style="left:25%;width:12%;">Migracao</div><div class="ev c-proc" style="left:37%;width:63%;">Ativo</div></div></div>
-        <span class="group-header group-neg">NEGOCIO</span>
-        <div class="swimlane"><div class="swimlane-label">Negocio Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">Ativo</div><div class="ev c-frozen" style="left:25%;width:12%;">Cong.</div><div class="ev c-passive" style="left:37%;width:56%;">Passivo</div><div class="ev c-discontinued" style="left:93%;width:7%;">x</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">Negocio ExaCC</div><div class="swimlane-track"><div class="ev c-migr" style="left:0%;width:25%;">Migr+BL+CNPJ</div><div class="ev c-repr" style="left:25%;width:12%;">Reproc</div><div class="ev c-proc" style="left:37%;width:63%;">Processando</div></div></div>
-        <span class="group-header group-cnis">CNIS</span>
-        <div class="swimlane"><div class="swimlane-label">CNIS Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">Ativo</div><div class="ev c-frozen" style="left:25%;width:75%;">Congelado</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">CNIS ExaCC</div><div class="swimlane-track"><div class="ev c-migr" style="left:0%;width:25%;">Migr+BL</div><div class="ev c-waiting" style="left:25%;width:12%;">Aguarda</div><div class="ev c-proc" style="left:37%;width:63%;">Ativo</div></div></div>
-        <span class="group-header group-dg">DATAGUARD</span>
-        <div class="swimlane"><div class="swimlane-label">DG Exadata</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:25%;">Atual.</div><div class="ev c-frozen" style="left:25%;width:12%;">Cong.</div><div class="ev c-passive" style="left:37%;width:56%;">Passivo</div><div class="ev c-discontinued" style="left:93%;width:7%;">x</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">DG ExaCC</div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:37%;opacity:0.3;">-</div><div class="ev c-dg-exacc" style="left:37%;width:63%;">Ativo</div></div></div>
-        <div class="swimlane"><div class="swimlane-label">Consumidores</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:25%;">DG Exa</div><div class="ev c-frozen" style="left:25%;width:12%;">Defas.</div><div class="ev c-choose" style="left:37%;width:56%;">Exa ou ExaCC</div><div class="ev c-dg-exacc" style="left:93%;width:7%;">ExaCC</div></div></div>
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span>21</span><span>25</span><span>30</span><span>31</span></div></div>
-    </div>
-
-    <!-- ============ COMPARATIVO ============ -->
-    <div class="panel" id="panel-comp">
-        <div class="section-header"><h2>Comparativo A vs B</h2></div>
-        <div class="info-section">
-            <table class="comp-table">
-                <thead><tr><th>Aspecto</th><th>Proposta A</th><th>Proposta B</th><th>Delta</th></tr></thead>
-                <tbody>
-                    <tr><td><strong>Janela total</strong></td><td>16 dias</td><td class="worse">21 dias</td><td class="worse">+5</td></tr>
-                    <tr><td><strong>Sem processamento</strong></td><td>~2 dias</td><td class="worse">~5 dias</td><td class="worse">+3</td></tr>
-                    <tr><td><strong>Recepcao Serpro parada</strong></td><td>~2 dias</td><td class="better">~32h (retomou 20/08)</td><td class="better">Menor</td></tr>
-                    <tr><td><strong>Migracao Negocio</strong></td><td>Clone direto</td><td>DG Oracle + Equal. + BL</td><td>Alternativa</td></tr>
-                    <tr><td><strong>CNIS ExaCC</strong></td><td>Migracao junto</td><td class="better">Ja pronto</td><td class="better">Adiantado</td></tr>
-                    <tr><td><strong>Fallback Exadata</strong></td><td>-</td><td class="better">dblink mantido</td><td class="better">Seguranca</td></tr>
-                    <tr><td><strong>Normalizacao</strong></td><td>30/08</td><td class="worse">05/09</td><td class="worse">+6</td></tr>
-                    <tr style="background:#fefcbf;"><td><strong>Causa</strong></td><td>-</td><td colspan="2">Clone falhou 17 e 19/08</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="info-section">
-            <h3>Resumo Executivo</h3>
-            <ul style="padding-left:1.2rem; font-size:0.8rem; line-height:2;">
-                <li>15/08: inicio. Clone falhou 2x (15-17, 17-19)</li>
-                <li>19/08: estrategia alternativa. Equalizacao concluida. Recepcao Serpro parada 9h</li>
-                <li><strong>20/08 (hoje):</strong> Baseline alfa em andamento. Recepcao Serpro retomou 17h. Backup+BL Exadata rodando</li>
-                <li>CNIS ExaCC ja pronto</li>
-                <li>~24: baseline concluida - stats - drop TBS - disco - DG Oracle - Proc. Negocio retoma</li>
-                <li>~28: Extrato CNIS muda para ExaCC</li>
-                <li>~30: inversao - Primario assume</li>
-                <li>05/09: normalizado, DG Exadata descontinuado</li>
-            </ul>
-        </div>
-    </div>
-
-    <footer style="text-align:center; margin-top:1.5rem; padding:0.4rem; font-size:0.65rem; color:#a0aec0;">
-        ALFA-ESOCIAL | CNPJ Alfanumerico | 20/08/2026 | v10
-    </footer>
-    <script>
-        function showPanel(id) {
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('panel-' + id).classList.add('active');
-            document.querySelector('[data-panel="' + id + '"]').classList.add('active');
-        }
-    </script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Migracao eSocial Alfanumerico - v10</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f7fa;color:#2d3748;padding:1.5rem;line-height:1.6}
+h1{text-align:center;font-size:1.5rem;margin-bottom:0.2rem;color:#1a365d}
+.subtitle{text-align:center;color:#718096;margin-bottom:1rem;font-size:0.85rem}
+.today-banner{text-align:center;padding:0.5rem 1rem;background:#fff5f5;border:1px solid #feb2b2;border-radius:6px;font-size:0.78rem;color:#c53030;font-weight:600;margin-bottom:1.5rem;max-width:950px;margin-inline:auto}
+.tabs{display:flex;justify-content:center;gap:0.4rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{padding:0.45rem 1rem;border:2px solid #cbd5e0;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.75rem;transition:all 0.2s;background:white}
+.tab:hover{border-color:#4299e1;color:#4299e1}
+.tab.active{background:#ebf8ff;border-color:#3182ce;color:#2b6cb0}
+.panel{display:none;max-width:1200px;margin:0 auto}
+.panel.active{display:block}
+.badge{display:inline-block;padding:0.2rem 0.55rem;border-radius:10px;font-size:0.65rem;font-weight:700;text-transform:uppercase;margin-left:0.3rem}
+.badge-blue{background:#bee3f8;color:#2a4365}
+.badge-yellow{background:#fefcbf;color:#744210}
+.badge-red{background:#fed7d7;color:#9b2c2c}
+.section-header{display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.section-header h2{font-size:1.1rem;color:#2d3748}
+.group-header{font-size:0.75rem;font-weight:700;padding:0.35rem 0.7rem;margin:1.2rem 0 0.4rem;border-radius:4px;display:inline-block}
+.group-rec{background:#fef3c7;color:#92400e}
+.group-neg{background:#dbeafe;color:#1e40af}
+.group-cnis{background:#d1fae5;color:#065f46}
+.group-dg{background:#ede9fe;color:#5b21b6}
+.group-proc{background:#fce7f3;color:#9d174d}
+.swimlane{display:grid;grid-template-columns:160px 1fr;margin-bottom:0.45rem;min-height:44px;align-items:center}
+.swimlane-label{font-weight:700;font-size:0.66rem;color:#4a5568;text-align:right;padding-right:0.7rem;line-height:1.25}
+.swimlane-label small{font-weight:400;color:#a0aec0;display:block}
+.swimlane-track{position:relative;height:34px;background:#edf2f7;border-radius:5px}
+.ev{position:absolute;top:50%;transform:translateY(-50%);height:26px;border-radius:4px;display:flex;align-items:center;padding:0 0.35rem;font-size:0.59rem;font-weight:600;white-space:nowrap;color:white;box-shadow:0 1px 2px rgba(0,0,0,0.1);cursor:default;overflow:hidden;text-overflow:ellipsis}
+.ev:hover{transform:translateY(-50%) scale(1.06);z-index:10;overflow:visible}
+.c-proc{background:#38a169}.c-migr{background:#3182ce}.c-fail{background:#e53e3e}.c-equal{background:#d53f8c}
+.c-baseline{background:#0694a2}.c-dg{background:#6b46c1}.c-repr{background:#d69e2e}.c-invert{background:#b794f4}
+.c-stop{background:#e53e3e;opacity:0.75}.c-read{background:#a0aec0}.c-prim{background:#2b6cb0}
+.c-frozen{background:#e53e3e;opacity:0.6}.c-passive{background:#ed8936}.c-discontinued{background:#a0aec0;opacity:0.5}
+.c-dg-exa{background:#c53030}.c-dg-exacc{background:#276749}.c-choose{background:#5a67d8}
+.c-ready{background:#10b981}.c-waiting{background:#6ee7b7;color:#065f46}
+.date-axis{display:grid;grid-template-columns:160px 1fr;margin-top:0.2rem;margin-bottom:1rem}
+.date-axis-track{display:flex;justify-content:space-between;font-size:0.65rem;color:#718096;font-weight:600;padding:0.2rem 0;border-top:2px solid #cbd5e0}
+.legend{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:0.5rem 0 0.8rem;padding:0.4rem 0.6rem;background:white;border-radius:6px;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
+.legend-item{display:flex;align-items:center;gap:0.25rem;font-size:0.62rem}
+.legend-color{width:10px;height:10px;border-radius:3px}
+.info-section{max-width:1050px;margin:1.2rem auto;padding:1.2rem;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.info-section h3{margin-bottom:0.7rem;color:#2d3748;font-size:0.92rem}
+.note{font-size:0.72rem;color:#718096;margin-top:0.5rem;padding:0.5rem;background:#f7fafc;border-radius:4px;border-left:3px solid #4299e1}
+.comp-table{width:100%;border-collapse:collapse;background:white;border-radius:8px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+.comp-table th{background:#2d3748;color:white;padding:0.55rem 0.6rem;text-align:left;font-size:0.72rem}
+.comp-table td{padding:0.45rem 0.6rem;border-bottom:1px solid #e2e8f0;font-size:0.74rem}
+.comp-table tr:nth-child(even){background:#f7fafc}
+.worse{color:#e53e3e;font-weight:600}.better{color:#38a169;font-weight:600}
+@media(max-width:768px){body{padding:0.8rem}.swimlane{grid-template-columns:95px 1fr}.swimlane-label{font-size:0.55rem}.ev{font-size:0.5rem;padding:0 0.15rem}}
+</style>
+</head>
+<body>
+<h1>Migracao eSocial Alfanumerico</h1>
+<p class="subtitle">Exadata - ExaCC | CNPJ Alfanumerico | Plano de Acao 2026 - v10</p>
+<div class="today-banner">Hoje: 20/08/2026 (qui) - Dia 6 | <strong>Baseline alfanumerico no Intermediario (20-24)</strong> | Recepcao Serpro retomou 17h no ExaCC</div>
+<div class="tabs">
+<div class="tab active" data-panel="b" onclick="showPanel('b')">Proposta B (Detalhada)</div>
+<div class="tab" data-panel="infra" onclick="showPanel('infra')">Infraestrutura</div>
+<div class="tab" data-panel="a" onclick="showPanel('a')">Proposta A (Original)</div>
+<div class="tab" data-panel="comp" onclick="showPanel('comp')">Comparativo</div>
+</div>
+<div class="panel active" id="panel-b">
+<div class="section-header"><h2>Proposta B - Vigente</h2><span class="badge badge-yellow">21 dias | 15/08 - 05/09</span><span class="badge badge-red">Clone falhou 17 e 19/08</span></div>
+<div class="legend">
+<div class="legend-item"><div class="legend-color" style="background:#3182ce"></div>Migracao</div>
+<div class="legend-item"><div class="legend-color" style="background:#e53e3e"></div>Falha/Parada</div>
+<div class="legend-item"><div class="legend-color" style="background:#d53f8c"></div>Equalizacao</div>
+<div class="legend-item"><div class="legend-color" style="background:#0694a2"></div>Baseline</div>
+<div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Ativo</div>
+<div class="legend-item"><div class="legend-color" style="background:#ed8936"></div>Passivo</div>
+<div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reproc.</div>
+<div class="legend-item"><div class="legend-color" style="background:#6b46c1"></div>DG/Standby</div>
+<div class="legend-item"><div class="legend-color" style="background:#10b981"></div>Pronto</div>
+</div>
+<span class="group-header group-rec">BANCOS - RECEPCAO</span>
+<div class="swimlane"><div class="swimlane-label">Recepcao Exadata<small>origem</small></div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:19%;">Ativo</div><div class="ev c-frozen" style="left:19%;width:5%;">Parou</div><div class="ev c-passive" style="left:43%;width:57%;">Via dblink (fallback)</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Recepcao ExaCC<small>banco separado</small></div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:19%;opacity:0.3;">-</div><div class="ev c-migr" style="left:19%;width:5%;">Migr</div><div class="ev c-proc" style="left:24%;width:76%;">Serpro (retomou 20/08 17h) + dblink-Exa</div></div></div>
+<div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
+<span class="group-header group-neg">BANCOS - NEGOCIO</span>
+<div class="swimlane"><div class="swimlane-label">Negocio Exadata<small>origem</small></div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:19%;">Ativo</div><div class="ev c-frozen" style="left:19%;width:24%;">Congelado</div><div class="ev c-passive" style="left:43%;width:38%;">Passivo (dblink)</div><div class="ev c-discontinued" style="left:81%;width:19%;">Descont.</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Negocio ExaCC Intermediario<small>primary temp</small></div><div class="swimlane-track"><div class="ev c-migr" style="left:0%;width:9%;">CNIS</div><div class="ev c-fail" style="left:9%;width:5%;">xC1</div><div class="ev c-fail" style="left:14%;width:5%;">xC2</div><div class="ev c-equal" style="left:19%;width:3%;">Eq</div><div class="ev c-baseline" style="left:22%;width:21%;">BL Alfa [AQUI]</div><div class="ev c-proc" style="left:43%;width:28%;">Primary (Fase 1)</div><div class="ev c-dg" style="left:71%;width:10%;">Standby</div><div class="ev c-read" style="left:81%;width:19%;opacity:0.4;">Desmob.</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Negocio ExaCC Primario<small>definitivo</small></div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">-</div><div class="ev c-dg" style="left:43%;width:28%;">Standby (DG Oracle)</div><div class="ev c-proc" style="left:71%;width:29%;">Primary definitivo</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Negocio ExaCC DataGuard<small>leitura</small></div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">-</div><div class="ev c-dg-exacc" style="left:43%;width:38%;">DG Ativo</div><div class="ev c-dg-exacc" style="left:81%;width:19%;">DG Online</div></div></div>
+<div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
+<span class="group-header group-cnis">BANCOS - CNIS</span>
+<div class="swimlane"><div class="swimlane-label">CNIS Exadata<small>origem</small></div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:19%;">Ativo</div><div class="ev c-frozen" style="left:19%;width:81%;">Congelado (dados ate 19/08)</div></div></div>
+<div class="swimlane"><div class="swimlane-label">CNIS ExaCC<small>pronto</small></div><div class="swimlane-track"><div class="ev c-ready" style="left:0%;width:43%;">Pronto (BL aplicada)</div><div class="ev c-waiting" style="left:43%;width:57%;">Aguardando Negocio processar</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Extrato CNIS<small>consumidor critico</small></div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:62%;">Lendo CNIS Exadata</div><div class="ev c-dg-exacc" style="left:62%;width:38%;">Lendo CNIS ExaCC (28/08)</div></div></div>
+<div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>28</span><span>05/09</span></div></div>
+<span class="group-header group-proc">PROCESSAMENTOS</span>
+<div class="swimlane"><div class="swimlane-label">Proc. Recepcao<small>Serpro - Banco Rec.</small></div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:19%;">Exa</div><div class="ev c-stop" style="left:19%;width:5%;">Parado</div><div class="ev c-proc" style="left:24%;width:76%;">ExaCC (retomou 20/08)</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Proc. Negocio<small>Rec. - Negocio</small></div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:19%;">Exa</div><div class="ev c-stop" style="left:19%;width:24%;">Parado</div><div class="ev c-proc" style="left:43%;width:57%;">ExaCC (apos BL+stats)</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Proc. CNIS<small>Negocio - CNIS</small></div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:19%;">Exa</div><div class="ev c-stop" style="left:19%;width:24%;">Parado</div><div class="ev c-proc" style="left:43%;width:57%;">Depende Proc. Negocio</div></div></div>
+<div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
+<span class="group-header group-proc" style="background:#fdf2f8;">FAIXAS PROCESSADAS</span>
+<div class="swimlane"><div class="swimlane-label">Faixas Exadata</div><div class="swimlane-track"><div class="ev c-prim" style="left:0%;width:19%;">15, 18, 19</div><div class="ev c-stop" style="left:19%;width:24%;">Nenhum</div><div class="ev c-passive" style="left:43%;width:57%;">Reproc. passivo (qdo Rec OK)</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Faixas ExaCC</div><div class="swimlane-track"><div class="ev c-stop" style="left:0%;width:43%;">Nenhum (baseline)</div><div class="ev c-repr" style="left:43%;width:9%;">15-19</div><div class="ev c-proc" style="left:52%;width:19%;">20-30</div><div class="ev c-invert" style="left:71%;width:4%;">Inv</div><div class="ev c-proc" style="left:75%;width:25%;">Corrente</div></div></div>
+<div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
+<span class="group-header group-dg">DATAGUARD & CONSUMIDORES</span>
+<div class="swimlane"><div class="swimlane-label">DG Exadata</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:19%;">Atualizado</div><div class="ev c-frozen" style="left:19%;width:24%;">Congelado</div><div class="ev c-passive" style="left:43%;width:38%;">Passivo</div><div class="ev c-discontinued" style="left:81%;width:19%;">Descont.</div></div></div>
+<div class="swimlane"><div class="swimlane-label">DG ExaCC</div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">-</div><div class="ev c-dg-exacc" style="left:43%;width:57%;">Ativo</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Consumidores</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:19%;">DG Exa</div><div class="ev c-frozen" style="left:19%;width:24%;">Defasado</div><div class="ev c-choose" style="left:43%;width:38%;">Exa ou ExaCC (+ atual)</div><div class="ev c-dg-exacc" style="left:81%;width:19%;">ExaCC (unico)</div></div></div>
+<div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>19</span><span>20</span><span>24</span><span>~30</span><span>05/09</span></div></div>
+<div class="note"><strong>Fluxo:</strong> Serpro - Recepcao - Negocio - CNIS.<br><strong>Sequencia pos-baseline:</strong> Estatisticas - Drop TBS - Remanejamento disco - DG Oracle - Proc. Negocio retoma.<br><strong>Fallback:</strong> Recepcao Exadata mantida via dblink.</div>
+</div>
+<div class="panel" id="panel-infra">
+<div class="section-header"><h2>Infraestrutura</h2></div>
+<div class="info-section"><h3>Visao Geral dos Bancos</h3>
+<table class="comp-table"><thead><tr><th>Banco</th><th>Exadata (Oracle 12, SP)</th><th>ExaCC Intermediario (Oracle 19, SP)</th><th>ExaCC Primario (Oracle 19, SP)</th><th>ExaCC DG (Oracle 19, SP)</th></tr></thead>
+<tbody>
+<tr><td><strong>Negocio - Plano A</strong></td><td>104 TB</td><td>104 TB (clone)</td><td>104-208-104 TB (CTAS)</td><td>104 TB</td></tr>
+<tr style="background:#fffff0;"><td><strong>Negocio - Plano B</strong></td><td>104 TB</td><td>104-208-104 TB (CTAS)</td><td>104 TB (via DG)</td><td>104 TB</td></tr>
+<tr><td><strong>Recepcao</strong></td><td>32 TB</td><td>32 TB</td><td>32 TB (ja instalado)</td><td>-</td></tr>
+<tr><td><strong>CNIS</strong> (RJ exceto DG)</td><td>20 TB (Oracle 18, RJ)</td><td>- (nao necessario)</td><td>20 TB (RJ)</td><td>20 TB (SP)</td></tr>
+</tbody>
+<tfoot><tr style="background:#2d3748;color:white;font-weight:700;"><td>TOTAL</td><td>156 TB</td><td>392 TB (pico)</td><td>208 TB (min)</td><td>124 TB</td></tr></tfoot>
+</table></div>
+<div class="info-section"><h3>Espaco - Base Definitiva</h3>
+<table class="comp-table"><thead><tr><th>Item</th><th>TB</th><th>Obs</th></tr></thead><tbody>
+<tr><td>Recepcao (instalado)</td><td>32</td><td>Ja na definitiva</td></tr>
+<tr><td>Negocio (a receber)</td><td>104</td><td>Via DG intermediario</td></tr>
+<tr><td>DG CNIS (a receber)</td><td>20</td><td>SP</td></tr>
+<tr style="background:#f0fff4;"><td><strong>Disponivel</strong></td><td><strong>153</strong></td><td>Livre</td></tr>
+<tr><td>Devolucao intermediario</td><td>+120</td><td>Apos desmob.</td></tr>
+</tbody></table></div>
+</div>
+<div class="panel" id="panel-a">
+<div class="section-header"><h2>Proposta A - Original</h2><span class="badge badge-blue">16 dias | 15/08 - 31/08</span></div>
+<span class="group-header group-neg">NEGOCIO</span>
+<div class="swimlane"><div class="swimlane-label">Negocio Exadata</div><div class="swimlane-track"><div class="ev c-proc" style="left:0%;width:25%;">Ativo</div><div class="ev c-frozen" style="left:25%;width:12%;">Cong.</div><div class="ev c-passive" style="left:37%;width:56%;">Passivo</div><div class="ev c-discontinued" style="left:93%;width:7%;">x</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Negocio ExaCC</div><div class="swimlane-track"><div class="ev c-migr" style="left:0%;width:25%;">Migr+BL+CNPJ</div><div class="ev c-repr" style="left:25%;width:12%;">Reproc</div><div class="ev c-proc" style="left:37%;width:63%;">Processando</div></div></div>
+<span class="group-header group-dg">DATAGUARD</span>
+<div class="swimlane"><div class="swimlane-label">DG Exadata</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:25%;">Atual.</div><div class="ev c-frozen" style="left:25%;width:12%;">Cong.</div><div class="ev c-passive" style="left:37%;width:56%;">Passivo</div><div class="ev c-discontinued" style="left:93%;width:7%;">x</div></div></div>
+<div class="swimlane"><div class="swimlane-label">DG ExaCC</div><div class="swimlane-track"><div class="ev c-read" style="left:0%;width:37%;opacity:0.3;">-</div><div class="ev c-dg-exacc" style="left:37%;width:63%;">Ativo</div></div></div>
+<div class="swimlane"><div class="swimlane-label">Consumidores</div><div class="swimlane-track"><div class="ev c-dg-exa" style="left:0%;width:25%;">DG Exa</div><div class="ev c-frozen" style="left:25%;width:12%;">Def.</div><div class="ev c-choose" style="left:37%;width:56%;">Exa ou ExaCC</div><div class="ev c-dg-exacc" style="left:93%;width:7%;">ExaCC</div></div></div>
+<div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span>21</span><span>25</span><span>30</span><span>31</span></div></div>
+</div>
+<div class="panel" id="panel-comp">
+<div class="section-header"><h2>Comparativo A vs B</h2></div>
+<div class="info-section">
+<table class="comp-table"><thead><tr><th>Aspecto</th><th>Proposta A</th><th>Proposta B</th><th>Delta</th></tr></thead><tbody>
+<tr><td><strong>Janela</strong></td><td>16 dias</td><td class="worse">21 dias</td><td class="worse">+5</td></tr>
+<tr><td><strong>Sem processamento</strong></td><td>~2 dias</td><td class="worse">~5 dias</td><td class="worse">+3</td></tr>
+<tr><td><strong>Recepcao parada</strong></td><td>~2 dias</td><td class="better">~32h</td><td class="better">Menor</td></tr>
+<tr><td><strong>CNIS ExaCC</strong></td><td>Junto</td><td class="better">Ja pronto</td><td class="better">Adiantado</td></tr>
+<tr><td><strong>Fallback</strong></td><td>-</td><td class="better">dblink</td><td class="better">Seguranca</td></tr>
+<tr><td><strong>Normalizacao</strong></td><td>30/08</td><td class="worse">05/09</td><td class="worse">+6</td></tr>
+<tr style="background:#fefcbf;"><td><strong>Causa</strong></td><td>-</td><td colspan="2">Clone falhou 17 e 19/08</td></tr>
+</tbody></table></div>
+</div>
+<footer style="text-align:center;margin-top:1.5rem;padding:0.4rem;font-size:0.65rem;color:#a0aec0;">ALFA-ESOCIAL | 20/08/2026 | v10</footer>
+<script>
+function showPanel(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active');document.querySelector('[data-panel="'+id+'"]').classList.add('active');}
+</script>
 </body>
 </html>
