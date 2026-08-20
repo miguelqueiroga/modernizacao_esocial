@@ -79,55 +79,10 @@
 
     <div class="tabs">
         <div class="tab active" data-panel="b" onclick="showPanel('b')">Proposta B (Vigente)</div>
-        <div class="tab" data-panel="dg" onclick="showPanel('dg')">DataGuard & Consumidores</div>
         <div class="tab" data-panel="a" onclick="showPanel('a')">Proposta A (Original)</div>
         <div class="tab" data-panel="comp" onclick="showPanel('comp')">Comparativo</div>
     </div>
 
-    <!-- ============ DATAGUARD ============ -->
-    <div class="panel" id="panel-dg">
-        <div class="section-header"><h2>DataGuard — Visão Exadata vs ExaCC</h2></div>
-        <div class="info-section">
-            <p style="font-size:0.78rem; color:#4a5568; margin-bottom:0.8rem;">
-                DataGuard = base de leitura dos consumidores. Entre ~24/08 e ~02/09 indicamos a mais atualizada (Exadata ou ExaCC). A partir de 05/09, DG Exadata descontinuado.
-            </p>
-            <div class="legend">
-                <div class="legend-item"><div class="legend-color" style="background:#c53030"></div>DG Exa (atualizado)</div>
-                <div class="legend-item"><div class="legend-color" style="background:#e53e3e;opacity:0.6"></div>Congelado</div>
-                <div class="legend-item"><div class="legend-color" style="background:#ed8936"></div>Passivo (dblink)</div>
-                <div class="legend-item"><div class="legend-color" style="background:#a0aec0;opacity:0.5"></div>Descontinuado</div>
-                <div class="legend-item"><div class="legend-color" style="background:#276749"></div>DG ExaCC</div>
-                <div class="legend-item"><div class="legend-color" style="background:#5a67d8"></div>Opção Exa/ExaCC</div>
-            </div>
-            <div style="font-size:0.68rem; font-weight:700; color:#c53030; margin-bottom:0.2rem;">🔴 DG EXADATA</div>
-            <div class="swimlane"><div class="swimlane-label">DG Exadata</div><div class="swimlane-track">
-                <div class="ev c-dg-exa" style="left:0%;width:19%;">✅ Atualizado</div>
-                <div class="ev c-frozen" style="left:19%;width:24%;">❄️ Congelado</div>
-                <div class="ev c-passive" style="left:43%;width:38%;">🔄 Passivo</div>
-                <div class="ev c-discontinued" style="left:81%;width:19%;">⊘</div>
-            </div></div>
-            <div style="font-size:0.68rem; font-weight:700; color:#276749; margin-bottom:0.2rem;">🟢 DG EXACC</div>
-            <div class="swimlane"><div class="swimlane-label">DG ExaCC</div><div class="swimlane-track">
-                <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;">—</div>
-                <div class="ev c-dg-exacc" style="left:43%;width:38%;">✅ Ativo</div>
-                <div class="ev c-dg-exacc" style="left:81%;width:19%;">✅ Definitivo</div>
-            </div></div>
-            <div style="font-size:0.68rem; font-weight:700; color:#5a67d8; margin-bottom:0.2rem;">👥 CONSUMIDORES</div>
-            <div class="swimlane"><div class="swimlane-label">Leem de qual DG</div><div class="swimlane-track">
-                <div class="ev c-dg-exa" style="left:0%;width:19%;">DG Exa ✅</div>
-                <div class="ev c-frozen" style="left:19%;width:24%;">❄️ Exa (congelado)</div>
-                <div class="ev c-choose" style="left:43%;width:38%;">🔀 Exa ou ExaCC</div>
-                <div class="ev c-dg-exacc" style="left:81%;width:19%;">ExaCC (único)</div>
-            </div></div>
-            <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
-            <div class="note">
-                <strong>❄️ 19→24:</strong> congelado.<br>
-                <strong>🔄 ~24→05/09:</strong> passivo via dblink (defasado vs ExaCC).<br>
-                <strong>🔀 ~24→02/09:</strong> indicamos a + atualizada.<br>
-                <strong>⊘ 05/09:</strong> descontinuado.
-            </div>
-        </div>
-    </div>
 
     <!-- ============ PROPOSTA B ============ -->
     <div class="panel active" id="panel-b">
