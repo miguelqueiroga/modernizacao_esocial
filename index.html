@@ -28,19 +28,16 @@ h1{text-align:center;font-size:1.5rem;margin-bottom:0.2rem;color:#1a365d}
 .group-cnis{background:#d1fae5;color:#065f46}
 .group-dg{background:#ede9fe;color:#5b21b6}
 .group-proc{background:#fce7f3;color:#9d174d}
-/* Timeline grid - 21 dias, cada dia ~4.76% */
-.tl-row{display:grid;grid-template-columns:150px 1fr;margin-bottom:0.4rem;min-height:40px;align-items:center}
+.tl-row{display:grid;grid-template-columns:160px 1fr;margin-bottom:0.4rem;min-height:40px;align-items:center}
 .tl-label{font-weight:700;font-size:0.66rem;color:#4a5568;text-align:right;padding-right:0.7rem;line-height:1.2}
 .tl-label small{font-weight:400;color:#a0aec0;display:block}
 .tl-track{position:relative;height:30px;background:#edf2f7;border-radius:4px}
 .tl-bar{position:absolute;top:50%;transform:translateY(-50%);height:24px;border-radius:3px;display:flex;align-items:center;padding:0 0.3rem;font-size:0.58rem;font-weight:600;white-space:nowrap;color:white;overflow:hidden;text-overflow:ellipsis}
 .tl-bar:hover{overflow:visible;z-index:10}
-/* Date ruler */
-.tl-ruler{display:grid;grid-template-columns:150px 1fr;margin-top:0.1rem;margin-bottom:1.2rem}
+.tl-ruler{display:grid;grid-template-columns:160px 1fr;margin-top:0.1rem;margin-bottom:1.2rem}
 .tl-ruler-track{position:relative;height:18px;border-top:2px solid #a0aec0}
 .tl-ruler-track span{position:absolute;top:3px;font-size:0.58rem;color:#718096;font-weight:600}
 .tl-ruler-track .today{color:#e53e3e;font-weight:800;font-size:0.62rem}
-/* Colors */
 .bg-proc{background:#38a169}.bg-migr{background:#3182ce}.bg-fail{background:#e53e3e}
 .bg-equal{background:#d53f8c}.bg-baseline{background:#0694a2}.bg-dg{background:#6b46c1}
 .bg-repr{background:#d69e2e}.bg-invert{background:#b794f4}.bg-stop{background:#e53e3e;opacity:0.7}
@@ -48,7 +45,6 @@ h1{text-align:center;font-size:1.5rem;margin-bottom:0.2rem;color:#1a365d}
 .bg-passive{background:#ed8936}.bg-disc{background:#a0aec0;opacity:0.45}
 .bg-dgexa{background:#c53030}.bg-dgexacc{background:#276749}.bg-choose{background:#5a67d8}
 .bg-ready{background:#10b981}.bg-wait{background:#6ee7b7;color:#065f46}
-/* Misc */
 .note{font-size:0.72rem;color:#718096;margin-top:0.5rem;padding:0.5rem;background:#f7fafc;border-radius:4px;border-left:3px solid #4299e1}
 .info-section{max-width:1050px;margin:1.2rem auto;padding:1.2rem;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
 .info-section h3{margin-bottom:0.7rem;color:#2d3748;font-size:0.92rem}
@@ -66,7 +62,7 @@ h1{text-align:center;font-size:1.5rem;margin-bottom:0.2rem;color:#1a365d}
 <body>
 <h1>Migracao eSocial Alfanumerico</h1>
 <p class="subtitle">Exadata para ExaCC | CNPJ Alfanumerico | Plano de Acao 2026</p>
-<div class="today-banner">Hoje: 20/08/2026 (qui) - Dia 6 | <strong>Baseline alfanumerico no Intermediario</strong> | Recepcao Serpro retomou 17h no ExaCC</div>
+<div class="today-banner">Hoje: 20/08/2026 (qui) - Dia 6 | <strong>Baseline Negocio no Intermediario em andamento</strong> | Recepcao Serpro retomou 20/08 17h | ~34.9M eventos acumulados</div>
 <div class="tabs">
 <div class="tab active" data-panel="b" onclick="showPanel('b')">Proposta B (Detalhada)</div>
 <div class="tab" data-panel="infra" onclick="showPanel('infra')">Infraestrutura</div>
@@ -74,7 +70,7 @@ h1{text-align:center;font-size:1.5rem;margin-bottom:0.2rem;color:#1a365d}
 </div>
 
 <div class="panel active" id="panel-b">
-<div class="section-header"><h2>Proposta B - Vigente</h2><span class="badge badge-yellow">15/08 a 05/09</span><span class="badge badge-red">Clone falhou</span></div>
+<div class="section-header"><h2>Proposta B - Vigente</h2><span class="badge badge-yellow">14/08 a 04/09</span><span class="badge badge-red">Clone falhou</span></div>
 <div class="legend">
 <div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Ativo</div>
 <div class="legend-item"><div class="legend-color" style="background:#3182ce"></div>Migracao</div>
@@ -83,51 +79,55 @@ h1{text-align:center;font-size:1.5rem;margin-bottom:0.2rem;color:#1a365d}
 <div class="legend-item"><div class="legend-color" style="background:#0694a2"></div>Baseline</div>
 <div class="legend-item"><div class="legend-color" style="background:#ed8936"></div>Passivo</div>
 <div class="legend-item"><div class="legend-color" style="background:#6b46c1"></div>DG/Standby</div>
-<div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reproc</div>
+<div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reproc/Stats</div>
 <div class="legend-item"><div class="legend-color" style="background:#10b981"></div>Pronto</div>
 </div>
 
-<span class="group-header group-rec">RECEPCAO</span>
+<span class="group-header group-rec">RECEPCAO (ja na infra definitiva)</span>
 <div class="tl-row"><div class="tl-label">Recepcao Exadata<small>origem</small></div><div class="tl-track">
 <div class="tl-bar bg-proc" style="left:0%;width:19%;">Ativo</div>
-<div class="tl-bar bg-frozen" style="left:19%;width:5%;">Parou</div>
-<div class="tl-bar bg-passive" style="left:43%;width:57%;">Via dblink (fallback)</div>
+<div class="tl-bar bg-frozen" style="left:19%;width:5%;">Parou 19/08</div>
+<div class="tl-bar bg-passive" style="left:29%;width:71%;">Via dblink do ExaCC (fallback)</div>
 </div></div>
-<div class="tl-row"><div class="tl-label">Recepcao ExaCC<small>banco separado</small></div><div class="tl-track">
-<div class="tl-bar bg-migr" style="left:19%;width:5%;">Migr</div>
+<div class="tl-row"><div class="tl-label">Recepcao ExaCC<small>definitiva</small></div><div class="tl-track">
+<div class="tl-bar bg-migr" style="left:19%;width:5%;">Copia 19-20</div>
 <div class="tl-bar bg-proc" style="left:24%;width:76%;">Serpro retomou 20/08 17h + dblink Exa</div>
 </div></div>
 <div class="tl-ruler"><div></div><div class="tl-ruler-track">
-<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:71%">30</span><span style="left:95%">05/09</span>
+<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:52%">25</span><span style="left:71%">30</span><span style="left:95%">04/09</span>
 </div></div>
 
 <span class="group-header group-neg">NEGOCIO</span>
 <div class="tl-row"><div class="tl-label">Negocio Exadata<small>origem</small></div><div class="tl-track">
 <div class="tl-bar bg-proc" style="left:0%;width:19%;">Ativo</div>
-<div class="tl-bar bg-frozen" style="left:19%;width:24%;">Congelado</div>
-<div class="tl-bar bg-passive" style="left:43%;width:38%;">Passivo (dblink)</div>
+<div class="tl-bar bg-frozen" style="left:19%;width:10%;">Congelado</div>
+<div class="tl-bar bg-passive" style="left:29%;width:52%;">Passivo (dblink) - previsto retomar 21/08</div>
 <div class="tl-bar bg-disc" style="left:81%;width:19%;">Descont.</div>
 </div></div>
 <div class="tl-row"><div class="tl-label">Negocio ExaCC Intermediario<small>primary temp</small></div><div class="tl-track">
-<div class="tl-bar bg-migr" style="left:0%;width:9%;">CNIS</div>
-<div class="tl-bar bg-fail" style="left:9%;width:5%;">xC1</div>
-<div class="tl-bar bg-fail" style="left:14%;width:5%;">xC2</div>
-<div class="tl-bar bg-equal" style="left:19%;width:5%;">Eq</div>
-<div class="tl-bar bg-baseline" style="left:24%;width:19%;">BL Alfa [AQUI]</div>
-<div class="tl-bar bg-proc" style="left:43%;width:28%;">Primary (F1)</div>
-<div class="tl-bar bg-dg" style="left:71%;width:10%;">Standby</div>
+<div class="tl-bar bg-migr" style="left:0%;width:9%;">DG+Migr</div>
+<div class="tl-bar bg-fail" style="left:9%;width:5%;">xClone1</div>
+<div class="tl-bar bg-fail" style="left:14%;width:5%;">xClone2</div>
+<div class="tl-bar bg-equal" style="left:19%;width:5%;">Eq 19/08</div>
+<div class="tl-bar bg-baseline" style="left:24%;width:19%;">BL Alfa 20-24 [AQUI]</div>
+<div class="tl-bar bg-repr" style="left:43%;width:19%;">Stats 1%+5% (24-28)</div>
+<div class="tl-bar bg-proc" style="left:62%;width:9%;">Primary</div>
+<div class="tl-bar bg-dg" style="left:71%;width:10%;">Standby/DG temp</div>
 <div class="tl-bar bg-read" style="left:81%;width:19%;">Desmob.</div>
 </div></div>
+<div class="tl-row"><div class="tl-label">Copia Inter para Definitivo<small>Negocio</small></div><div class="tl-track">
+<div class="tl-bar bg-migr" style="left:43%;width:14%;">Copia via DG (24-26/08)</div>
+</div></div>
 <div class="tl-row"><div class="tl-label">Negocio ExaCC Primario<small>definitivo</small></div><div class="tl-track">
-<div class="tl-bar bg-dg" style="left:43%;width:28%;">Standby (DG Oracle)</div>
+<div class="tl-bar bg-dg" style="left:52%;width:19%;">Standby (recebe DG)</div>
 <div class="tl-bar bg-proc" style="left:71%;width:29%;">Primary definitivo</div>
 </div></div>
-<div class="tl-row"><div class="tl-label">Negocio ExaCC DG<small>leitura consumidores</small></div><div class="tl-track">
-<div class="tl-bar bg-dgexacc" style="left:43%;width:38%;">DG Ativo</div>
-<div class="tl-bar bg-dgexacc" style="left:81%;width:19%;">DG Online</div>
+<div class="tl-row"><div class="tl-label">DG Negocio ExaCC<small>extracoes/leitura</small></div><div class="tl-track">
+<div class="tl-bar bg-dg" style="left:52%;width:10%;">DG Temp (inter)</div>
+<div class="tl-bar bg-dgexacc" style="left:62%;width:38%;">DG Definitivo (26-27/08+)</div>
 </div></div>
 <div class="tl-ruler"><div></div><div class="tl-ruler-track">
-<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:71%">30</span><span style="left:95%">05/09</span>
+<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:52%">26</span><span style="left:62%">28</span><span style="left:71%">30</span><span style="left:95%">04/09</span>
 </div></div>
 
 <span class="group-header group-cnis">CNIS</span>
@@ -135,88 +135,88 @@ h1{text-align:center;font-size:1.5rem;margin-bottom:0.2rem;color:#1a365d}
 <div class="tl-bar bg-proc" style="left:0%;width:19%;">Ativo</div>
 <div class="tl-bar bg-frozen" style="left:19%;width:81%;">Congelado (dados ate 19/08)</div>
 </div></div>
-<div class="tl-row"><div class="tl-label">CNIS ExaCC<small>pronto</small></div><div class="tl-track">
-<div class="tl-bar bg-ready" style="left:0%;width:43%;">Pronto (BL aplicada)</div>
-<div class="tl-bar bg-wait" style="left:43%;width:57%;">Aguardando Negocio</div>
+<div class="tl-row"><div class="tl-label">CNIS ExaCC<small>definitivo - pronto</small></div><div class="tl-track">
+<div class="tl-bar bg-ready" style="left:0%;width:43%;">Pronto (BL aplicada 15-16/08)</div>
+<div class="tl-bar bg-wait" style="left:43%;width:57%;">Aguardando Proc Negocio</div>
+</div></div>
+<div class="tl-row"><div class="tl-label">DG CNIS ExaCC<small>extracoes</small></div><div class="tl-track">
+<div class="tl-bar bg-dgexacc" style="left:71%;width:29%;">DG CNIS (previsto ate 30/08)</div>
 </div></div>
 <div class="tl-row"><div class="tl-label">Extrato CNIS<small>consumidor critico</small></div><div class="tl-track">
 <div class="tl-bar bg-dgexa" style="left:0%;width:62%;">Lendo CNIS Exadata</div>
 <div class="tl-bar bg-dgexacc" style="left:62%;width:38%;">Lendo CNIS ExaCC (28/08)</div>
 </div></div>
 <div class="tl-ruler"><div></div><div class="tl-ruler-track">
-<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:62%">28</span><span style="left:95%">05/09</span>
+<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:52%">25</span><span style="left:62%">28</span><span style="left:71%">30</span><span style="left:95%">04/09</span>
 </div></div>
 
-<span class="group-header group-proc">PROCESSAMENTOS (ExaCC e Exadata sao independentes)</span>
-<div class="tl-row"><div class="tl-label">Proc. Recepcao Exadata<small>dblink ExaCC para Rec Exa</small></div><div class="tl-track">
-<div class="tl-bar bg-proc" style="left:0%;width:19%;">Ativo (Serpro direto)</div>
-<div class="tl-bar bg-stop" style="left:19%;width:24%;">Parado (BL rapida+disco)</div>
-<div class="tl-bar bg-passive" style="left:43%;width:57%;">Retoma qdo espaco OK (sem previsao)</div>
+<span class="group-header group-proc">PROCESSAMENTOS (Exadata e ExaCC independentes)</span>
+<div class="tl-row"><div class="tl-label">Proc. Recepcao Exadata<small>dblink do ExaCC</small></div><div class="tl-track">
+<div class="tl-bar bg-proc" style="left:0%;width:19%;">Serpro direto</div>
+<div class="tl-bar bg-stop" style="left:19%;width:10%;">Parado</div>
+<div class="tl-bar bg-passive" style="left:29%;width:71%;">Previsto retomar 21/08 (dblink+baseline+sinonimo)</div>
 </div></div>
 <div class="tl-row"><div class="tl-label">Proc. Negocio Exadata<small>Rec Exa para Neg Exa</small></div><div class="tl-track">
 <div class="tl-bar bg-proc" style="left:0%;width:19%;">Ativo</div>
-<div class="tl-bar bg-stop" style="left:19%;width:24%;">Parado</div>
-<div class="tl-bar bg-passive" style="left:43%;width:57%;">Retoma qdo Rec Exa retomar</div>
+<div class="tl-bar bg-stop" style="left:19%;width:10%;">Parado</div>
+<div class="tl-bar bg-passive" style="left:29%;width:71%;">Retoma qdo Rec Exa retomar (~21/08)</div>
 </div></div>
 <div class="tl-row"><div class="tl-label">Proc. CNIS Exadata<small>Neg Exa para CNIS Exa</small></div><div class="tl-track">
 <div class="tl-bar bg-proc" style="left:0%;width:19%;">Ativo</div>
-<div class="tl-bar bg-stop" style="left:19%;width:24%;">Parado</div>
-<div class="tl-bar bg-passive" style="left:43%;width:57%;">Depende Proc Negocio Exa</div>
+<div class="tl-bar bg-stop" style="left:19%;width:10%;">Parado</div>
+<div class="tl-bar bg-passive" style="left:29%;width:71%;">Depende Proc Negocio Exa</div>
 </div></div>
 <div class="tl-row"><div class="tl-label">Proc. Recepcao ExaCC<small>Serpro para Rec ExaCC</small></div><div class="tl-track">
-<div class="tl-bar bg-stop" style="left:0%;width:24%;">-</div>
+<div class="tl-bar bg-stop" style="left:0%;width:24%;">Parado</div>
 <div class="tl-bar bg-proc" style="left:24%;width:76%;">Retomou 20/08 17h</div>
 </div></div>
 <div class="tl-row"><div class="tl-label">Proc. Negocio ExaCC<small>Rec ExaCC para Neg ExaCC</small></div><div class="tl-track">
-<div class="tl-bar bg-stop" style="left:0%;width:43%;">Aguardando BL+stats</div>
-<div class="tl-bar bg-proc" style="left:43%;width:57%;">Retoma apos BL+stats (~24)</div>
+<div class="tl-bar bg-stop" style="left:0%;width:62%;">Aguardando BL + Stats 1% + Stats 5%</div>
+<div class="tl-bar bg-proc" style="left:62%;width:38%;">Retoma apos stats (~28/08)</div>
 </div></div>
 <div class="tl-row"><div class="tl-label">Proc. CNIS ExaCC<small>Neg ExaCC para CNIS ExaCC</small></div><div class="tl-track">
-<div class="tl-bar bg-stop" style="left:0%;width:43%;">Aguardando Neg ExaCC</div>
-<div class="tl-bar bg-proc" style="left:43%;width:57%;">Depende Proc Negocio ExaCC</div>
+<div class="tl-bar bg-stop" style="left:0%;width:62%;">Aguardando Neg ExaCC</div>
+<div class="tl-bar bg-proc" style="left:62%;width:38%;">Depende Proc Negocio ExaCC</div>
 </div></div>
 <div class="tl-ruler"><div></div><div class="tl-ruler-track">
-<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:71%">30</span><span style="left:95%">05/09</span>
-</div></div>
-
-<span class="group-header group-proc" style="background:#fdf2f8">FAIXAS PROCESSADAS</span>
-<div class="tl-row"><div class="tl-label">Faixas Exadata</div><div class="tl-track">
-<div class="tl-bar bg-proc" style="left:0%;width:19%;">15, 18, 19</div>
-<div class="tl-bar bg-stop" style="left:19%;width:24%;">Nenhum</div>
-<div class="tl-bar bg-passive" style="left:43%;width:57%;">Reproc passivo (qdo Rec OK)</div>
-</div></div>
-<div class="tl-row"><div class="tl-label">Faixas ExaCC</div><div class="tl-track">
-<div class="tl-bar bg-stop" style="left:0%;width:43%;">Nenhum (baseline)</div>
-<div class="tl-bar bg-repr" style="left:43%;width:9%;">15-19</div>
-<div class="tl-bar bg-proc" style="left:52%;width:19%;">20-30</div>
-<div class="tl-bar bg-invert" style="left:71%;width:5%;">Inv</div>
-<div class="tl-bar bg-proc" style="left:76%;width:24%;">Corrente</div>
-</div></div>
-<div class="tl-ruler"><div></div><div class="tl-ruler-track">
-<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:71%">30</span><span style="left:95%">05/09</span>
+<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:29%">21</span><span style="left:43%">24</span><span style="left:62%">28</span><span style="left:71%">30</span><span style="left:95%">04/09</span>
 </div></div>
 
 <span class="group-header group-dg">DATAGUARD e CONSUMIDORES</span>
-<div class="tl-row"><div class="tl-label">DG Exadata</div><div class="tl-track">
+<div class="tl-row"><div class="tl-label">DG Exadata (Negocio)</div><div class="tl-track">
 <div class="tl-bar bg-dgexa" style="left:0%;width:19%;">Atualizado</div>
-<div class="tl-bar bg-frozen" style="left:19%;width:24%;">Congelado</div>
-<div class="tl-bar bg-passive" style="left:43%;width:38%;">Passivo</div>
+<div class="tl-bar bg-frozen" style="left:19%;width:10%;">Congelado</div>
+<div class="tl-bar bg-passive" style="left:29%;width:52%;">Passivo (defasado)</div>
 <div class="tl-bar bg-disc" style="left:81%;width:19%;">Descont.</div>
 </div></div>
-<div class="tl-row"><div class="tl-label">DG ExaCC</div><div class="tl-track">
-<div class="tl-bar bg-dgexacc" style="left:43%;width:57%;">Ativo</div>
+<div class="tl-row"><div class="tl-label">DG ExaCC (Negocio)</div><div class="tl-track">
+<div class="tl-bar bg-dg" style="left:52%;width:10%;">DG Temp</div>
+<div class="tl-bar bg-dgexacc" style="left:62%;width:38%;">DG Definitivo</div>
 </div></div>
-<div class="tl-row"><div class="tl-label">Consumidores</div><div class="tl-track">
+<div class="tl-row"><div class="tl-label">Consumidores Negocio</div><div class="tl-track">
 <div class="tl-bar bg-dgexa" style="left:0%;width:19%;">DG Exa</div>
-<div class="tl-bar bg-frozen" style="left:19%;width:24%;">Defasado</div>
-<div class="tl-bar bg-choose" style="left:43%;width:38%;">Exa ou ExaCC</div>
+<div class="tl-bar bg-frozen" style="left:19%;width:10%;">Defasado</div>
+<div class="tl-bar bg-choose" style="left:29%;width:52%;">Exa ou ExaCC (+ atualizada)</div>
 <div class="tl-bar bg-dgexacc" style="left:81%;width:19%;">ExaCC unico</div>
 </div></div>
+<div class="tl-row"><div class="tl-label">Apps externas<small>reapontamento</small></div><div class="tl-track">
+<div class="tl-bar bg-dgexa" style="left:0%;width:71%;">Apontando DG antigos</div>
+<div class="tl-bar bg-dgexacc" style="left:71%;width:29%;">Reapontar novos DGs (30/08-10/09)</div>
+</div></div>
+<div class="tl-row"><div class="tl-label">eSocial API + Extrato<small>apontamento</small></div><div class="tl-track">
+<div class="tl-bar bg-dgexa" style="left:0%;width:52%;">Apontamento antigo</div>
+<div class="tl-bar bg-dgexacc" style="left:52%;width:48%;">Novo apontamento (25/08)</div>
+</div></div>
 <div class="tl-ruler"><div></div><div class="tl-ruler-track">
-<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:71%">30</span><span style="left:95%">05/09</span>
+<span style="left:0%">15</span><span style="left:19%">19</span><span style="left:24%" class="today">20*</span><span style="left:43%">24</span><span style="left:52%">25</span><span style="left:62%">28</span><span style="left:71%">30</span><span style="left:95%">04/09</span>
 </div></div>
 
-<div class="note"><strong>Sequencia pos-baseline (~24):</strong> Estatisticas - Drop TBS - Remanejamento disco - DG Oracle - Proc Negocio retoma.<br><strong>Fallback:</strong> Recepcao Exadata mantida via dblink.<br><strong>* 20 = HOJE</strong></div>
+<div class="note">
+<strong>* 20 = HOJE</strong> | ~34.9M eventos acumulados (15-19/08), zero processados no ExaCC ate agora.<br>
+<strong>Sequencia pos-baseline Intermediario (~24):</strong> Stats 1% (24h) + Stats 5% (3 dias) + Compilar procedures + Drop TBS + Backup + Copia para definitivo (2 dias).<br>
+<strong>Proc Exadata:</strong> previsto retomar 21/08 (dblink + baseline recepcao + sinonimo + retomada).<br>
+<strong>Reapontar apps externas:</strong> 30/08 a 10/09 (changes dos demais gestores de produto).
+</div>
 </div>
 
 <div class="panel" id="panel-infra">
@@ -228,31 +228,58 @@ h1{text-align:center;font-size:1.5rem;margin-bottom:0.2rem;color:#1a365d}
 <tr><td><strong>Recepcao</strong></td><td>32 TB</td><td>32 TB</td><td>32 TB (ja instalado)</td><td>-</td></tr>
 <tr><td><strong>CNIS</strong> (RJ exceto DG)</td><td>20 TB (Ora 18, RJ)</td><td>- (nao necessario)</td><td>20 TB (RJ)</td><td>20 TB (SP)</td></tr>
 </tbody><tfoot><tr style="background:#2d3748;color:white;font-weight:700"><td>TOTAL</td><td>156 TB</td><td>392 TB (pico)</td><td>208 TB (min)</td><td>124 TB</td></tr></tfoot></table></div>
-<div class="info-section"><h3>Espaco Definitiva (Primario)</h3>
+<div class="info-section"><h3>Espaco Definitiva</h3>
 <table class="comp-table"><thead><tr><th>Item</th><th>TB</th><th>Obs</th></tr></thead><tbody>
 <tr><td>Recepcao (instalado)</td><td>32</td><td>Ja na definitiva</td></tr>
-<tr><td>Negocio (a receber)</td><td>104</td><td>Via DG</td></tr>
+<tr><td>Negocio (a receber)</td><td>104</td><td>Via DG / copia (24-26/08)</td></tr>
 <tr><td>DG CNIS (a receber)</td><td>20</td><td>SP</td></tr>
 <tr style="background:#f0fff4"><td><strong>Disponivel</strong></td><td><strong>153</strong></td><td>Livre</td></tr>
 <tr><td>Devolucao intermediario</td><td>+120</td><td>Apos desmob.</td></tr>
 </tbody></table></div>
-</div>
-
-<div class="panel" id="panel-comp">
-<div class="section-header"><h2>Comparativo</h2></div>
-<div class="info-section">
-<table class="comp-table"><thead><tr><th>Aspecto</th><th>Plano A</th><th>Plano B</th><th>Delta</th></tr></thead><tbody>
-<tr><td><strong>Janela</strong></td><td>16 dias</td><td class="worse">21 dias</td><td class="worse">+5</td></tr>
-<tr><td><strong>Sem processamento</strong></td><td>~2 dias</td><td class="worse">~5 dias</td><td class="worse">+3</td></tr>
-<tr><td><strong>Recepcao parada</strong></td><td>~2 dias</td><td class="better">~32h</td><td class="better">Menor</td></tr>
-<tr><td><strong>CNIS ExaCC</strong></td><td>Junto</td><td class="better">Ja pronto</td><td class="better">Adiantado</td></tr>
-<tr><td><strong>Fallback</strong></td><td>-</td><td class="better">dblink</td><td class="better">Seguranca</td></tr>
-<tr><td><strong>Normalizacao</strong></td><td>30/08</td><td class="worse">05/09</td><td class="worse">+6</td></tr>
-<tr style="background:#fefcbf"><td><strong>Causa</strong></td><td>-</td><td colspan="2">Clone falhou 17 e 19/08</td></tr>
+<div class="info-section"><h3>Numeros</h3>
+<table class="comp-table"><thead><tr><th>Metrica</th><th>Valor</th></tr></thead><tbody>
+<tr><td>Eventos recebidos 15-19/08</td><td>~34.9 milhoes</td></tr>
+<tr><td>Processados no ExaCC ate agora</td><td>0</td></tr>
+<tr><td>Processados no Exadata 15-18/08</td><td>~30.6 milhoes</td></tr>
+<tr><td>Atividades totais (checklist)</td><td>119</td></tr>
+<tr><td>Concluidas</td><td>61</td></tr>
+<tr><td>Em andamento</td><td>11</td></tr>
+<tr><td>Aguardando</td><td>34</td></tr>
+<tr><td>Impedimento</td><td>2 (copia Negocio inter para definitivo)</td></tr>
 </tbody></table></div>
 </div>
 
-<footer style="text-align:center;margin-top:1.5rem;font-size:0.6rem;color:#a0aec0">ALFA-ESOCIAL | 20/08/2026</footer>
+<div class="panel" id="panel-comp">
+<div class="section-header"><h2>Comparativo e Resumo</h2></div>
+<div class="info-section">
+<table class="comp-table"><thead><tr><th>Aspecto</th><th>Plano A</th><th>Plano B</th><th>Delta</th></tr></thead><tbody>
+<tr><td><strong>Janela</strong></td><td>16 dias (15/08-31/08)</td><td class="worse">21 dias (14/08-04/09)</td><td class="worse">+5</td></tr>
+<tr><td><strong>Sem processamento ExaCC</strong></td><td>~2 dias</td><td class="worse">~8 dias (ate ~28?)</td><td class="worse">+6</td></tr>
+<tr><td><strong>Recepcao Serpro parada</strong></td><td>~2 dias</td><td class="better">~32h</td><td class="better">Menor</td></tr>
+<tr><td><strong>Proc Exadata retoma</strong></td><td>Nao previsto</td><td class="better">21/08 (dblink)</td><td class="better">Paralelo</td></tr>
+<tr><td><strong>CNIS ExaCC</strong></td><td>Junto</td><td class="better">Ja pronto 16/08</td><td class="better">Adiantado</td></tr>
+<tr><td><strong>Fallback</strong></td><td>-</td><td class="better">dblink mantido</td><td class="better">Seguranca</td></tr>
+<tr><td><strong>Normalizacao</strong></td><td>30/08</td><td class="worse">04/09</td><td class="worse">+5</td></tr>
+<tr><td><strong>Reapontar apps</strong></td><td>31/08</td><td class="worse">30/08-10/09</td><td class="worse">+10</td></tr>
+<tr style="background:#fefcbf"><td><strong>Causa</strong></td><td>-</td><td colspan="2">Clone falhou 17 e 19/08</td></tr>
+</tbody></table></div>
+<div class="info-section"><h3>Resumo Executivo</h3>
+<ul style="padding-left:1.2rem;font-size:0.8rem;line-height:2">
+<li>15/08: inicio. Clone falhou 2x (15-17, 17-19). Equalizacao concluida 19/08</li>
+<li><strong>20/08 (hoje):</strong> Baseline Negocio em andamento (10:25). Recepcao Serpro retomou 17h. ~34.9M eventos acumulados</li>
+<li>~21/08: previsto retomar processamento Exadata (dblink + baseline recepcao + sinonimo)</li>
+<li>~24/08: baseline concluida. Stats 1% (24h) + Stats 5% (3 dias)</li>
+<li>~24-26/08: copia Negocio intermediario para definitivo (2 dias)</li>
+<li>~25/08: apontamento eSocial API e Extrato</li>
+<li>~26-27/08: DG Negocio temp (intermediario) + DG definitivo</li>
+<li>~28/08: Extrato CNIS muda para ExaCC. Proc Negocio ExaCC retoma (apos stats)</li>
+<li>~30/08: DG CNIS pronto. Inversao Primario assume</li>
+<li>30/08-10/09: reapontar apps externas para novos DGs</li>
+<li>04/09: processamento normalizado</li>
+</ul></div>
+</div>
+
+<footer style="text-align:center;margin-top:1.5rem;font-size:0.6rem;color:#a0aec0">ALFA-ESOCIAL | Checklist v20/08 | DTP.091870</footer>
 <script>function showPanel(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active');document.querySelector('[data-panel="'+id+'"]').classList.add('active');}</script>
 </body>
 </html>
