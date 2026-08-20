@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migração eSocial Alfanumérico — Timeline v1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f5f7fa;
+            color: #2d3748;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            color: #1a365d;
+        }
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .tab {
+            padding: 0.6rem 1.5rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            background: white;
+        }
+        .tab:hover { border-color: #4299e1; color: #4299e1; }
+        .tab.active-a { background: #ebf8ff; border-color: #3182ce; color: #2b6cb0; }
+        .tab.active-b { background: #fefcbf; border-color: #d69e2e; color: #975a16; }
+        .tab.active-comp { background: #f0fff4; border-color: #38a169; color: #276749; }
+
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        /* Timeline */
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .timeline-header h2 {
+            font-size: 1.3rem;
+            color: #2d3748;
+        }
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-original { background: #bee3f8; color: #2a4365; }
+        .badge-revised { background: #fefcbf; color: #744210; }
+        .badge-failed { background: #fed7d7; color: #9b2c2c; }
+
+        /* Swim lanes */
+        .swimlane {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            margin-bottom: 0.75rem;
+            min-height: 56px;
+            align-items: center;
+        }
+        .swimlane-label {
+            font-weight: 700;
+            font-size: 0.78rem;
+            color: #4a5568;
+            text-align: right;
+            padding-right: 1rem;
+        }
+        .swimlane-track {
+            position: relative;
+            height: 44px;
+            background: #edf2f7;
+            border-radius: 6px;
+            overflow: visible;
+        }
+
+        .event {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 34px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+            font-size: 0.68rem;
+            font-weight: 600;
+            white-space: nowrap;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            cursor: default;
+            transition: transform 0.15s, z-index 0s;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .event:hover {
+            transform: translateY(-50%) scale(1.05);
+            z-index: 10;
+            overflow: visible;
+        }
+
+        .event-snapshot { background: #805ad5; }
+        .event-migration { background: #3182ce; }
+        .event-conversion { background: #dd6b20; }
+        .event-baseline { background: #2f855a; }
+        .event-noprocess { background: #e53e3e; opacity: 0.75; }
+        .event-reprocess { background: #d69e2e; }
+        .event-process-exacc { background: #38a169; }
+        .event-dataguard { background: #6b46c1; }
+        .event-normalize { background: #319795; }
+        .event-fail { background: #e53e3e; }
+        .event-services { background: #667eea; }
+        .event-readonly { background: #a0aec0; }
+        .event-primary { background: #2b6cb0; }
+
+        /* Date axis */
+        .date-axis {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .date-axis-track {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: #718096;
+            font-weight: 600;
+            padding: 0.25rem 0;
+            border-top: 2px solid #cbd5e0;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin: 1rem 0 1.5rem;
+            padding: 0.75rem 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.72rem;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        /* Comparison table */
+        .comp-table {
+            width: 100%;
+            max-width: 950px;
+            margin: 1.5rem auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .comp-table th {
+            background: #2d3748;
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.83rem;
+        }
+        .comp-table td {
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.83rem;
+        }
+        .comp-table tr:nth-child(even) { background: #f7fafc; }
+        .comp-table .highlight { background: #fefcbf; font-weight: 600; }
+        .comp-table .worse { color: #e53e3e; font-weight: 600; }
+        .comp-table .better { color: #38a169; font-weight: 600; }
+
+        /* Sections */
+        .info-section {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .info-section h3 {
+            margin-bottom: 1rem;
+            color: #2d3748;
+            font-size: 1.05rem;
+        }
+
+        /* DG timeline cards */
+        .dg-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+        .dg-slot {
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.75rem;
+            text-align: center;
+            font-size: 0.75rem;
+            position: relative;
+        }
+        .dg-slot .date {
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+        }
+        .dg-slot .role { font-size: 0.7rem; color: #718096; margin-top: 0.3rem; }
+        .dg-slot.exadata-primary { border-color: #fc8181; background: #fff5f5; }
+        .dg-slot.transition { border-color: #d69e2e; background: #fffff0; }
+        .dg-slot.exacc-primary { border-color: #68d391; background: #f0fff4; }
+        .dg-slot.no-dg { border-color: #e53e3e; background: #fff5f5; border-style: dashed; }
+        .dg-slot.dg-temp { border-color: #b794f4; background: #faf5ff; }
+
+        .dg-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #a0aec0;
+        }
+
+        /* Processing cards */
+        .processing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .proc-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .proc-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        .proc-card.exadata-card { border-color: #fc8181; }
+        .proc-card.exadata-card h4 { color: #c53030; }
+        .proc-card.exacc-card { border-color: #68d391; }
+        .proc-card.exacc-card h4 { color: #276749; }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.35rem 0;
+            font-size: 0.78rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .status-row:last-child { border-bottom: none; }
+
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 0.3rem;
+        }
+        .dot-active { background: #38a169; }
+        .dot-stopped { background: #e53e3e; }
+        .dot-readonly { background: #d69e2e; }
+        .dot-migrating { background: #3182ce; }
+
+        .risk-box {
+            border-left: 4px solid #e53e3e;
+        }
+        .risk-box ul {
+            padding-left: 1.5rem;
+            font-size: 0.83rem;
+            line-height: 2;
+        }
+
+        .today-banner {
+            text-align: center;
+            padding: 0.5rem 1rem;
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            color: #c53030;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .swimlane { grid-template-columns: 90px 1fr; }
+            .swimlane-label { font-size: 0.65rem; }
+            .event { font-size: 0.6rem; padding: 0 0.3rem; }
+            .processing-grid { grid-template-columns: 1fr; }
+            .dg-timeline { grid-template-columns: 1fr; }
+            .tabs { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Migração eSocial Alfanumérico</h1>
+    <p class="subtitle">Exadata → ExaCC | Conversão CNPJ Alfanumérico | Plano de Ação 2026 — v1</p>
+
+    <div class="today-banner">
+        📍 Hoje: 20/08/2026 — Dia 6 da migração | Proposta B em vigor (falhas clone 17 e 19/08)
+    </div>
+
+    <div class="tabs">
+        <div class="tab active-a" id="tab-a" onclick="showPanel('a')">Proposta A (Original)</div>
+        <div class="tab" id="tab-b" onclick="showPanel('b')">Proposta B (Vigente)</div>
+        <div class="tab" id="tab-comp" onclick="showPanel('comp')">Comparativo + DataGuard</div>
+    </div>
+
+    <!-- ============ PROPOSTA A ============ -->
+    <div class="panel active" id="panel-a">
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <h2>Proposta A — Cronograma Original</h2>
+                <span class="badge badge-original">16 dias | 15/08 → 31/08</span>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item"><div class="legend-color" style="background:#805ad5"></div>Snapshot</div>
+                <div class="legend-item"><div class="legend-color" style="background:#3182ce"></div>Migração</div>
+                <div class="legend-item"><div class="legend-color" style="background:#dd6b20"></div>Conversão CNPJ</div>
+                <div class="legend-item"><div class="legend-color" style="background:#2f855a"></div>Baseline</div>
+                <div class="legend-item"><div class="legend-color" style="background:#e53e3e;opacity:0.75"></div>Sem processamento</div>
+                <div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reprocessamento</div>
+                <div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Proc. ExaCC</div>
+                <div class="legend-item"><div class="legend-color" style="background:#6b46c1"></div>DataGuard</div>
+                <div class="legend-item"><div class="legend-color" style="background:#319795"></div>Normalizado</div>
+                <div class="legend-item"><div class="legend-color" style="background:#a0aec0"></div>Somente consulta</div>
+            </div>
+
+            <!-- EXADATA -->
+            <div class="swimlane">
+                <div class="swimlane-label">EXADATA<br><small>(origem)</small></div>
+                <div class="swimlane-track">
+                    <div class="event event-snapshot" style="left:0%; width:10%;" title="15/08: Snapshot dados → ExaCC">📷 Snapshot</div>
+                    <div class="event event-readonly" style="left:25%; width:75%;" title="A partir de 19/08: apenas consulta a eventos antigos">📖 Somente consulta (eventos antigos)</div>
+                </div>
+            </div>
+
+            <!-- Processamento -->
+            <div class="swimlane">
+                <div class="swimlane-label">Processamento<br>eSocial</div>
+                <div class="swimlane-track">
+                    <div class="event event-primary" style="left:0%; width:25%;" title="15→19/08: Processando no Exadata">🔵 Exadata</div>
+                    <div class="event event-noprocess" style="left:25%; width:12%;" title="19→21/08: Sem processamento (~2 dias)">⛔ Parada</div>
+                    <div class="event event-reprocess" style="left:37%; width:13%;" title="21→25/08: Reprocessa dias 15-19 no ExaCC">♻️ Reproc 15→19</div>
+                    <div class="event event-process-exacc" style="left:50%; width:50%;" title="25→31/08: ExaCC processando normalmente">🟢 ExaCC</div>
+                </div>
+            </div>
+
+            <!-- EXACC -->
+            <div class="swimlane">
+                <div class="swimlane-label">EXACC<br><small>(destino)</small></div>
+                <div class="swimlane-track">
+                    <div class="event event-migration" style="left:0%; width:13%;" title="15→17/08: DG + Migração Negócio e CNIS">Migr. Neg+CNIS</div>
+                    <div class="event event-conversion" style="left:13%; width:9%;" title="~17/08: Conversão CNPJ alfanumérico">🔄 CNPJ Alfa</div>
+                    <div class="event event-baseline" style="left:13%; width:12%;" title="17→19/08: Baselines CNIS e Negócio">Baselines</div>
+                    <div class="event event-migration" style="left:25%; width:12%;" title="19→21/08: Migração Recepção">Migr. Recepção</div>
+                    <div class="event event-process-exacc" style="left:37%; width:63%;" title="21→31/08: Processando">Processando</div>
+                </div>
+            </div>
+
+            <!-- DataGuard -->
+            <div class="swimlane">
+                <div class="swimlane-label">DataGuard</div>
+                <div class="swimlane-track">
+                    <div class="event event-dataguard" style="left:0%; width:25%; opacity:0.5;" title="15→19/08: DG sendo migrado (Exadata ainda é primary)">Migrando...</div>
+                    <div class="event event-noprocess" style="left:25%; width:68%; opacity:0.4;" title="19→30/08: Sem DG ativo">Sem DG</div>
+                    <div class="event event-dataguard" style="left:93%; width:7%;" title="31/08: DataGuard Online no ExaCC">DG Online</div>
+                </div>
+            </div>
+
+            <!-- Serviços -->
+            <div class="swimlane">
+                <div class="swimlane-label">Serviços<br><small>(Extrato, Portal, API)</small></div>
+                <div class="swimlane-track">
+                    <div class="event event-services" style="left:0%; width:25%;" title="Até 19/08: Serviços normais">✅ Normal</div>
+                    <div class="event event-noprocess" style="left:25%; width:37%;" title="19→25/08: Indisponíveis">⛔ Indisponíveis</div>
+                    <div class="event event-normalize" style="left:62%; width:25%;" title="25/08: Apontamento API → 30/08: Normalizado">API 25 → Normal 30</div>
+                    <div class="event event-dataguard" style="left:93%; width:7%;" title="31/08: DG Online">DG</div>
+                </div>
+            </div>
+
+            <div class="date-axis">
+                <div></div>
+                <div class="date-axis-track">
+                    <span>15/08</span><span>17/08</span><span>19/08</span><span>21/08</span><span>25/08</span><span>30/08</span><span>31/08</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ PROPOSTA B ============ -->
+    <div class="panel" id="panel-b">
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <h2>Proposta B — Cronograma Vigente</h2>
+                <span class="badge badge-revised">21 dias | 15/08 → 05/09</span>
+                <span class="badge badge-failed">Falhas clone 17/08 e 19/08</span>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item"><div class="legend-color" style="background:#805ad5"></div>Snapshot</div>
+                <div class="legend-item"><div class="legend-color" style="background:#3182ce"></div>Migração</div>
+                <div class="legend-item"><div class="legend-color" style="background:#e53e3e"></div>Falha / Parada</div>
+                <div class="legend-item"><div class="legend-color" style="background:#2f855a"></div>Baseline</div>
+                <div class="legend-item"><div class="legend-color" style="background:#d69e2e"></div>Reprocessamento</div>
+                <div class="legend-item"><div class="legend-color" style="background:#38a169"></div>Proc. ExaCC</div>
+                <div class="legend-item"><div class="legend-color" style="background:#6b46c1"></div>DataGuard</div>
+                <div class="legend-item"><div class="legend-color" style="background:#319795"></div>Normalizado</div>
+                <div class="legend-item"><div class="legend-color" style="background:#a0aec0"></div>Somente consulta</div>
+            </div>
+
+            <!-- EXADATA -->
+            <div class="swimlane">
+                <div class="swimlane-label">EXADATA<br><small>(origem / DG atual)</small></div>
+                <div class="swimlane-track">
+                    <div class="event event-snapshot" style="left:0%; width:7%;" title="15/08: Snapshot dados → ExaCC">📷 Snap</div>
+                    <div class="event event-readonly" style="left:19%; width:81%;" title="A partir de 19/08: apenas consulta eventos antigos">📖 Somente consulta (eventos antigos)</div>
+                </div>
+            </div>
+
+            <!-- Processamento -->
+            <div class="swimlane">
+                <div class="swimlane-label">Processamento<br>eSocial</div>
+                <div class="swimlane-track">
+                    <div class="event event-primary" style="left:0%; width:19%;" title="15→19/08: Processando no Exadata">🔵 Exadata</div>
+                    <div class="event event-noprocess" style="left:19%; width:24%;" title="19→24/08: Sem processamento (~5 dias)">⛔ Parada (~5 dias)</div>
+                    <div class="event event-reprocess" style="left:43%; width:14%;" title="24→28/08: Reprocessa dias 15-19 no ExaCC">♻️ Reproc 15→19</div>
+                    <div class="event event-process-exacc" style="left:57%; width:43%;" title="28/08→05/09: ExaCC processando">🟢 ExaCC</div>
+                </div>
+            </div>
+
+            <!-- EXACC -->
+            <div class="swimlane">
+                <div class="swimlane-label">EXACC<br><small>(destino)</small></div>
+                <div class="swimlane-track">
+                    <div class="event event-migration" style="left:0%; width:10%;" title="15→17/08: Migração CNIS">Migr. CNIS</div>
+                    <div class="event event-fail" style="left:10%; width:3%;" title="17/08: ❌ Falha clone #1">❌ F1</div>
+                    <div class="event event-baseline" style="left:0%; width:19%;" title="15→19/08: Baselines CNIS" style="top:80%">BL CNIS</div>
+                    <div class="event event-fail" style="left:19%; width:3%;" title="19/08: ❌ Falha clone #2">❌ F2</div>
+                    <div class="event event-migration" style="left:22%; width:16%;" title="19→24/08: Migração Recepção">Migr. Recepção</div>
+                    <div class="event event-baseline" style="left:38%; width:9%;" title="~24/08: Baselines Negócio">BL Neg</div>
+                    <div class="event event-dataguard" style="left:43%; width:19%;" title="24→28/08: Migração Negócio via DataGuard temporário">DG → Migr. Negócio</div>
+                    <div class="event event-process-exacc" style="left:62%; width:38%;" title="~28/08→: Processando">Processando</div>
+                </div>
+            </div>
+
+            <!-- DataGuard -->
+            <div class="swimlane">
+                <div class="swimlane-label">DataGuard<br><small>(DR)</small></div>
+                <div class="swimlane-track">
+                    <div class="event event-primary" style="left:0%; width:19%;" title="15→19/08: Exadata = Primary, ExaCC sendo populado">Primary: Exadata</div>
+                    <div class="event event-noprocess" style="left:19%; width:24%; opacity:0.5;" title="19→24/08: DG desconectado — sem proteção DR">⚠️ Sem DG</div>
+                    <div class="event event-dataguard" style="left:43%; width:19%; opacity:0.7;" title="~24→28/08: DG Temporário — ExaCC vira primary, Exadata standby">DG Temp (ExaCC→Exa)</div>
+                    <div class="event event-dataguard" style="left:81%; width:19%;" title="~02/09→: DG Online definitivo — ExaCC primary, Exadata standby">DG Online ✅</div>
+                </div>
+            </div>
+
+            <!-- Serviços -->
+            <div class="swimlane">
+                <div class="swimlane-label">Serviços<br><small>(Extrato, Portal, API)</small></div>
+                <div class="swimlane-track">
+                    <div class="event event-services" style="left:0%; width:19%;" title="Até 19/08: Serviços normais">✅ Normal</div>
+                    <div class="event event-noprocess" style="left:19%; width:62%;" title="19/08→02/09: Serviços sem atualização (~14 dias)">⛔ Sem atualização (~14 dias)</div>
+                    <div class="event event-normalize" style="left:81%; width:19%;" title="~02/09: Apontamento → 05/09: Normalizado">API → Normal 05/09</div>
+                </div>
+            </div>
+
+            <div class="date-axis">
+                <div></div>
+                <div class="date-axis-track">
+                    <span>15/08</span><span>17/08</span><span>19/08</span><span>24/08</span><span>28/08</span><span>02/09</span><span>05/09</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ COMPARATIVO ============ -->
+    <div class="panel" id="panel-comp">
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <h2>Comparativo + Visão de Bases e DataGuard</h2>
+            </div>
+
+            <!-- Tabela comparativa -->
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Proposta A (Original)</th>
+                        <th>Proposta B (Vigente)</th>
+                        <th>Delta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Janela total</strong></td>
+                        <td>16 dias (15/08 → 31/08)</td>
+                        <td class="worse">21 dias (15/08 → 05/09)</td>
+                        <td class="worse">+5 dias</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Parada processamento</strong></td>
+                        <td>~2 dias (19 → 21/08)</td>
+                        <td class="worse">~5 dias (19 → 24/08)</td>
+                        <td class="worse">+3 dias</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Serviços sem atualização</strong></td>
+                        <td>~6 dias (19 → 25/08)</td>
+                        <td class="worse">~14 dias (19/08 → 02/09)</td>
+                        <td class="worse">+8 dias</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Migração eSocial Negócio</strong></td>
+                        <td>Clone direto (15/08)</td>
+                        <td>Via DataGuard Temp (~24/08)</td>
+                        <td>Estratégia alternativa</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Normalização completa</strong></td>
+                        <td>30/08</td>
+                        <td class="worse">05/09</td>
+                        <td class="worse">+6 dias</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DataGuard Online (DR)</strong></td>
+                        <td>31/08</td>
+                        <td class="worse">~05/09</td>
+                        <td class="worse">+5 dias sem DR</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Janela sem nenhum DG</strong></td>
+                        <td>~11 dias (19 → 30/08)</td>
+                        <td class="worse">~5 dias (19 → 24/08)*</td>
+                        <td class="better">Menor (DG Temp ajuda)</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td><strong>Causa da revisão</strong></td>
+                        <td>—</td>
+                        <td colspan="2">Falhas na etapa de clone do eSocial nos dias 17/08 e 19/08</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size:0.75rem; color:#718096; text-align:center; margin-top:-1rem; margin-bottom:2rem;">
+                * Na Proposta B, o DG Temporário entra em ~24/08. Na A, só havia DG Online no último dia (31/08).
+            </p>
+
+            <!-- Processamento por base -->
+            <div class="info-section">
+                <h3>📊 Quando cada base processa — Proposta B (vigente)</h3>
+                <div class="processing-grid">
+                    <div class="proc-card exadata-card">
+                        <h4>🔴 EXADATA (origem — hoje é a base de DataGuard)</h4>
+                        <div class="status-row">
+                            <span><span class="dot dot-active"></span>15/08 → 19/08</span>
+                            <span>Processando (primary)</span>
+                        </div>
+                        <div class="status-row">
+                            <span><span class="dot dot-stopped"></span>19/08 em diante</span>
+                            <span>Sem processamento novo</span>
+                        </div>
+                        <div class="status-row">
+                            <span><span class="dot dot-readonly"></span>19/08 → ?</span>
+                            <span>Consulta eventos antigos</span>
+                        </div>
+                        <div class="status-row">
+                            <span><span class="dot dot-migrating"></span>~24/08 em diante</span>
+                            <span>Vira standby (DG do ExaCC)</span>
+                        </div>
+                    </div>
+                    <div class="proc-card exacc-card">
+                        <h4>🟢 EXACC (destino — será a nova primary)</h4>
+                        <div class="status-row">
+                            <span><span class="dot dot-migrating"></span>15/08 → 24/08</span>
+                            <span>Recebendo migrações</span>
+                        </div>
+                        <div class="status-row">
+                            <span><span class="dot dot-readonly"></span>~24/08 → ~28/08</span>
+                            <span>Reprocessando dias 15-19</span>
+                        </div>
+                        <div class="status-row">
+                            <span><span class="dot dot-active"></span>~28/08 em diante</span>
+                            <span>Processamento ativo (primary)</span>
+                        </div>
+                        <div class="status-row">
+                            <span><span class="dot dot-active"></span>~02/09 em diante</span>
+                            <span>DG Online ativo (DR completo)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DataGuard detalhado -->
+            <div class="info-section">
+                <h3>🛡️ DataGuard — Quem é Primary/Standby em cada fase (Proposta B)</h3>
+                <p style="font-size:0.82rem; color:#4a5568; margin-bottom:1rem;">
+                    <strong>Contexto:</strong> Hoje (pré-migração e durante início), a base de DataGuard é a do <strong>Exadata</strong>. 
+                    Ao final da migração, o ExaCC assume como primary e o Exadata vira standby.
+                </p>
+                <div class="dg-timeline">
+                    <div class="dg-slot exadata-primary">
+                        <div class="date">15/08 → 19/08</div>
+                        <strong>Primary: EXADATA</strong><br>
+                        Standby: —<br>
+                        <span class="role">ExaCC recebendo dados<br>(DG original = Exadata)</span>
+                    </div>
+                    <div class="dg-slot no-dg">
+                        <div class="date">19/08 → ~24/08</div>
+                        <strong>⚠️ SEM DataGuard</strong><br>
+                        Primary: nenhuma processa<br>
+                        <span class="role">Exadata congelado<br>ExaCC em migração<br><em>Risco: sem DR</em></span>
+                    </div>
+                    <div class="dg-slot dg-temp">
+                        <div class="date">~24/08 → ~02/09</div>
+                        <strong>Primary: EXACC</strong><br>
+                        Standby: Exadata<br>
+                        <span class="role">DG Temporário<br>(Negócio via DG)<br>Exadata vira standby</span>
+                    </div>
+                    <div class="dg-slot exacc-primary">
+                        <div class="date">~02/09 em diante</div>
+                        <strong>Primary: EXACC ✅</strong><br>
+                        Standby: Exadata<br>
+                        <span class="role">DG Online definitivo<br>DR completo<br>Situação final</span>
+                    </div>
+                </div>
+                <p style="margin-top:1rem; font-size:0.78rem; color:#e53e3e; font-weight:600;">
+                    ⚠️ De 19/08 a ~24/08 (~5 dias) não há DataGuard ativo. Se o ExaCC falhar nesse período, 
+                    a migração precisaria recomeçar do snapshot.
+                </p>
+            </div>
+
+            <!-- Riscos -->
+            <div class="info-section risk-box">
+                <h3>⚠️ Riscos Proposta B</h3>
+                <ul>
+                    <li><strong>Janela sem DR (~5 dias):</strong> 19→24/08 — qualquer falha no ExaCC exige recomeçar do snapshot</li>
+                    <li><strong>Indisponibilidade serviços (~14 dias):</strong> CTPS Digital, Meu INSS, Portal CNIS, Extrato sem atualização de 19/08 a ~02/09</li>
+                    <li><strong>Crédito do Trabalhador:</strong> extração diária interrompida — possível impacto ao cidadão</li>
+                    <li><strong>Impacto FPSE/CAF:</strong> retestes que dependem de Extrato CNIS atualizado bloqueados até ~02/09</li>
+                    <li><strong>Clone pode falhar novamente:</strong> já falhou 2x — estratégia B mitiga usando DataGuard em vez de clone</li>
+                    <li><strong>Datas são estimativas:</strong> apresentação explicita que atividades podem antecipar ou postergar</li>
+                </ul>
+            </div>
+
+            <!-- Resumo executivo -->
+            <div class="info-section" style="border-left: 4px solid #3182ce;">
+                <h3>📋 Resumo Executivo</h3>
+                <ul style="padding-left:1.5rem; font-size:0.85rem; line-height:2.2;">
+                    <li>Migração iniciou conforme planejado em 15/08 às 11h</li>
+                    <li>Duas falhas no clone do eSocial (17 e 19/08) forçaram mudança de estratégia</li>
+                    <li>Nova abordagem: migra Negócio via DataGuard temporário em vez de clone direto</li>
+                    <li>Consequência: +5 dias na janela total, +3 dias de parada, +8 dias sem serviços</li>
+                    <li>DataGuard original (Exadata) será desconectado e reconectado como standby do ExaCC</li>
+                    <li>Normalização prevista: 05/09 (antes era 31/08)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPanel(which) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.remove('active-a', 'active-b', 'active-comp');
+            });
+            document.getElementById('panel-' + which).classList.add('active');
+            const tab = document.getElementById('tab-' + which);
+            if (which === 'a') tab.classList.add('active-a');
+            else if (which === 'b') tab.classList.add('active-b');
+            else tab.classList.add('active-comp');
+        }
+    </script>
+</body>
+</html>
