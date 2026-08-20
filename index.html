@@ -46,6 +46,7 @@
         .c-baseline { background: #0694a2; } .c-choose { background: #5a67d8; }
         .c-ready { background: #10b981; } .c-waiting { background: #6ee7b7; color: #065f46; }
         .c-blocked { background: #fbbf24; color: #78350f; }
+        .swimlane-track::after { content:''; position:absolute; left:24%; top:0; bottom:0; width:2px; background:#e53e3e; opacity:0.5; z-index:1; }
         .date-axis { display: grid; grid-template-columns: 160px 1fr; margin-top: 0.2rem; margin-bottom: 1.2rem; }
         .date-axis-track { display: flex; justify-content: space-between; font-size: 0.65rem; color: #718096; font-weight: 600; padding: 0.2rem 0; border-top: 2px solid #cbd5e0; }
         .legend { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 0.5rem 0 0.8rem; padding: 0.4rem 0.6rem; background: white; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
@@ -542,7 +543,7 @@
             <div class="ev c-dg-exacc" style="left:81%;width:19%;">ExaCC</div>
         </div></div>
 
-        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08</span><span>17</span><span>19</span><span>24</span><span>~30</span><span>02/09</span><span>05/09</span></div></div>
+        <div class="date-axis"><div></div><div class="date-axis-track"><span>15/08 (sex)</span><span>17 (seg)</span><span>19 (qua)</span><span style="color:#e53e3e; font-weight:700;">📍20 HOJE</span><span>24 (dom)</span><span>~30 (sáb)</span><span>02/09 (ter)</span><span>05/09 (sex)</span></div></div>
 
         <div class="note">
             <strong>Fluxo:</strong> Serpro → Recepção → Negócio → CNIS (subconjunto).<br>
