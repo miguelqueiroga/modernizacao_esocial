@@ -106,58 +106,16 @@
     <!-- ============ ESTRATÉGIA & DATAGUARD ============ -->
     <div class="panel active" id="panel-strategy">
         <div class="section-header">
-            <h2>Estratégia Alternativa & DataGuard</h2>
+            <h2>DataGuard — Visão Exadata vs ExaCC</h2>
             <span class="badge badge-red">Clone falhou 17 e 19/08</span>
-        </div>
-
-        <div class="info-section">
-            <h3>🔄 Fluxo de Processamento</h3>
-            <div class="flow-box">
-                <strong>Serpro</strong> <span class="arrow">→</span> eventos <span class="arrow">→</span>
-                <strong>Banco Recepção</strong> <span class="arrow">→</span> transformação <span class="arrow">→</span>
-                <strong>Banco Negócio</strong>
-            </div>
-            <div class="note">
-                Fluxo idêntico no Exadata e ExaCC. Após migração, recepção Serpro entra pelo ExaCC.
-                Processamento no Exadata depende de <strong>dblink</strong> (Recepção ExaCC → Recepção Exadata).
-            </div>
-        </div>
-
-        <div class="info-section">
-            <h3>📐 Etapas da Migração</h3>
-            <div class="strategy-flow">
-                <div class="strat-card origin">
-                    <div class="step">Etapa 01</div>
-                    <div class="title">ORIGEM</div>
-                    <div class="detail">Exadata<br>Base de produção atual<br>Negócio + Recepção</div>
-                    <div class="strat-arrow">→</div>
-                </div>
-                <div class="strat-card intermediate">
-                    <div class="step">Etapa 02</div>
-                    <div class="title">INTERMEDIÁRIO</div>
-                    <div class="detail">ExaCC<br>Recebe dados<br>Capacidade reduzida</div>
-                    <div class="strat-arrow">→</div>
-                </div>
-                <div class="strat-card equalize">
-                    <div class="step">Etapa 03</div>
-                    <div class="title">EQUALIZAÇÃO</div>
-                    <div class="detail">Mesmo servidor<br>Ampliação de recursos<br>para suportar produção</div>
-                    <div class="strat-arrow">→</div>
-                </div>
-                <div class="strat-card final">
-                    <div class="step">Etapa 04</div>
-                    <div class="title">PRIMARY TEMP.</div>
-                    <div class="detail">Assume processamento<br>Recepção Serpro retoma<br>Primário recebe via DG</div>
-                </div>
-            </div>
         </div>
 
         <!-- VISÃO EMPILHADA DG -->
         <div class="info-section">
-            <h3>🛡️ DataGuard — Visão Exadata vs ExaCC</h3>
+            <h3>🛡️ DataGuard — Base de Leitura dos Consumidores</h3>
             <p style="font-size:0.78rem; color:#4a5568; margin-bottom:1rem;">
                 O DataGuard é a base de leitura dos consumidores. Cada linha mostra o estado em cada infraestrutura.
-                Consumidores são sempre apontados para o DG mais atualizado. A partir de 05/09 o DG Exadata é descontinuado para consumidores.
+                A partir de 05/09 o DG Exadata é descontinuado — todos consumidores passam para DG ExaCC.
             </p>
 
             <div class="legend">
@@ -185,9 +143,8 @@
                 <div class="swimlane-label">DG ExaCC<small>base leitura</small></div>
                 <div class="swimlane-track">
                     <div class="ev c-read" style="left:0%;width:43%;opacity:0.3;" title="até ~24/08: Não existe ainda">— não existe</div>
-                    <div class="ev c-dg-exacc" style="left:43%;width:28%;" title="~24→~30: Fase 1 — Intermediário processando, DG ativo e atualizando">✅ Fase 1 (ativo)</div>
-                    <div class="ev c-dg-exacc" style="left:71%;width:10%;" title="~30→~02/09: Fase 2 — Inversão, Primário processando, DG ativo">✅ Fase 2</div>
-                    <div class="ev c-dg-exacc" style="left:81%;width:19%;" title="~05/09+: DG Online definitivo — única base de leitura para consumidores">✅ Definitivo</div>
+                    <div class="ev c-dg-exacc" style="left:43%;width:38%;" title="~24→~02/09: Ativo e atualizando (processamento no ExaCC)">✅ Ativo (atualizando)</div>
+                    <div class="ev c-dg-exacc" style="left:81%;width:19%;" title="~05/09+: DG Online definitivo — única base de leitura">✅ Definitivo (único)</div>
                 </div>
             </div>
 
@@ -197,8 +154,8 @@
                 <div class="swimlane-track">
                     <div class="ev c-dg-exa" style="left:0%;width:19%;" title="até 19/08: DG Exadata (atualizado em tempo real)">DG Exadata ✅</div>
                     <div class="ev c-frozen" style="left:19%;width:24%;" title="19→24: DG Exadata (congelado) — dados até 19/08, defasagem crescente">DG Exadata ❄️ (congelado)</div>
-                    <div class="ev c-dg-exacc" style="left:43%;width:38%;" title="~24→~05/09: DG ExaCC (mais atualizado que Exadata)">DG ExaCC ✅ (mais atual)</div>
-                    <div class="ev c-dg-exacc" style="left:81%;width:19%;" title="~05/09+: Somente DG ExaCC — Exadata descontinuado">DG ExaCC (único)</div>
+                    <div class="ev c-consumers" style="left:43%;width:38%;" title="~24→~02/09: Indicamos DG Exadata OU ExaCC — depende de qual está mais atualizada">🔀 DG Exadata ou ExaCC (+ atualizada)</div>
+                    <div class="ev c-dg-exacc" style="left:81%;width:19%;" title="~05/09+: Somente DG ExaCC">DG ExaCC (único)</div>
                 </div>
             </div>
 
@@ -211,8 +168,9 @@
 
             <div class="note">
                 <strong>Congelado (19→24):</strong> sem processamento algum — dados parados na posição de 19/08.<br>
-                <strong>Processamento passivo (~24→05/09):</strong> Exadata volta a processar via dblink do ExaCC — atualiza, mas com defasagem em relação ao ExaCC.<br>
-                <strong>A partir de 05/09:</strong> DG Exadata descontinuado para consumidores. Todos passam para DG ExaCC.
+                <strong>Proc. passivo (~24→05/09):</strong> Exadata processa via dblink do ExaCC — atualiza, mas com defasagem.<br>
+                <strong>~24 a ~02/09:</strong> ambos DGs operando — indicamos o mais atualizado para consumidores (pode ser Exadata ou ExaCC, a depender do momento).<br>
+                <strong>A partir de 05/09:</strong> DG Exadata descontinuado. Todos consumidores no DG ExaCC exclusivamente.
             </div>
         </div>
 
