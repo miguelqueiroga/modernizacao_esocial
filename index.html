@@ -102,7 +102,7 @@
                         <th>Banco</th>
                         <th>Exadata<br><small style="font-weight:400;opacity:0.8;">Oracle 12 | SP</small></th>
                         <th>ExaCC Intermediário<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
-                        <th>ExaCC Primário<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
+                        <th>ExaCC Primário (Definitivo)<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
                         <th>ExaCC DataGuard<br><small style="font-weight:400;opacity:0.8;">Oracle 19 | SP</small></th>
                     </tr>
                 </thead>
@@ -110,35 +110,61 @@
                     <tr>
                         <td><strong>Negócio</strong></td>
                         <td>104 TB</td>
-                        <td>104 TB → <strong>208 TB</strong> (CTAS) → 104 TB<br><small style="color:#ed8936;">antes | durante conversão | depois</small></td>
-                        <td>104 TB</td>
+                        <td>104 TB → <strong>208 TB</strong> (CTAS) → 104 TB<br><small style="color:#ed8936;">Plano B: CTAS no intermediário</small></td>
+                        <td>104 TB<br><small style="color:#718096;">Recebe via DG do intermediário</small></td>
                         <td>104 TB</td>
                     </tr>
                     <tr>
                         <td><strong>Recepção</strong></td>
                         <td>32 TB</td>
                         <td>32 TB</td>
-                        <td>32 TB</td>
+                        <td>32 TB<br><small style="color:#38a169;">Já está na definitiva</small></td>
                         <td>—</td>
                     </tr>
                     <tr style="background:#f0fff4;">
                         <td><strong>CNIS</strong><br><small style="color:#718096;">RJ (exceto DG)</small></td>
                         <td>20 TB<br><small>Oracle 18 | RJ</small></td>
-                        <td style="text-align:center; color:#a0aec0;">— <br><small>Não necessário (já era Oracle 18)</small></td>
+                        <td style="text-align:center; color:#a0aec0;">—<br><small>Não necessário (já era Oracle 18)</small></td>
                         <td>20 TB<br><small>Oracle 19 | RJ</small></td>
-                        <td>20 TB<br><small>SP</small></td>
+                        <td>20 TB<br><small>SP | vai para definitiva</small></td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr style="background:#2d3748; color:white; font-weight:700;">
                         <td>TOTAL</td>
                         <td>156 TB</td>
-                        <td style="color:#fbbf24;">392 TB (c/ CTAS)</td>
+                        <td style="color:#fbbf24;">392 TB (pico c/ CTAS)</td>
                         <td>208 TB (mín. previsto)</td>
                         <td>124 TB</td>
                     </tr>
                 </tfoot>
             </table>
+
+            <div class="info-section" style="margin-top:1rem; padding:1rem;">
+                <h3>💾 Espaço em Disco — Base Definitiva (Primário ExaCC)</h3>
+                <table class="comp-table">
+                    <thead><tr><th>Item</th><th>TB</th><th>Observação</th></tr></thead>
+                    <tbody>
+                        <tr><td>Recepção (já instalado)</td><td>32 TB</td><td>Já está na definitiva</td></tr>
+                        <tr><td>Negócio (a receber)</td><td>104 TB</td><td>Via DG do intermediário</td></tr>
+                        <tr><td>DG CNIS (a receber)</td><td>20 TB</td><td>DataGuard do CNIS (SP)</td></tr>
+                        <tr style="background:#f0fff4;"><td><strong>Espaço disponível atual</strong></td><td><strong>153 TB</strong></td><td>Livre para receber</td></tr>
+                        <tr><td>Devolução do intermediário</td><td>+120 TB</td><td>Após desmobilização do intermediário</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-section" style="margin-top:1rem; padding:1rem;">
+                <h3>🔄 CTAS — Diferença entre Planos</h3>
+                <table class="comp-table">
+                    <thead><tr><th>Aspecto</th><th>Plano A (Original)</th><th>Plano B (Vigente)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Onde roda o CTAS</td><td>Base Definitiva (Primário)</td><td class="better">Base Intermediária</td></tr>
+                        <tr><td>Pico de espaço</td><td>Definitiva: 208 TB temp</td><td>Intermediária: 208 TB temp</td></tr>
+                        <tr><td>Risco de disco</td><td class="worse">Definitiva precisa aguentar 208 TB</td><td class="better">Intermediária aguenta (392 TB disponível)</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="note" style="margin-top:1rem;">
                 <strong>CTAS (Create Table As Select):</strong> operação de conversão Oracle 12→19 que duplica temporariamente o espaço do Negócio no Intermediário (104→208 TB).<br>
